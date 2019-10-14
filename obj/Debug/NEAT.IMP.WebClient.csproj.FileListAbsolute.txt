@@ -1,0 +1,13 @@
+D:\CodeFile\NEATIMP\NEAT.IMP.Web\NEAT.IMP.WebClient\bin\NEAT.IMP.WebClient.dll.config
+D:\CodeFile\NEATIMP\NEAT.IMP.Web\NEAT.IMP.WebClient\bin\NEAT.IMP.WebClient.dll
+D:\CodeFile\NEATIMP\NEAT.IMP.Web\NEAT.IMP.WebClient\bin\NEAT.IMP.WebClient.pdb
+D:\CodeFile\NEATIMP\NEAT.IMP.Web\NEAT.IMP.WebClient\obj\Debug\NEAT.IMP.WebClient.csprojAssemblyReference.cache
+D:\CodeFile\NEATIMP\NEAT.IMP.Web\NEAT.IMP.WebClient\obj\Debug\NEAT.IMP.WebClient.csproj.CoreCompileInputs.cache
+D:\CodeFile\NEATIMP\NEAT.IMP.Web\NEAT.IMP.WebClient\obj\Debug\NEAT.IMP.WebClient.dll
+D:\CodeFile\NEATIMP\NEAT.IMP.Web\NEAT.IMP.WebClient\obj\Debug\NEAT.IMP.WebClient.pdb
+D:\neat\NEAT.IMP.Web\NEAT.IMP.WebClient\bin\NEAT.IMP.WebClient.dll.config
+D:\neat\NEAT.IMP.Web\NEAT.IMP.WebClient\bin\NEAT.IMP.WebClient.dll
+D:\neat\NEAT.IMP.Web\NEAT.IMP.WebClient\bin\NEAT.IMP.WebClient.pdb
+D:\neat\NEAT.IMP.Web\NEAT.IMP.WebClient\obj\Debug\NEAT.IMP.WebClient.csprojAssemblyReference.cache
+D:\neat\NEAT.IMP.Web\NEAT.IMP.WebClient\obj\Debug\NEAT.IMP.WebClient.dll
+D:\neat\NEAT.IMP.Web\NEAT.IMP.WebClient\obj\Debug\NEAT.IMP.WebClient.pdb

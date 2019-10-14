@@ -1,0 +1,205 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="renderer" content="webkit" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="applicable-device" content="pc">
+    <link rel="stylesheet" href="/content/3rd/layui/css/layui.css">
+    <link rel="stylesheet" href="/content/3rd/fontawesome/css/all.min.css">
+    <link href="/content/neat/css/neat-common.css" rel="stylesheet" />
+    <link href="/content/neat/css/monitor.css" rel="stylesheet" />
+    <link href="/content/neat/css/big-screen.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="big-container">
+        <div class="big-screen-head">
+            <div class="head-time-layer">
+                <span class="head-time-content" id="currentTime"></span>
+            </div>
+            <div class="head-logo-layer"></div>
+            <div class="head-com-layer">
+                <a class="head-com-content" href="http://www.neat.com.cn" target="_blank">www.neat.com.cn</a>
+            </div>
+        </div>
+        <div class="big-screen-body">
+            <div class="body-left-bigout-layer">
+                <div class="body-left-inlayer1">
+                    <span class="body-left-inlayer1-span">未处理警情</span>
+                    <div class="body-left-inlayer1-centdiv">
+                        <div class="body-left-inlayer1-incentds" style="margin-left: 7px;">
+                            <div class="body-left-inlayer1-incentdiv">
+                                <div class="body-left-inlayer1-innumdiv" id="uFireCount"></div>
+                            </div>
+                            <span class="body-left-inlayer1-incentspan">未处理火警</span>
+                        </div>
+
+                        <div class="body-left-inlayer1-incentds">
+                            <div class="body-left-inlayer1-incentdiv">
+                                <div class="body-left-inlayer1-innumdiv" id="uAlarmCount"></div>
+                            </div>
+                            <span class="body-left-inlayer1-incentspan">未处理报警</span>
+                        </div>
+
+                        <div class="body-left-inlayer1-incentds">
+                            <div class="body-left-inlayer1-incentdiv">
+                                <div class="body-left-inlayer1-innumdiv" id="uFaultCount"></div>
+                            </div>
+                            <span class="body-left-inlayer1-incentspan">未处理故障</span>
+                        </div>
+
+                        <div class="body-left-inlayer1-incentds">
+                            <div class="body-left-inlayer1-incentdiv">
+                                <div class="body-left-inlayer1-innumdiv" id="uHiddenCount"></div>
+                            </div>
+                            <span class="body-left-inlayer1-incentspan">未处理隐患</span>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="body-left-inlayer2">
+                    <div class="body-left-inlayer2-centdiv">
+                        <div class="body-left-inlayer2-incentds" style="margin-left: 10px;">
+                            <div class="body-left-inlayer2-incentdiv">
+                                <div class="body-left-inlayer2-innumdiv" id="gatewayCount"></div>
+                            </div>
+                            <span class="body-left-inlayer1-incentspan">网关总数</span>
+                        </div>
+
+                        <div class="body-left-inlayer2-incentds">
+                            <div class="body-left-inlayer2-incentdiv">
+                                <div class="body-left-inlayer2-innumdiv" id="alarmGatewayCount"></div>
+                            </div>
+                            <span class="body-left-inlayer1-incentspan">报警网关</span>
+                        </div>
+
+                        <div class="body-left-inlayer2-incentds">
+                            <div class="body-left-inlayer2-incentdiv">
+                                <div class="body-left-inlayer2-innumdiv" id="keypartCount"></div>
+                            </div>
+                            <span class="body-left-inlayer1-incentspan">重点设施</span>
+                        </div>
+
+                        <div class="body-left-inlayer2-incentds">
+                            <div class="body-left-inlayer2-incentdiv">
+                                <div class="body-left-inlayer2-innumdiv" id="nbiotCount"></div>
+                            </div>
+                            <span class="body-left-inlayer1-incentspan">NB-IOT</span>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="body-left-inlayer3">
+                    <span class="body-left-inlayer3-span">巡检统计</span>
+                    <div class="body-left-inlayer3-centdiv">
+                        <div class="body-left-inlayer3-chartdiv">
+                            <div class="body-left-inlayer3-incentds" id="xj_ctl_1" style="margin-left: 10px;">
+                            </div>
+                            <div>任务完成<span class="body-left-inlayer3-chartdivspan" id="xj_ctl_1_lbl">0%</span></div>
+                        </div>
+
+                        <div class="body-left-inlayer3-chartdiv">
+                            <div class="body-left-inlayer3-incentds" id="xj_ctl_2" style="margin-left: 10px;">
+                            </div>
+                            <div>
+                                隐患单位<span class="body-left-inlayer3-chartdivspan" id="xj_ctl_2_lbl">0%</span>
+                            </div>
+                        </div>
+
+                        <div class="body-left-inlayer3-chartdiv">
+                            <div class="body-left-inlayer3-incentds" id="xj_ctl_3" style="margin-left: 10px;">
+                            </div>
+                            <div>巡查点位<span class="body-left-inlayer3-chartdivspan" id="xj_ctl_3_lbl">0%</span></div>
+                        </div>
+
+                        <div class="body-left-inlayer3-chartdiv">
+                            <div class="body-left-inlayer3-incentds" id="xj_ctl_4" style="margin-left: 10px;">
+                            </div>
+                            <div>
+                                隐患点位<span class="body-left-inlayer3-chartdivspan" id="xj_ctl_4_lbl">0%</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="body-left-inlayer4">
+                    <span class="body-left-inlayer3-span">历年火警趋势</span>
+                    <div class="body-left-inlayer4-chart" id="lnbjqs"></div>
+                </div>
+            </div>
+            <div class="body-middle-bigout-layer">
+                <div class="body-middle-inlayer1">
+                    <div id="mapContainer" class="body-middle-inlayer1-mapin">
+                    </div>
+                </div>
+                <div class="body-middle-inlayer2">
+                    <span class="body-left-inlayer3-span">近一年火警趋势图</span>
+                    <div class="body-left-inlayer5-chart" id="hjgzqst"></div>
+                </div>
+            </div>
+            <div class="body-right-bigout-layer">
+                <div class="body-right-inlayer1">
+                    <span class="body-left-inlayer3-span">联网主机在线统计</span>
+                    <div class="layui-input-inline layui-form" style="width: 100px; margin-left: 200px;">
+                        <select lay-filter="optSysType">
+                            <option value="fire">火灾报警</option>
+                            <option value="water">水源监测</option>
+                            <option value="nb">NB设备</option>
+                            <option value="electric">智慧用电设备</option>
+                        </select>
+                    </div>
+
+                    <div class="body-right-inlayer6-chart" id="lwzjzxtj">
+
+                    </div>
+                </div>
+                <div class="body-right-inlayer2">
+                    <span class="body-left-inlayer3-span">联网单位统计</span>
+                    <div class="body-right-inlayer7-chart" id="lwdwtj"></div>
+                </div>
+                <div class="body-right-inlayer3">
+                    <span class="body-left-inlayer3-span">实时警情列表</span>
+                    <div class="body-right-inlayer7-chart" id="ssjqlb" lay-filter="ssjqlb"></div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <script src="/content/3rd/layui/layui.js"></script>
+    <script src="/content/neat/layui.config.js"></script>
+
+    <script id="maplocationinfo" type="text/html">
+        <p class='entnamep' title="{{ d.name }}" id='entname'>{{ d.name }}</p>
+        <div class='infodiv-span'>
+            <span class='infospannum'>火警设备：<a href='javascript:void(0)' attrid={{ d.id }} onclick='eventbuttoncount(this,"fire")' class='div-span-a-fire'>{{ d.fireCount }}</a></span>
+            <span class='infospannum'>故障设备：<a href='javascript:void(0)' attrid={{ d.id }} onclick='eventbuttoncount(this, "fault")' class='div-span-a-fault'>{{ d.faultCount }}</a></span>
+        </div>
+        <div class='infodiv-span'>
+            <span class='infospannum'>报警设备：<a href='javascript:void(0)' attrid={{ d.id }} onclick='eventbuttoncount(this, "alarm")' class='div-span-a-alarm'>{{ d.alarmCount }}</a></span>
+            <span class='infospannum'>离线设备：<a href='javascript:void(0)' attrid={{ d.id }} onclick='eventbuttoncount(this, "offline")' class='div-span-a-offline'>{{d.offlineCount}}</a></span>
+        </div>
+        <div class='phoneaddress-div'>
+            <span class='infospannum'>电话：{{ d.fproomtel1 }}</span>
+            <span class='infospanaddr' title="{{ d.address }}">地址：{{ d.address }}</span>
+        </div>
+        <div class='button-out-div'>
+            <span class='span-button-event'>
+                <button attrid={{ d.id }} id='entdetailsbutton' onclick='entdetailsbutton(this)' class='layui-btn layui-btn-sm span-button-color'>详情</button>
+            </span>
+            <span class='span-button-event'>
+                <button attrid={{ d.id }} id='entvideobutton' onclick='entvideobutton(this)' class='layui-btn layui-btn-sm span-button-color'>视频</button>
+            </span>
+            <span class='span-button-event'>
+                <button attrid={{ d.id }} id='entplanbutton' onclick='entplanbutton(this)' class='layui-btn layui-btn-sm span-button-color'>平面图</button>
+            </span>
+        </div>
+    </script>
+    <script type="text/javascript">
+        layui.use(["pageBoardShow"], function () {
+            var page = layui.pageBoardShow;
+            page.init();
+         });
+    </script>
+</body>
+</html>

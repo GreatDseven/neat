@@ -1,0 +1,178 @@
+﻿<!doctype html>
+<html lang="zh">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="renderer" content="webkit">
+    <title>平面图描点</title>
+    <link rel="stylesheet" href="/content/3rd/layui/css/layui.css">
+    <link rel="stylesheet" href="/content/neat/css/neat-common.css">
+    <link rel="stylesheet" href="/content/3rd/fontawesome/css/all.min.css">
+    <link rel="stylesheet" href="/content/3rd/svg/css/svg.select.css" />
+
+    <link href="/content/3rd/svgtooltip/css/tooltipster.bundle.min.css" rel="stylesheet" />
+    <link href="/content/3rd/svgtooltip/css/style.css" rel="stylesheet" />
+    <style type="text/css">
+        .menu_search {
+            height: 415px;
+            width: 150px;
+            margin: 0 auto;
+            float: left;
+            margin-top: 10px;
+        }
+
+        .menu_list {
+            height: 415px;
+            width: 250px;
+            margin: 0 auto;
+            float: left;
+            margin-top: 40px;
+        }
+
+        .menu_head {
+            height: 47px;
+            line-height: 47px;
+            padding-left: 20px;
+            font-size: 14px;
+            position: relative;
+            margin: 0px;
+            font-weight: bold;
+            background: #1f2d55;
+        }
+
+        .menu_list .current {
+            color: #f7f8f8;
+            background-color: #134c7e;
+        }
+
+        .menu_body {
+            padding-left: 15px;
+            line-height: 38px;
+            border-left: 1px solid #1f2d55;
+            background: #1e274d;
+            border-right: 1px solid #1f2d55;
+            height: 530px;
+            overflow-y: auto;
+            overflow-x: hidden;
+        }
+
+            .menu_body a {
+                font-size: 12px;
+                display: block;
+                height: 38px;
+                line-height: 38px;
+                padding-left: 25px;
+                color: #b5b9c7;
+                background: #1f2d55;
+                text-decoration: none;
+            }
+
+                .menu_body a:hover {
+                    text-decoration: none;
+                    background-color: #134c7e;
+                }
+
+        .left_layer_listCon {
+            width: 250px;
+            height: 713px;
+            float: left;
+        }
+
+        .video_out_div {
+            margin: 10px;
+        }
+
+        .video_in_div {
+            float: left;
+            width: 1110px;
+            height: 715px;
+            margin-left: 10px;
+            border: 1px solid rgb(22, 62, 107);
+        }
+
+        .top_layer_search {
+            width: 250px;
+            height: 125px;
+            background-color: #1e274d;
+        }
+
+        .top_layer_in_search {
+            width: 210px;
+            height: 100px;
+        }
+    </style>
+
+
+</head>
+<body>
+    <div class="video_out_div">
+        <div class="left_layer_listCon">
+            <div class="top_layer_search">
+
+                <div class="top_layer_in_search">
+                    <div class="layui-input-inline layui-form"  style="background-color: #1e274d;margin-top: 25px;margin-left: 20px;width: 200px;">
+                        <select id="optQuery" lay-filter="optQuery">
+                            <option value="-1">全部设备类型</option>
+                            <option value="1">用户信息传输设备</option>
+                            <option value="2">NEAT水设备</option>
+                            <option value="3">一体式水源监测</option>
+                            <option value="4">智慧用电网关</option>
+                            <option value="6">NB设备</option>
+                            <option value="7">视频设备</option>
+                            <option value="101">消防主机</option>
+                            <option value="102">消防器件</option>
+                            <option value="201">水信号</option>
+                            <option value="701">视频通道</option>
+                        </select>
+                        <input class="search-btn layui-input-inline" type="button" style="width:200px;margin-top:15px;" id="btnSearchTree" value="搜索" />
+                    </div>
+                </div>
+                <div class="menu_list">
+                    <div id="firstpane">
+                        <h3 class="menu_head" id="enterpriseName"></h3>
+                        <div class="menu_body" id="treeview">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="video_in_div">
+            <svg id="svgBackgroundImg" xmlns="http://www.w3.org/2000/svg" style="display: inline; width: inherit; min-width: inherit;
+    max-width: inherit; height: inherit; min-height: inherit; max-height: inherit;  border-color:aquamarine" viewBox="0 0 1000 680" version="1.1">
+
+            </svg>
+        </div>
+    </div>
+    <script src="/content/3rd/layui/layui.js"></script>
+    <script src="/content/neat/layui.config.js"></script>
+    <script src="/content/3rd/ezuikit.js"></script>
+    <script src="/content/3rd/svg/svg.js"></script>
+    <script src="/content/3rd/svg/svg.select.js"></script>
+    <script src="/content/3rd/svg/svg.draggable.js"></script>
+    <script src="/content/3rd/svg/svg.panzoom.js"></script>
+
+    <script>
+        var cssArray = [
+            "/content/3rd/layui/css/layui.css",
+            "/content/3rd/fontawesome/css/all.min.css",
+            "/content/neat/css/neat-common.css",
+            "/content/neat/css/notify.css"
+        ];
+
+        layui.each(cssArray, function (_, cssurl) {
+            layui.link(cssurl);
+
+        });
+
+    </script>
+    <script>
+        layui.use(["pagePlanImgLayoutEdit"], function () {
+            var page = layui.pagePlanImgLayoutEdit;
+            page.init();
+        });
+
+    </script>
+</body>
+
+</html>

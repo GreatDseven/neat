@@ -1,0 +1,147 @@
+﻿<!-- 综合设备查询 -->
+
+
+<style>
+    .layui-input-inline-checkbox {
+        float: left;
+        max-width: 160px !important;
+        min-width: 100px;
+        margin-right: 10px;
+    }
+
+    .layui-form-checkbox span {
+        color: #0486c7 !important;
+    }
+</style>
+<div class="layui-row sitemap-row-container normal-blue-text">
+    当前位置&nbsp;:&nbsp;设备管理>综合设备查询
+</div>
+
+<!-- 查询条件行 -->
+<div class="layui-row query-row-container-2line">
+    <div class="layui-form layui-form-pane1" lay-filter="query">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">关键字</label>
+                <div class="layui-input-inline">
+                    <input type="text" id="txtKeyword" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">所属单位</label>
+                <div class="layui-input-inline layui-form" lay-filter="optEntForm">
+                    <select id="optEnt" lay-filter="optEnt">
+                        <option value="">全部</option>
+                    </select>
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">所属建筑</label>
+                <div class="layui-input-inline layui-form" lay-filter="optBuildingForm">
+                    <select id="optBuilding" lay-filter="optBuilding">
+                        <option value="">全部</option>
+
+                    </select>
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">所属部位</label>
+                <div class="layui-input-inline layui-form" lay-filter="optKeypartForm">
+                    <select id="optKeypart" lay-filter="optKeypart">
+                        <option value="">全部</option>
+
+                    </select>
+                </div>
+            </div>
+
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline" id="queryCondition">
+                
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 查询结果行 -->
+<div class="layui-row result-row-container-with-2line-query">
+
+    <div class="table-container">
+        <div id="resultTable" lay-filter="resultTable"></div>
+    </div>
+    <div class="pager-container">
+        <div id="resultTablePager"></div>
+    </div>
+</div>
+
+
+<!--查询条件模板-->
+<script type="text/html" id="queryConditionTemplate">
+    <label class="layui-form-label">设备类别</label>
+
+    {{#  layui.each(d.data, function(index, item){ }}
+
+    <div class="layui-input-inline-checkbox">
+        <input type="checkbox" name="devType" dev-type-value="{{item.id}}" checked lay-filter="devType" lay-skin="primary" title="{{item.name}}">
+    </div>
+
+    {{#  }); }}
+
+
+    <div class="layui-inline">
+        &nbsp;
+    </div>
+
+    <div class="layui-inline">
+        <button class="layui-btn" id="btnQuery" lay-filter="query">查询</button>
+    </div>
+    <div class="layui-inline">
+        <button class="layui-btn layui-btn-normal" id="btnRefresh" lay-filter="query">刷新</button>
+    </div>
+</script>
+
+    <!--数据表格操作-->
+<script type="text/html" id="opColTemplate">
+
+    <a lay-event="detail" title="查看详情" href="javascript:void(0)" style="color:#babdc9;"><i class="fa fa-eye"></i></a>
+    <a lay-event="realtime-data" title="实时数据" href="javascript:void(0)" style="color:#babdc9;"><i class="fa fa-chart-bar"></i></a>
+    <a lay-event="history-data" title="历史数据" href="javascript:void(0)" style="color:#babdc9;"><i class="fa fa-clock"></i></a>
+    <a lay-event="location" title="地图定位" href="javascript:void(0)" style="color:#babdc9;"><i class="fa fa-map-marker-alt"></i></a>
+    <a lay-event="events" title="报警信息" href="javascript:void(0)" style="color:#babdc9;"><i class="fa fa-bell"></i></a>
+
+</script>
+
+    <script type="text/html" id="optEntTemplate">
+        <option value="">全部</option>
+        {{#  layui.each(d.data, function(index, item){ }}
+
+        <option value="{{item.id}}">{{item.name}}</option>
+
+        {{#  }); }}
+    </script>
+    <script type="text/html" id="optBuildingTemplate">
+        <option value="">全部</option>
+        {{#  layui.each(d.data, function(index, item){ }}
+
+        <option value="{{item.id}}">{{item.name}}</option>
+
+        {{#  }); }}
+    </script>
+    <script type="text/html" id="optKeypartTemplate">
+        <option value="">全部</option>
+        {{#  layui.each(d.data, function(index, item){ }}
+
+        <option value="{{item.id}}">{{item.name}}</option>
+
+        {{#  }); }}
+    </script>
+
+
+    <script type="text/javascript">
+        layui.use(["pageGeneralQueryList"], function () {
+
+            var subPage = layui.pageGeneralQueryList;
+
+            subPage.init();
+
+        });
+    </script>

@@ -1,0 +1,331 @@
+﻿<!doctype html>
+<html lang="zh">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="/content/3rd/layui/css/layui.css">
+    <link rel="stylesheet" href="/content/3rd/fontawesome/css/all.min.css">
+    <link rel="stylesheet" href="/content/neat/css/neat-common.css">
+    <title>修改一体式水源监测设备</title>
+
+    <style>
+        .layui-form-item .layui-input-inline {
+            width: 250px;
+        }
+
+        .layui-form-item .layui-input-wide-inline {
+            width: 650px !important;
+        }
+
+        .layui-form-item .layui-input-wide2-inline {
+            width: 530px;
+        }
+
+        .layui-form-item .layui-input-wide3-inline {
+            width: 80px;
+        }
+
+        .layui-form-select dl {
+            max-height: 200px;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <div class="layui-layer-content layui-form" lay-filter="wholeForm">
+
+            <div class="layui-row">
+                <div class="layui-col-sm6">
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label normal-label">生产厂商</label>
+                            <div class="layui-input-inline layui-form" lay-filter="optManufacturerForm">
+                                <select id="optManufacturer" lay-filter="optManufacturer" disabled name="optManufacturer" lay-verify="optManufacturer" lay-verType="tips">
+                                    <option value="">请选择生产厂商</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="layui-col-sm6">
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label normal-label">联网方式</label>
+                            <div class="layui-input-inline layui-form" lay-filter="optConnectionTypeForm">
+                                <select id="optConnectionType" lay-filter="optConnectionType" name="optConnectionType" lay-verify="optConnectionType" lay-verType="tips">
+                                    <option value="">请选择联网方式</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="layui-row">
+                <div class="layui-col-sm6">
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label normal-label" id="lblDeviceCode">设备编码</label>
+                            <div class="layui-input-inline">
+                                <input type="text" id="txtCode" name="txtCode" autocomplete="off" lay-verify="txtCode" lay-verType="tips" placeholder="请输入设备编码" class="layui-input">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-sm6">
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label normal-label">设备名称</label>
+                            <div class="layui-input-inline">
+                                <input type="text" id="txtName" name="txtName" autocomplete="off" lay-verify="txtName" lay-verType="tips" placeholder="请输入设备名称" class="layui-input">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="layui-row" id="divIMData">
+                <div class="layui-col-sm6">
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label normal-label">IMEI</label>
+                            <div class="layui-input-inline">
+                                <input type="text" id="txtIMEI" name="txtIMEI" autocomplete="off" lay-verify="txtIMEI" lay-verType="tips" placeholder="请输入IMEI" class="layui-input">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="layui-col-sm6" id="divIMSI">
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label normal-label">IMSI</label>
+                            <div class="layui-input-inline">
+                                <input type="text" id="txtIMSI" name="txtIMSI" autocomplete="off" lay-verify="txtIMSI" lay-verType="tips" placeholder="请输入IMSI" class="layui-input">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="layui-row">
+                <div class="layui-col-sm6">
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label normal-label">所属单位</label>
+                            <div class="layui-input-inline">
+                                <input type="text" id="txtEnterpriseName" autocomplete="off" disabled class="layui-input layui-disabled">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-sm6">
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label normal-label">所属建筑</label>
+                            <div class="layui-input-inline layui-form" lay-filter="optBuildingForm">
+                                <select id="optBuilding" lay-filter="optBuilding" name="optBuilding" lay-verify="optBuilding" lay-verType="tips">
+                                    <option value="">请选择所属建筑</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="layui-row">
+                <div class="layui-col-sm6">
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label normal-label">所属部位</label>
+                            <div class="layui-input-inline layui-form" lay-filter="optKeyPartListForm">
+                                <select id="optKeyPartList" lay-filter="optKeyPartList" name="optKeyPartList" lay-verify="optKeyPartList" lay-verType="tips">
+                                    <option value="">请选择所属部位</option>
+
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-sm6">
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label normal-label">安装位置</label>
+                            <div class="layui-input-inline">
+                                <input type="text" id="txtAddr" autocomplete="off" name="txtAddr" class="layui-input" lay-verify="txtAddr" lay-verType="tips">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="layui-row">
+                <div class="layui-col-sm6">
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label normal-label">设备类型</label> <!--液压/液位/温度-->
+                            <div class="layui-input-inline layui-form" lay-filter="optDeviceTypeForm">
+                                <select id="optDeviceType" lay-filter="optDeviceType" name="optDeviceType" lay-verify="optDeviceType" lay-verType="tips">
+                                    <option value="">请选择设备类型</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-sm6">
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label normal-label">计量单位</label>
+                            <div class="layui-input-inline layui-form" lay-filter="optUnitForm">
+                                <select id="optUnit" lay-filter="optUnit" name="optUnit" lay-verify="optUnit" lay-verType="tips"></select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!--地图标注-->
+            <div class="layui-row"  id="divGis">
+                <div class="layui-col-sm12">
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label normal-label">地图标注</label>
+                            <div class="layui-input-inline layui-input-wide2-inline" width =" 520">
+
+                                <input type="text" id="txtGisAddress" readonly autocomplete="off" class="layui-input layui-disabled">
+                            </div>
+                            <div class="layui-input-inline layui-input-wide3-inline">
+                                <button class="layui-btn layui-btn-normal" style="margin-left:25px;" id="btnGisBrowse">标注</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="layui-row">
+                &nbsp;
+            </div>
+
+            <div class="layui-row" style="text-align: center;margin-top:20px;">
+                <button class="layui-btn layui-btn" lay-submit lay-filter="btnSave" id="btnSave">保存</button>
+                <button class="layui-btn layui-btn-grey" id="btnCancel">取消</button>
+            </div>
+        </div>
+
+
+
+    </div>
+
+
+
+    <script type="text/html" id="optManufacturerTemplate">
+        <option value="">请选择生产厂商</option>
+        {{#  layui.each(d.data, function(index, item){ }}
+
+        {{# if (item.id == d.selectedValue){}}
+        <option value="{{item.id}}" selected>{{item.name}}</option>
+        {{# } else {}}
+        <option value="{{item.id}}">{{item.name}}</option>
+        {{# } }}
+
+        {{#  }); }}
+    </script>
+
+
+    <script type="text/html" id="optConnectionTypeTemplate">
+        <option value="">请选择联网方式</option>
+        {{#  layui.each(d.data, function(index, item){ }}
+
+        {{# if (item.id == d.selectedValue){}}
+        <option value="{{item.id}}" selected>{{item.name}}</option>
+        {{# } else {}}
+        <option value="{{item.id}}">{{item.name}}</option>
+        {{# } }}
+
+        {{#  }); }}
+    </script>
+
+
+    <script type="text/html" id="optBuildingTemplate">
+        <option value="">请选择所属建筑</option>
+        {{#  layui.each(d.data, function(index, item){ }}
+
+        {{# if (item.id == d.selectedValue){}}
+        <option value="{{item.id}}" selected>{{item.name}}</option>
+        {{# } else {}}
+        <option value="{{item.id}}">{{item.name}}</option>
+        {{# } }}
+
+        {{#  }); }}
+    </script>
+    <script type="text/html" id="optKeyPartListTemplate">
+        <option value="">请选择所属部位</option>
+        {{#  layui.each(d.data, function(index, item){ }}
+
+        {{# if (item.id == d.selectedValue){}}
+        <option value="{{item.id}}" selected>{{item.name}}</option>
+        {{# } else {}}
+        <option value="{{item.id}}">{{item.name}}</option>
+        {{# } }}
+
+
+        {{#  }); }}
+    </script>
+
+    <!--设备类型-->
+    <script type="text/html" id="optDeviceTypeTemplate">
+        <option value="">请选择设备类型</option>
+
+        {{#  layui.each(d.data, function(index, item){ }}
+
+        {{# if (item.id == d.selectedValue){}}
+        <option value="{{item.id}}" selected>{{item.name}}</option>
+        {{# } else {}}
+        <option value="{{item.id}}">{{item.name}}</option>
+        {{# } }}
+
+        {{#  }); }}
+
+    </script>
+
+    <!--单位-->
+    <script type="text/html" id="optUnitTemplate">
+        <option value="">请选择单位</option>
+
+
+        {{#  layui.each(d.data, function(index, item){ }}
+
+        {{# if (item.id == d.selectedValue){}}
+        <option value="{{item.id}}" selected>{{item.name}}</option>
+        {{# } else {}}
+        <option value="{{item.id}}">{{item.name}}</option>
+        {{# } }}
+
+        {{#  }); }}
+    </script>
+
+
+    <script src="/content/3rd/layui/layui.js"></script>
+    <script src="/content/neat/layui.config.js"></script>
+    <script type="text/javascript">
+
+
+        layui.use(["layer"], function () {
+            var layindex = layui.layer.load(1);
+            layui.use(["pageUnibodyWaterGatewayUpdate"], function () {
+                var page = layui.pageUnibodyWaterGatewayUpdate;
+                page.init();
+                layui.layer.close(layindex);
+            });
+        });
+
+    </script>
+</body>
+
+</html>

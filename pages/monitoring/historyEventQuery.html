@@ -1,0 +1,200 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="/content/3rd/layui/css/layui.css">
+    <link rel="stylesheet" href="/content/3rd/fontawesome/css/all.min.css">
+    <link rel="stylesheet" href="/content/neat/css/neat-common.css">
+    <link rel="stylesheet" href="/content/neat/css/notify.css">
+    <title></title>
+    <style>
+
+        .layui-form-item .layui-input-inline-short {
+            float: left;
+            width: 120px;
+            margin-right: 10px;
+        }
+
+        .sp-query-condition-row {
+            width: 1866px;
+            height: 86px;
+            background: url(/content/neat/images/neat-common/query-bg-wide.png) center center no-repeat;
+            margin: 0px 17px 0px 17px;
+            padding-top: 20px;
+        }
+
+
+        .sp-query-result-row {
+            width: 1866px;
+            height: 790px;
+            background: url("/content/neat/images/neat-common/query-result-bg-wide.png") center center no-repeat;
+            margin: 0px 17px 0px 17px;
+            padding-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="neat-container">
+        <!-- logo -->
+        <div class="logo layui-row"></div>
+        <!-- 内容 -->
+        <div class="sp-middle-row layui-row">
+            <div class="layui-col-lg12">
+
+                <!-- 导航栏 -->
+                <div class="sp-nav-row layui-row sitemap-row-container normal-blue-text">
+                    &nbsp;&nbsp;&nbsp;&nbsp;当前位置&nbsp;:&nbsp;接处警情>历史警情
+                </div>
+
+                <div class="sp-query-condition-row layui-row">
+                    <div class="layui-form layui-form-pane1" lay-filter="query">
+                        <div class="layui-form-item">
+                            <div class="layui-inline">
+                                <label class="layui-form-label">设备名称</label>
+                                <div class="layui-input-inline-short">
+                                    <input type="text" id="txtDeviceName" autocomplete="off" class="layui-input">
+                                </div>
+                            </div>
+                            <div class="layui-inline">
+                                <label class="layui-form-label">报警类型</label>
+                                <div class="layui-input-inline-short layui-form" lay-filter="optAlarmTypeForm">
+                                    <select id="optAlarmType" lay-filter="optAlarmType">
+                                        <option value="">全部</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="layui-inline">
+                                <label class="layui-form-label">处理情况</label>
+                                <div class="layui-input-inline-short layui-form" lay-filter="optProcessResultForm">
+                                    <select id="optProcessResult" lay-filter="optProcessResult">
+                                        <option value="">全部</option>
+
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="layui-inline">
+                                <label class="layui-form-label">起止时间</label>
+                                <div class="layui-input-inline layui-form timespan_cont" lay-filter="startDateForm">
+                                    <input type="text" class="layui-input timespan-ctl" readonly id="dateSpan">
+                                </div>
+                            </div>
+                            <div class="layui-inline">
+                                <label class="layui-form-label">所属中心</label>
+                                <div class="layui-input-inline layui-form" lay-filter="optDomainForm">
+                                    <select id="optDomain" lay-filter="optDomain">
+                                        <option value="">全部</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="layui-inline">
+                                <label class="layui-form-label">所属企业</label>
+                                <div class="layui-input-inline layui-form" lay-filter="optEntForm">
+                                    <select id="optEnt" lay-filter="optEnt">
+                                        <option value="">全部</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="layui-inline">
+                                <button class="layui-btn" id="btnQuery" lay-filter="query">查询</button>
+                            </div>
+                            <div class="layui-inline">
+                                <button class="layui-btn layui-btn-normal" id="btnRefresh" lay-filter="query">刷新</button>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+                <div class="sp-query-result-row layui-row">
+                    <div class="table-container">
+                        <div id="resultTable" lay-filter="resultTable"></div>
+                    </div>
+                    <div class="pager-container">
+                        <div id="resultTablePager"></div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!-- 页脚 -->
+        <div class="bottom-row layui-row">
+            <!-- 当前时间 -->
+            <div class="layui-col-lg3 current-time-container normal-blue-text">
+                当前时间 : <span id="currentTime"></span>
+            </div>
+            <!-- 版本信息 -->
+            <div class="layui-col-lg3 layui-col-lg-offset6 copyright-container normal-blue-text">
+                版权所有 : 秦皇岛尼特智能科技有限公司
+            </div>
+        </div>
+    </div>
+    <script src="/content/3rd/layui/layui.js"></script>
+    <script src="/content/neat/layui.config.js"></script>
+
+    <!-- 报警类型模板 -->
+    <script type="text/html" id="optAlarmTypeTemplate">
+
+        {{#  layui.each(d.data, function(index, item){ }}
+
+        <option value="{{item.id}}">{{item.name}}</option>
+
+        {{#  }); }}
+    </script>
+    <!-- 处理情况模板 -->
+    <script type="text/html" id="optProcessResultTemplate">
+        {{#  layui.each(d.data, function(index, item){ }}
+
+        <option value="{{item.id}}">{{item.name}}</option>
+
+        {{#  }); }}
+    </script>
+
+    <script type="text/html" id="optDomainTemplate">
+        <option value="">全部</option>
+        {{#  layui.each(d.data, function(index, item){ }}
+
+        <option value="{{item.id}}">{{item.name}}</option>
+
+        {{#  }); }}
+    </script>
+
+    <script type="text/html" id="optEntTemplate">
+        <option value="">全部</option>
+        {{#  layui.each(d.data, function(index, item){ }}
+
+        <option value="{{item.id}}">{{item.name}}</option>
+
+        {{#  }); }}
+    </script>
+
+    <!--数据表格操作-->
+    <script type="text/html" id="opColTemplate">
+
+        <!--处理-->
+        {{# if(!d.isHandled ){ }}
+        <a lay-event="event-process" title="处理" href="javascript:void(0)" style="color:#babdc9;"><i class="fas fa-mouse-pointer"></i></a>
+        {{#} else { }}
+        <a lay-event="" title="无需处理" href="javascript:void(0)" style="color:rgba(241, 238, 238, 0.5);"><i class="fas fa-mouse-pointer"></i></a>
+        {{#}  }}
+
+        <!-- 查看 -->
+        <a lay-event="event-detail" title="查看详情" href="javascript:void(0)" style="color:#babdc9;"><i class="fa fa-eye"></i></a>
+        <!-- 平面图 -->
+        <a lay-event="planar-graph" title="平面图" href="javascript:void(0)" style="color:#babdc9;"><i class="fa fa-money-check"></i></a>
+        <!-- 地图定位 -->
+        <a lay-event="gis-locate" title="地图定位" href="javascript:void(0)" style="color:#babdc9;"><i class="fa fa-map-marker-alt"></i></a>
+        <!-- 摄像头 -->
+        <a lay-event="camera" title="摄像头" href="javascript:void(0)" style="color:#babdc9;"><i class="fa fa-video"></i></a>
+
+    </script>
+
+    <script type="text/javascript">
+        layui.use(["pageHistoryEventQuery"], function () {
+            layui.pageHistoryEventQuery.init();
+        });
+    </script>
+</body>
+
+</html>

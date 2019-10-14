@@ -1,0 +1,123 @@
+﻿<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="/content/3rd/layui/css/layui.css">
+    <link rel="stylesheet" href="/content/3rd/fontawesome/css/all.min.css">
+    <link rel="stylesheet" href="/content/neat/css/neat-common.css">
+    <link href="/content/neat/css/monitor.css" rel="stylesheet" />
+</head>
+<body>
+    <div style="padding:20px;">
+        <form class="layui-form" action="">
+            <!-- 头部 -->
+            <div class="layui-row div-head">
+                <div class="head-div2">
+                    <div class="layui-col-xs2 head-layui-col-xs2-div">
+                        <div class="head-img-div">
+                            <img id="devicePic" class="devicePic" />
+                        </div>
+                    </div>
+                    <div class="layui-col-xs9">
+                        <div class="layui-row head-layui-row-divfont">
+                            <span id="alarmStatusspan" style="margin-right: 10px;"></span>
+                            <label id="deviceName"></label>
+                        </div>
+                        <div class="head-div-labelstate">
+                            <span id="onlineStatusspan" style="display:none;"><label>联网状态：</label><label id="onlineStatus"></label></span>
+                            <span id="signalStatusspan" style="display:none;"><label>信号强度：</label><label id="signalStatus"></label></span>
+                            <span id="batteryStatusspan" style="display:none;"><label>剩余电量：</label><label id="batteryStatus"></label></span>
+                            <span id="currentValuespan" style="display:none;"><label>当前值：</label><label id="currentValue"></label></span>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="layui-row">
+                <div class="layui-form-item layui-form-item-width">
+                    <label class="layui-form-label" style="margin-left: 16px;">报警描述</label>
+                    <div id="AlarmDes" class="layui-input-block" style="margin-top: 10px;width:650px;color:#b5bbc4;line-height: 21px;">
+                    </div>
+                </div>
+            </div>
+            <div class="input-left-div">
+                <div class="layui-form-item layui-form-item-width">
+                    <label class="layui-form-label">所在单位</label>
+                    <div class="layui-input-block">
+                        <input id="enterpriseName" disabled type="text" name="enterpriseName" lay-verify="title" autocomplete="off" placeholder="请输入所在单位" class="layui-input layui-disabled">
+                    </div>
+                </div>
+                <div class="layui-form-item layui-form-item-width">
+                    <label class="layui-form-label">单位负责人</label>
+                    <div class="layui-input-block">
+                        <input id="leader" type="text" disabled="disabled" name="leader" lay-verify="required" placeholder="请输入单位负责人" autocomplete="off" class="layui-input layui-disabled">
+                    </div>
+                </div>
+            </div>
+            <div class="input-left-div">
+                <div class="layui-form-item layui-form-item-width">
+                    <label class="layui-form-label">安装位置</label>
+                    <div class="layui-input-block">
+                        <input id="address" type="text" disabled="disabled" name="address" lay-verify="title" autocomplete="off" placeholder="请输入单位地址" class="layui-input layui-disabled">
+                    </div>
+                </div>
+                <div class="layui-form-item layui-form-item-width">
+                    <label class="layui-form-label">联系电话</label>
+                    <div class="layui-input-block">
+                        <input id="telephone" type="text" disabled="disabled" name="telephone" lay-verify="required" placeholder="请输入联系电话" autocomplete="off" class="layui-input layui-disabled">
+                    </div>
+                </div>
+            </div>
+            <div class="input-left-div">
+                <div class="layui-form-item layui-form-item-width-hander">
+                    <label class="layui-form-label">处理人</label>
+                    <div class="layui-input-block">
+                        <input id="CurrentUsername" disabled="disabled" type="text" name="CurrentUsername" lay-verify="title" autocomplete="off" placeholder="请输入处理人" class="layui-input layui-disabled">
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="input-left-div">
+                <div class="layui-form-item layui-form-item-width-radio">
+                    <label class="layui-form-label">处理结果</label>
+                    <div class="layui-input-block" style="margin-left: 0px;">
+                        <input type="radio" name="eventradio" lay-filter="eventradio" value="2" title="真实警情">
+                        <input type="radio" name="eventradio" lay-filter="eventradio" value="3" title="系统测试">
+                        <input type="radio" name="eventradio" lay-filter="eventradio" value="4" title="设备误报">
+                    </div>
+                </div>
+            </div>
+            <div class="input-left-div">
+                <div class="layui-form-item layui-form-item-width-textarea">
+                    <label class="layui-form-label">处理说明</label>
+                    <div class="layui-input-block">
+                        <textarea id="HandleContent" name="HandleContent" rows="5" placeholder="请输入内容" class="layui-textarea"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-input-block" style="margin-left: 300px;">
+                    <button class="layui-btn" lay-submit="" lay-filter="btnSave" id="btnSave">处理</button>
+                    <input class="layui-btn" id="btnCancel" style="background-color:#646978;width: 58px;" value="取消" />
+                </div>
+            </div>
+        </form>
+    </div>
+    <script src="/content/3rd/layui/layui.js"></script>
+    <script src="/content/neat/layui.config.js"></script>
+    <script type="text/javascript">
+
+        layui.use(["layer"], function () {
+            var layindex = layui.layer.load(1);
+            layui.use(["pagemonitorEventProcess"], function () {
+                var page = layui.pagemonitorEventProcess;
+                page.init();
+                layui.layer.close(layindex);
+            });
+        });
+
+    </script>
+</body>
+</html>

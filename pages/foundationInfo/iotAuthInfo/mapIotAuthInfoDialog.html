@@ -1,0 +1,106 @@
+﻿<!doctype html>
+<html lang="zh">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="/content/3rd/layui/css/layui.css">
+    <link rel="stylesheet" href="/content/3rd/fontawesome/css/all.min.css">
+    <link rel="stylesheet" href="/content/neat/css/neat-common.css">
+    <title>机构关联应用</title>
+
+    <style>
+        .table-cont{
+            width:840px;
+        }
+
+        .layui-table-page > div {
+            height: 26px;
+            text-align: right;
+            padding-right: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="dialog-body">
+        <div class="layui-layer-content">
+
+            <div class="layui-row">
+                <div class="layui-col">
+                    <div class="layui-form layui-form-pane1" action="" lay-filter="first">
+                        <div class="layui-form-item">
+                            <div class="layui-inline">
+                                <label class="layui-form-label">当前机构:</label>
+                                <div class="layui-input-inline">
+                                    <input type="text" id="txtOrgName" disabled class="layui-input layui-disabled">
+                                </div>
+                            </div>
+                            <div class="layui-inline">
+                                <label class="layui-form-label">关键字</label>
+                                <div class="layui-input-inline">
+                                    <input type="text" id="txtkeyWord" autocomplete="off" class="layui-input">
+                                </div>
+                            </div>
+                            <div class="layui-inline">
+                                <button class="layui-btn" id="btnSearch">搜索</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-row">
+                <div class="layui-col">
+                    <div class="table-cont">
+                        <div lay-filter="resultTable" id="resultTable"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="layui-row" style="text-align: center;margin-top:20px;">
+                <button class="layui-btn layui-btn" id="btnSave" lay-submit lay-filter="btnSave">保存</button>
+                <button class="layui-btn layui-btn-grey" id="btnCancel">关闭</button>
+            </div>
+        </div>
+
+
+    </div>
+
+
+
+    <script type="text/html" id="optISPListTemplate">
+        <option value="">请选择运营商</option>
+        {{#  layui.each(d.data, function(index, item){ }}
+
+        <option value="{{item.id}}">{{item.name}}</option>
+
+        {{#  }); }}
+    </script>
+
+    <script type="text/html" id="optEnvTypeTemplate">
+        <option value="">请选择运行环境</option>
+        {{#  layui.each(d.data, function(index, item){ }}
+
+        <option value="{{item.id}}">{{item.name}}</option>
+
+        {{#  }); }}
+    </script>
+
+
+
+    <script src="/content/3rd/layui/layui.js"></script>
+    <script src="/content/neat/layui.config.js"></script>
+    <script type="text/javascript">
+
+        layui.use(["layer"], function () {
+            var layindex = layui.layer.load(1);
+            layui.use(["pageMapIotAuthInfoDialog"], function () {
+                var page = layui.pageMapIotAuthInfoDialog;
+                page.init();
+                layui.layer.close(layindex);
+            });
+        });
+
+    </script>
+</body>
+
+</html>

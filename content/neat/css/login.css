@@ -1,0 +1,197 @@
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+body {
+    font-size: 12px;
+    color: #555555;
+}
+
+ul, ol, li {
+    list-style-type: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+img {
+    border: none;
+}
+
+html, body {
+    margin: 0px;
+    height: 100%;
+}
+
+body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    letter-spacing: 1px;
+    background-size: cover;
+    overflow: hidden;
+    background:url(/content/neat/images/login/login-bg.png) no-repeat  #131C40;
+    background-position:center;
+}
+
+.main-login {
+    width: 100%;
+    height: 150px;
+    margin-left: auto;
+    margin-right: auto;
+    position: absolute;
+    top: 31%;
+    border: 0px solid #ddd;
+}
+
+.login-content {
+    width: 600px;
+    height: 488px;
+    background: #000;
+    margin-top: -22px;
+    margin-left: auto;
+    margin-right: auto;
+    background: url(/content/neat/images/login/login-bg-s.png) no-repeat;
+}
+
+h2 {
+    text-align: center;
+    height: 98px;
+    line-height: 50px;
+}
+
+.login-info {
+    width: 380px;
+    height: 35px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+}
+
+    .login-info span.user {
+        float: left;
+        width: 56px;
+        height: 30px;
+        margin: 5px auto 5px auto;
+        font-size: 16px;
+        color: #BDBEC9;
+    }
+
+    .login-info span.pwd {
+        float: left;
+        width: 56px;
+        height: 30px;
+        margin: 5px auto 5px auto;
+        font-size: 16px;
+        color: #BDBEC9;
+    }
+
+.login-input {
+    width: 300px;
+    background: #24223B;
+    height: 32px;
+    border: none;
+    letter-spacing: 2px;
+    margin: 0;
+    padding: 2px 2px 2px 2px;
+    color: #FFF;
+    float:right;
+}
+
+.login-oper {
+    width: 380px;
+    height: 36px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+}
+
+.login-btn {
+    width: 170px;
+    height: 34px;
+    border: none;
+    background: #00A0E9;
+    color: #ffffff;
+    letter-spacing: 1px;
+    margin-left: 2px;
+    border-radius: 3px;
+    font-size: 14px;
+    float:left;
+
+}
+
+    .login-btn:hover {
+        background: #10B8E0;
+    }
+
+.login-reset:hover {
+    background: #ACAFBC;
+}
+
+.login-reset {
+    
+    width: 170px;
+    height: 34px;
+    border: none;
+    background: #9DA0AF;
+    color: #ffffff;
+    letter-spacing: 1px;
+    font-size: 14px;
+    margin-left: 2px;
+    border-radius: 3px;
+    float:right;
+}
+
+
+
+input[type=checkbox]::before {
+    content: '';
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    background: url(/content/neat/images/login/unchecked.png) no-repeat;
+}
+
+input[type=checkbox]:checked::before {
+    background: url(/content/neat/images/login/checked.png) no-repeat;
+    content: '';
+}
+
+input {
+    transition: all 0.30s ease-in-out;
+    -webkit-transition: all 0.30s ease-in-out;
+    -moz-transition: all 0.30s ease-in-out;
+    border: #35a5e5 1px solid;
+    border-radius: 3px;
+    outline: none;
+}
+
+
+
+#userName:focus {
+    box-shadow: 0 0 6px rgba(0, 255, 255, 0.8);
+    -webkit-box-shadow: 0 0 6px rgba(0, 255, 255, 0.8);
+    -moz-box-shadow: 0 0 6px rgba(0, 255, 255, 0.8);
+}
+
+#password:focus {
+    box-shadow: 0 0 6px rgba(0, 255, 255, 0.8);
+    -webkit-box-shadow: 0 0 6px rgba(0, 255, 255, 0.8);
+    -moz-box-shadow: 0 0 6px rgba(0, 255, 255, 0.8);
+}
+
+
+.user{
+    float:left;
+}
+.pwd{
+    float:left;
+}
+.error-msg-holder{
+    margin-left:auto;
+    margin-right:auto;
+    color:red;
+}

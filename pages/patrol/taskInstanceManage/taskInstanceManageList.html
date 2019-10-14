@@ -1,0 +1,100 @@
+﻿<!-- 巡检详情查看 -->
+
+<div class="layui-row sitemap-row-container normal-blue-text">
+    当前位置&nbsp;:&nbsp;巡检管理>巡检详情查看
+</div>
+
+<style>
+
+</style>
+
+<!-- 查询条件行 -->
+<div class="layui-row query-row-container">
+    <div class="layui-form layui-form-pane1" lay-filter="query">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">任务名称</label>
+                <div class="layui-input-inline">
+                    <input type="text" id="txtTaskName" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">巡检频率</label>
+                <div class="layui-input-inline layui-form" lay-filter="optFrequenceForm">
+                    <select id="optFrequence" lay-filter="optFrequence">
+                        <option value="">全部</option>
+                    </select>
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">巡检时间段</label>
+                <div class="layui-input-inline layui-form timespan_cont" lay-filter="startDateForm">
+                    <input type="text" class="layui-input timespan-ctl" readonly  id="dateSpan">
+                </div>
+            </div>
+         
+
+            <div class="layui-inline">
+                <label class="layui-form-label">完成情况</label>
+                <div class="layui-input-inline  layui-form" lay-filter="optFinishStatusForm">
+                    <select id="optFinishStatus" lay-filter="optFinishStatus">
+                        
+                    </select>
+                </div>
+            </div>
+            <div class="layui-inline">
+                <button class="layui-btn" id="btnQuery" lay-filter="query">查询</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- 查询结果行 -->
+<div class="layui-row result-row-container">
+    <div class="table-container">
+        <div id="resultTable" lay-filter="resultTable"></div>
+    </div>
+    <div class="pager-container">
+        <div id="resultTablePager"></div>
+    </div>
+</div>
+
+<!--数据表格操作-->
+<script type="text/html" id="opColTemplate">
+    <a lay-event="detail" href="javascript:void(0)" style="color:#babdc9;"><i class="far fa-eye"></i></a>
+
+</script>
+
+<!--生成option的通用模板-->
+<script type="text/html" id="optCommonTemplate">
+
+    {{#  layui.each(d.data, function(index, item){ }}
+
+    <option value="{{item.id}}">{{item.name}}</option>
+
+    {{#  }); }}
+</script>
+
+<script type="text/html" id="optFrequenceTemplate">
+    <option value="">全部</option>
+    {{#  layui.each(d.data, function(index, item){ }}
+
+    <option value="{{item.id}}">{{item.rateName}}</option>
+
+    {{#  }); }}
+</script>
+
+<script type="text/javascript">
+
+    layui.use(["layer"], function () {
+        var layindex = layui.layer.load(1);
+        layui.use(["pagePatrolTaskInstanceList"], function () {
+            var page = layui.pagePatrolTaskInstanceList;
+            page.init();
+            layui.layer.close(layindex);
+        });
+    });
+
+</script>

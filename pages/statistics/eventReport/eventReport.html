@@ -1,0 +1,224 @@
+﻿<!-- 警情统计报表 -->
+
+<div class="layui-row sitemap-row-container normal-blue-text">
+    当前位置&nbsp;:&nbsp;统计分析>警情统计报表
+</div>
+
+<style>
+    .layui-table th,
+    .layui-table td {
+        border-width: 1px;
+        border-style: solid;
+        border-color: #164c7f;
+    }
+    .layui-table th {
+        text-align: center !important;
+        
+    }
+       
+
+</style>
+
+<!-- 查询条件行 -->
+<div class="layui-row query-row-container">
+    <div class="layui-form layui-form-pane1" lay-filter="query">
+        <div class="layui-form-item">
+
+            <div class="layui-inline">
+                <label class="layui-form-label">所属单位</label>
+                <div class="layui-input-inline layui-form" lay-filter="optEntForm">
+                    <select id="optEnt" lay-filter="optEnt"></select>
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">报表类型</label>
+                <div class="layui-input-inline layui-form" lay-filter="optReportTypeForm">
+                    <select id="optReportType" lay-filter="optReportType">
+                        <option value="week" selected>周报</option>
+                        <option value="month">月报</option>
+                        <option value="year">年报</option>
+                    </select>
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">选择时间</label>
+                <div class="layui-input-inline" id="txtDateCont">
+                    <input type="text" id="txtDate" autocomplete="off" readonly class="layui-input">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <button class="layui-btn layui-btn-normal" id="btnGenerate">生成</button>
+            </div>
+            <div class="layui-inline">
+                <button class="layui-btn" id="btnReset">重置</button>
+            </div>
+            <div class="layui-inline">
+                <button class="layui-btn layui-btn-normal" id="btnExportExcel">导出Excel</button>
+            </div>
+            <div class="layui-inline">
+                <button class="layui-btn layui-btn-normal" id="btnExportPDF">导出PDF</button>
+            </div>
+            <div class="layui-inline">
+                <button class="layui-btn layui-btn-normal" id="btmExportDetail">导出明细</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 查询结果行 -->
+<div class="layui-row result-row-container" >
+    <div class="report-scroller">
+        <div class="report-container">
+
+            <table id="reportTable" class="layui-table layui-table-body " >
+                <thead>
+                    <tr>
+
+                        <th  rowspan="2" >日期</th>
+                        <th colspan="6">一体化火灾报警系统</th>
+                        <th  colspan="5">水源监测系统</th>
+                        <th  colspan="6">NB系统</th>
+                    </tr>
+                    <tr>
+                        <th>火警</th>
+                        <th>报警</th>
+                        <th>故障</th>
+                        <th>误报</th>
+                        <th>测试</th>
+                        <th>未处理</th>
+
+                        <th>报警</th>
+                        <th>故障</th>
+                        <th>误报</th>
+                        <th>测试</th>
+                        <th>未处理</th>
+
+                        <th>火警</th>
+                        <th>报警</th>
+                        <th>故障</th>
+                        <th>误报</th>
+                        <th>测试</th>
+                        <th>未处理</th>
+                    </tr>
+                </thead>
+                <tbody id="reportTableCont"></tbody>
+            </table>
+        </div>
+        <div class="report-chart-container">
+            <div class="layui-tab">
+                <ul class="layui-tab-title">
+                    <li class="layui-this">一体化火灾报警系统</li>
+                    <li>水源监测系统</li>
+                    <li>NB系统</li>
+                </ul>
+                <div class="layui-tab-content">
+                    <div class="layui-tab-item layui-show">
+                        <div id="fireSysChart" style="width:1470px;height:300px;"></div>
+                    </div>
+                    <div class="layui-tab-item">
+                        <div id="waterSysChart" style="width:1470px;height:300px;"></div>
+                    </div>
+                    <div class="layui-tab-item">
+                        <div id="nbSysChart" style="width:1470px;height:300px;"></div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</div>
+
+
+
+<script type="text/html" id="optEntTemplate">
+
+    {{#  layui.each(d.data, function(index, item){ }}
+
+    {{# if (item.id == d.selectedValue){}}
+    <option value="{{item.id}}" selected>{{item.name}}</option>
+    {{# } else {}}
+    <option value="{{item.id}}">{{item.name}}</option>
+    {{# } }}
+
+    {{#  }); }}
+</script>
+
+
+<script type="text/html" id="reportTemplate">
+
+
+    {{# if ( d.reportData.length>0 ){ }}
+    {{#  layui.each(d.reportData, function(index, item){ }}
+
+    <tr>
+        <td><div class="layui-table-cell">{{item.name}}</div></td>
+        <td><div class="layui-table-cell">{{item.fireSys.fireCount}}</div></td>
+        <td><div class="layui-table-cell">{{item.fireSys.alarmCount}}</div></td>
+        <td><div class="layui-table-cell">{{item.fireSys.faultCount}}</div></td>
+        <td><div class="layui-table-cell">{{item.fireSys.misReportCount}}</div></td>
+        <td><div class="layui-table-cell">{{item.fireSys.testReportCount}}</div></td>
+        <td><div class="layui-table-cell">{{item.fireSys.notHandleCount}}</div></td>
+
+        <td><div class="layui-table-cell">{{item.waterSys.alarmCount}}</div></td>
+        <td><div class="layui-table-cell">{{item.waterSys.faultCount}}</div></td>
+        <td><div class="layui-table-cell">{{item.waterSys.misReportCount}}</div></td>
+        <td><div class="layui-table-cell">{{item.waterSys.testReportCount}}</div></td>
+        <td><div class="layui-table-cell">{{item.waterSys.notHandleCount}}</div></td>
+
+        <td><div class="layui-table-cell">{{item.nbSys.fireCount}}</div></td>
+        <td><div class="layui-table-cell">{{item.nbSys.alarmCount}}</div></td>
+        <td><div class="layui-table-cell">{{item.nbSys.faultCount}}</div></td>
+        <td><div class="layui-table-cell">{{item.nbSys.misReportCount}}</div></td>
+        <td><div class="layui-table-cell">{{item.nbSys.testReportCount}}</div></td>
+        <td><div class="layui-table-cell">{{item.nbSys.notHandleCount}}</div></td>
+    </tr>
+
+
+
+    {{#  }); }}
+    {{# } else { }}
+
+    <tr>
+        <td><div class="layui-table-cell">&nbsp;</div></td>
+        <td><div class="layui-table-cell">&nbsp;</div></td>
+        <td><div class="layui-table-cell">&nbsp;</div></td>
+        <td><div class="layui-table-cell">&nbsp;</div></td>
+        <td><div class="layui-table-cell">&nbsp;</div></td>
+        <td><div class="layui-table-cell">&nbsp;</div></td>
+        <td><div class="layui-table-cell">&nbsp;</div></td>
+
+        <td><div class="layui-table-cell">&nbsp;</div></td>
+        <td><div class="layui-table-cell">&nbsp;</div></td>
+        <td><div class="layui-table-cell">&nbsp;</div></td>
+        <td><div class="layui-table-cell">&nbsp;</div></td>
+        <td><div class="layui-table-cell">&nbsp;</div></td>
+        <td><div class="layui-table-cell">&nbsp;</div></td>
+        <td><div class="layui-table-cell">&nbsp;</div></td>
+        <td><div class="layui-table-cell">&nbsp;</div></td>
+        <td><div class="layui-table-cell">&nbsp;</div></td>
+        <td><div class="layui-table-cell">&nbsp;</div></td>
+        <td><div class="layui-table-cell">&nbsp;</div></td>
+    </tr>
+    {{#  } }}
+
+    <tr>
+        <td colspan="4"><div class="layui-table-cell">单位名称:{{d.entName||""}}</div></td>
+        <td colspan="4"><div class="layui-table-cell">单位地址:{{d.entAddress||""}}</div></td>
+        <td colspan="4"><div class="layui-table-cell">联系方式:{{d.entTel||""}}</div></td>
+        <td colspan="2"><div class="layui-table-cell">制表人:{{d.reportUser||""}}</div></td>
+        <td colspan="4"><div class="layui-table-cell">制表时间:{{d.reportTime||""}}</div></td>
+    </tr>
+
+</script>
+
+
+
+<script type="text/javascript">
+    layui.use(["pageEventReport"], function () {
+
+        var subPage = layui.pageEventReport;
+
+        subPage.init();
+
+    });
+</script>

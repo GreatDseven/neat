@@ -1,0 +1,402 @@
+﻿/*顶部数据信息*/
+.day3-layer {
+    z-index: 9999;
+    margin: 30px auto;
+    position: relative;
+    height: 92px;
+    width: 780px;
+}
+
+.day3-fire {
+    z-index: 9999;
+    float: left;
+    margin-left: 25px;
+    height: 92px;
+    width: 232px;
+    background: url('../images/receiveThePolice/3d_fire.png') top no-repeat;
+}
+
+.day3-fault {
+    z-index: 9999;
+    float: left;
+    margin-left: 25px;
+    height: 92px;
+    width: 232px;
+    background: url('../images/receiveThePolice/3d_fault.png') top no-repeat;
+}
+
+.day3-alarm {
+    z-index: 9999;
+    float: left;
+    margin-left: 25px;
+    height: 92px;
+    width: 232px;
+    background: url('../images/receiveThePolice/3d_alarm.png') top no-repeat;
+}
+
+.day3-data {
+    font-size: 34px;
+    font-weight: bold;
+    top: 24px;
+    position: relative;
+    left: 45px;
+    letter-spacing: 3px;
+    width: 165px;
+    text-align: center;
+    display: block
+}
+/*顶部数据信息end*/
+/*左侧信息*/
+.deviceDventsLayer-leftTip {
+    z-index: 9999;
+    position: absolute;
+    top: 135px;
+    left: 56px;
+    height: 204px;
+    width: 38px;
+    background: url('../images/receiveThePolice/deviceEventsTip.png') top no-repeat;
+}
+
+.deviceDventsLayer {
+    z-index: 9999;
+    position: absolute;
+    top: 135px;
+    left: 100px;
+    height: 442px;
+    width: 490px;
+    background: url('../images/receiveThePolice/deviceDvents.png') top no-repeat;
+    text-align: center;
+}
+
+.nav-top-number {
+    position: absolute;
+    top: 0;
+    left: 10px;
+    font-size: 16px;
+    padding: 20px;
+}
+
+.nav-top-time {
+    position: absolute;
+    top: 0;
+    right: 10px;
+    font-size: 16px;
+    padding: 20px;
+}
+
+.nav-top-number span {
+    color: #1596dc;
+}
+
+    .nav-top-number span#todayUntreatedNum {
+        font-weight: bold;
+        color: #02e6ff;
+    }
+
+.nav-top-time span {
+    color: #1596dc;
+    cursor: pointer;
+}
+/*左侧信息 end*/
+
+
+/*右侧信息*/
+.right-layer-top {
+    z-index: 9999;
+    position: absolute;
+    top: 135px;
+    left: 1422px;
+    height: 294px;
+    width: 400px;
+    background: url('../images/receiveThePolice/baseInfoBoth.png') top no-repeat;
+}
+
+.right-layer-down {
+    z-index: 9999;
+    position: absolute;
+    top: 445px;
+    left: 1422px;
+    height: 294px;
+    width: 400px;
+    background: url('../images/receiveThePolice/baseInfoBoth.png') top no-repeat;
+}
+
+.baseinfo-div-single {
+    margin: 36px 0px 0px 20px;
+    height: 50px;
+}
+
+.baseinfo-p-single {
+    margin-left: 30px;
+    width: 80px;
+    height: 50px;
+    float: left;
+}
+
+.baseinfo-span-num {
+    color: #00a0e9;
+    font-size: 25px;
+    font-weight: bold;
+    float: left;
+    width: 60px;
+    text-align: center;
+}
+
+.baseinfo-span-des {
+    color: #b5bbc4;
+    float: left;
+}
+
+
+.baseinfo-right-tip {
+    z-index: 9999;
+    position: absolute;
+    top: 135px;
+    left: 1830px;
+    height: 204px;
+    width: 39px;
+    background: url('../images/receiveThePolice/baseInfoTip.png') top no-repeat;
+    cursor: pointer;
+}
+
+.linknet-right-tip {
+    z-index: 9999;
+    position: absolute;
+    top: 445px;
+    left: 1830px;
+    height: 228px;
+    width: 39px;
+    background: url('../images/receiveThePolice/linkNetOnline.png') top no-repeat;
+    cursor: pointer;
+}
+
+.linknet-right-progress {
+    background-color: #0bc0d8;
+}
+
+.linknet-right-progress-div {
+    margin-top: 15px;
+    width: 170px;
+    display: inline-block;
+}
+
+.linknet-right-progress-outdiv {
+    margin: 14px 0px 0px 27px;
+}
+
+.linknet-right-tip-span {
+    color: #b5bbc4;
+    margin-right: 18px;
+    text-align: right;
+    width: 90px;
+    display: inline-block;
+}
+
+.linknet-right-span-progressnum {
+    color: #00a0e9;
+    text-align: left;
+    font-size: 13px;
+    font-weight:bold;
+}
+/*右侧信息end*/
+/*切换地图样式*/
+.change-button-layer {
+    top: 2%;
+    left: 93%;
+    z-index: 9999;
+    position: absolute;
+}
+
+.layui-btn-group-ext {
+    letter-spacing: 0px;
+}
+
+.layui-btn-use-ext {
+    background-color: #1d1d22;
+}
+
+.layui-btn-normal-ext {
+    background-color: #0393d5;
+}
+/*切换地图样式 end*/
+/*描点最小样式*/
+.pointsmall {
+    height: 24px;
+    width: 24px;
+    border-radius: 12px;
+}
+/*描点最小样式 end*/
+.content-window-card {
+    position: relative;
+    box-shadow: none;
+    bottom: 0;
+    left: 0;
+    width: auto;
+    padding: 0;
+}
+    /*地图描点弹框样式*/
+    .content-window-card p {
+        height: 2rem;
+    }
+
+.custom-info {
+    border: solid 2px #1d77aa;
+    background-color: #102045;
+    filter: alpha(Opacity=60);
+    -moz-opacity: 0.6;
+    opacity: 0.9
+}
+
+div.info-middle {
+    font-size: 14px;
+    padding: 15px 25px;
+    line-height: 22px;
+}
+
+div.info-bottom {
+    width: 100%;
+    clear: both;
+    text-align: center;
+    position: relative;
+    top: 12px;
+    margin: 0px auto;
+}
+
+    div.info-bottom img {
+        position: relative;
+        z-index: 1;
+    }
+
+
+.entnamep {
+    color: #00a0e9;
+    font-size: 15px;
+    font-weight: bold;
+    width: 200px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.infospannum {
+    display: block;
+    color: #b5bbc4;
+}
+
+.infospanaddr {
+    display: block;
+    color: #b5bbc4;
+    width: 230px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.infodiv-span {
+    float: left;
+    margin-right: 13px;
+}
+
+.phoneaddress-div {
+    clear: both;
+}
+
+.span-button-event {
+    float: left;
+    margin-right: 13px;
+}
+
+.span-button-color {
+    background-color: #2ea7e0;
+}
+
+.button-out-div {
+    margin-top: 20px;
+}
+
+.div-span-a-fire {
+    color: #e74e4e;
+}
+
+.div-span-a-fault {
+    color: #f8b62d;
+}
+
+.div-span-a-alarm {
+    color: #8d6dff;
+}
+
+.div-span-a-offline {
+    color: #f7f8f8;
+}
+/*地图描点弹框样式 end*/
+/*警情处理弹框样式*/
+.div-head {
+    background-color: #202d57;
+    height: 100px;
+}
+
+.head-div2 {
+    padding: 10px;
+}
+
+.head-layui-col-xs2-div {
+    width: 13%
+}
+
+
+.head-img-div {
+    background-color: #1a4474;
+    width: 80px;
+    height: 80px;
+    border-radius: 50px;
+    text-align: center;
+    vertical-align: middle;
+    display: table-cell;
+}
+
+    .head-img-div .devicePic {
+        width: 40px;
+        height: 40px;
+    }
+
+.head-layui-row-divfont {
+    color: #02e6ff;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.head-div-labelstate label {
+    color: #b5bbc4;
+}
+
+.head-div-labelstate span {
+    margin-right: 20px;
+}
+
+.layui-form-item-width {
+    width: 340px;
+}
+
+.layui-form-item-width-hander {
+    width: 240px;
+}
+
+.layui-form-item-width-radio {
+    width: 440px;
+}
+
+.layui-form-item-width-textarea {
+    width: 700px;
+}
+
+.input-left-div {
+    float: left;
+    margin-right: 20px;
+    margin-left: 15px;
+}
+/*警情处理弹框样式 end*/
+
+

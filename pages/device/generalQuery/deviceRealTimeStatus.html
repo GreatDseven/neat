@@ -1,0 +1,278 @@
+﻿<!doctype html>
+<html lang="zh">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="/content/3rd/layui/css/layui.css">
+    <link rel="stylesheet" href="/content/3rd/fontawesome/css/all.min.css">
+    <link rel="stylesheet" href="/content/neat/css/neat-common.css">
+    <title>实时数据查看</title>
+
+    <style>
+        #devicePic {
+            width: 40px;
+            height: 40px;
+        }
+
+        .centercenter {
+            height: 100%;
+            display: flex !important;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .dataText {
+            color: #02e6ff;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .labelText {
+            color: #188ace;
+            font-size: 14px;
+
+        }
+
+        /*正常*/
+        .device_alarm_status_text_ok {
+            background-color: #50d663;
+            color: white;
+        }
+
+        /*火警*/
+        .device_alarm_status_text_fire {
+            background-color: #E74E4E; /*E74E4E*/
+            color: white;
+        }
+
+        /*故障*/
+        .device_alarm_status_text_fault {
+            background-color: #F4BA5D; /*F4BA5D*/
+            color: white;
+        }
+
+        /*报警*/
+        .device_alarm_status_text_alarm {
+            background-color: #814DF4; /*814DF4*/
+            color: white;
+        }
+
+        /*离线*/
+        .device_online_status_text_1 {
+            color: #999999;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        /*在线*/
+        .device_online_status_text_2 {
+            color: #02e6ff;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        /*状态文字的容器*/
+        .status_cont {
+            
+            width: 260px;
+            text-align: center;
+            vertical-align: middle;
+            display: table;
+            line-height: 40px;
+        }
+
+        /*最后通讯时间*/
+        .heartTime_text {
+            color: #02e6ff;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        /*实时值*/
+        .realTimeData_text {
+            color: #02e6ff;
+            font-size: 18px;
+            font-weight: bold;
+        }
+      
+
+      
+
+    </style>
+
+</head>
+
+<body>
+    <div>
+
+        <div style="padding:30px;">
+            <!-- 头部 -->
+            <div class="layui-row" style="background-color:#202d57;height: 100px;padding: 10px;">
+                <div class="layui-col-xs3">
+                    <div style="background-color:#1a4474;width: 100px;height: 100px;border-radius: 50px;text-align: center;vertical-align: middle;display: table-cell;">
+                        <img id="devicePic"  />
+                    </div>
+                </div>
+                <div class="layui-col-xs9">
+                    <div class="layui-row" style="color:#02e6ff;margin-top:20px;margin-bottom:10px;font-size: 18px;font-weight: bold;">
+
+                        <label id="deviceName"></label>
+                    </div>
+                    <div class="layui-row" style="margin-top:10px;margin-bottom:10px;">
+                        <label style="color:#cccccc">设备状态:</label><label id="alarmStatus" style="border-radius: 2px;font-weight:bold;padding: 3px 15px;margin:5px;"></label>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-row" style="background-color: #202d57;margin-top: 20px;height: 110px;" id="dataContainer">
+
+
+            </div>
+        </div>
+
+
+    </div>
+
+    <!--传输设备的模板-->
+    <script type="text/template" id="deviceType1Template">
+        <div class="layui-col-xs6 centercenter">
+            <div>
+                <div class="layui-row status_cont" id="onlineStatus"></div>
+                <div class="layui-row labelText ">联网状态</div>
+            </div>
+
+        </div>
+        <div class="layui-col-xs6 centercenter">
+            <div>
+                <div class="layui-row status_cont heartTime_text" id="heartTime"></div>
+                <div class="layui-row labelText ">最后通讯时间</div>
+            </div>
+
+        </div>
+    </script>
+    <!--NEAT水网关的模板-->
+    <script type="text/template" id="deviceType2Template">
+        <div class="layui-col-xs4 centercenter">
+            <div>
+                <div class="layui-row status_cont" id="onlineStatus"></div>
+                <div class="layui-row labelText ">联网状态</div>
+            </div>
+        </div>
+        <div class="layui-col-xs4 centercenter">
+            <div>
+                <div class="layui-row dataText status_cont " id="signalCount"></div>
+                <div class="layui-row labelText">水信号数量</div>
+            </div>
+        </div>
+        <div class="layui-col-xs4 centercenter">
+            <div>
+                <div class="layui-row status_cont heartTime_text" id="heartTime"></div>
+                <div class="layui-row labelText ">最后通讯时间</div>
+            </div>
+
+        </div>
+    </script>
+
+    <!--一体式水源监测设备的模板-->
+    <script type="text/template" id="deviceType3Template">
+        <div class="layui-col-xs3 centercenter">
+            <div>
+                <div class="layui-row status_cont" id="onlineStatus"></div>
+                <div class="layui-row labelText ">联网状态</div>
+            </div>
+        </div>
+        <div class="layui-col-xs3 centercenter">
+            <div>
+                <div class="layui-row dataText status_cont" id="signalStatus"></div>
+                <div class="layui-row labelText">信号强度</div>
+            </div>
+        </div>
+        <div class="layui-col-xs3 centercenter">
+            <div>
+                <div class="layui-row dataText status_cont" id="realTimeData"></div>
+                <div class="layui-row labelText">实时值</div>
+            </div>
+        </div>
+        <div class="layui-col-xs3 centercenter">
+            <div>
+                <div class="layui-row status_cont heartTime_text" id="heartTime"></div>
+                <div class="layui-row labelText ">最后通讯时间</div>
+            </div>
+
+        </div>
+    </script>
+
+    <!--nb的模板-->
+    <script type="text/template" id="deviceType6Template">
+        <div class="layui-col-xs4 centercenter">
+            <div>
+                <div class="layui-row status_cont" id="onlineStatus"></div>
+                <div class="layui-row labelText ">联网状态</div>
+            </div>
+
+        </div>
+        <div class="layui-col-xs4 centercenter">
+            <div>
+                <div class="layui-row dataText status_cont" id="signalStatus"></div>
+                <div class="layui-row labelText">信号强度</div>
+            </div>
+        </div>
+
+        <div class="layui-col-xs4 centercenter">
+            <div>
+                <div class="layui-row dataText status_cont " id="batteryStatus"></div>
+                <div class="layui-row labelText">剩余电量</div>
+            </div>
+        </div>
+    </script>
+    <!--消防主机的模板-->
+    <script type="text/template" id="deviceType101Template">
+        <div class="layui-col-xs6 centercenter">
+            <div>
+                <div class="layui-row status_cont" id="onlineStatus"></div>
+                <div class="layui-row labelText ">联网状态</div>
+            </div>
+        </div>
+        <div class="layui-col-xs6 centercenter">
+            <div>
+                <div class="layui-row status_cont heartTime_text" id="heartTime"></div>
+                <div class="layui-row labelText ">最后通讯时间</div>
+            </div>
+        </div>
+    </script>
+    <!--neat水信号的模板-->
+    <script type="text/template" id="deviceType201Template">
+        <div class="layui-col-xs4 centercenter">
+            <div>
+                <div class="layui-row status_cont" id="onlineStatus"></div>
+                <div class="layui-row labelText ">联网状态</div>
+            </div>
+        </div>
+        <div class="layui-col-xs4 centercenter">
+            <div>
+                <div class="layui-row status_cont realTimeData_text" id="realTimeData"></div>
+                <div class="layui-row labelText ">实时值</div>
+            </div>
+        </div>
+        <div class="layui-col-xs4 centercenter">
+            <div>
+                <div class="layui-row status_cont heartTime_text" id="heartTime"></div>
+                <div class="layui-row labelText ">最后通讯时间</div>
+            </div>
+        </div>
+    </script>
+    <script src="/content/3rd/layui/layui.js"></script>
+    <script src="/content/neat/layui.config.js"></script>
+    <script type="text/javascript">
+
+
+        layui.use(["layer"], function () {
+            var layindex = layui.layer.load(1);
+            layui.use(["pageDeviceRealTimeStatus"], function () {
+                var page = layui.pageDeviceRealTimeStatus;
+                page.init();
+                layui.layer.close(layindex);
+            });
+        });
+
+    </script>
+</body>
+</html>

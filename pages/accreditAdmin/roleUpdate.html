@@ -1,0 +1,148 @@
+﻿<!doctype html>
+<html lang="zh">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="/content/3rd/layui/css/layui.css">
+    <link rel="stylesheet" href="/content/3rd/fontawesome/css/all.min.css">
+    <link rel="stylesheet" href="/content/neat/css/neat-common.css">
+    <title>修改角色</title>
+
+    <style>
+        .layui-tab-title li{
+            display: block;
+        }
+        .layui-tab-title{
+            float: left;
+            width: 200px;
+        }
+        .layui-tab-content{
+            float: left;
+            width: 500px;
+        }
+        .treeview-cont{
+            overflow-x:auto;
+            overflow-y:auto;
+            width:455px;
+            height:390px;
+            margin:5px;
+        }
+         .vtab-container{
+            padding-left:30px;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="dialog-body">
+        <div class="layui-layer-content layui-form" lay-filter="wholeForm">
+
+            <div class="layui-row">
+                <div class="layui-col-sm6">
+                    <div class="layui-form-item">
+
+                        <div class="layui-inline">
+                            <label class="layui-form-label normal-label">角色名称</label>
+                            <div class="layui-input-inline">
+                                <input type="text" id="txtRoleName" name="txtRoleName" lay-verify="roleName" autocomplete="off" lay-verType="tips" placeholder="请输入角色名称" class="layui-input">
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="layui-col-sm6">
+                    <div class="layui-form-item">
+
+                        <div class="layui-inline">
+                            <label class="layui-form-label normal-label">角色类型</label>
+                            <div class="layui-input-inline">
+                                <div class="layui-input-inline layui-form" lay-filter="optRoleTypeForm">
+                                    <select id="optRoleType" lay-filter="optRoleType" name="optRoleType" lay-verify="roleType" lay-verType="tips"></select>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-row">
+                <div class="layui-col-sm12">
+
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label normal-label">所属机构</label>
+                            <div class="layui-input-inline" style="width:590px;">
+                                <input type="text" id="txtOrg" name="txtOrg" autocomplete="off" readonly lay-verType="tips" class="layui-input layui-disabled">
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+                <div class="layui-col-sm6">
+
+                </div>
+            </div>
+            <!--勾选权限的部分-->
+            <div class="layui-row" style="height:400px;">
+                <div class="layui-col-sm12  vtab-container">
+                    <div class="layui-tab" lay-filter="mytab">
+                        <ul class="layui-tab-title">
+                            <li class="layui-this">机构权限</li>
+                            
+                            <li>Web端权限</li>
+                            <li>App端权限</li>
+                        </ul>
+                        <div class="layui-tab-content" style="height: 400px;">
+                            <div class="layui-tab-item layui-show">
+                                <div class="treeview-cont" >
+                                    <div class="" id="orgTreeview">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-tab-item">
+                                <div class="treeview-cont" >
+                                    <div class="" id="webTreeview">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-tab-item">
+                                <div  class="treeview-cont" >
+                                    <div class="" id="appTreeview">
+                                    </div>
+                                </div>
+                            </div>
+                          
+                        </div>
+                    </div>
+                   
+                </div>
+            </div>
+
+            <div class="layui-row" style="text-align: center;margin-top:20px;">
+                <button class="layui-btn layui-btn" lay-submit lay-filter="btnSave" id="btnSave">保存</button>
+                <button class="layui-btn layui-btn-grey" id="btnCancel">取消</button>
+            </div>
+        </div>
+        
+
+    </div>
+    <script src="/content/3rd/layui/layui.js"></script>
+    <script src="/content/neat/layui.config.js"></script>
+
+    <script type="text/html" id="optRoleTypeTemplate">
+    
+        {{#  layui.each(d.data, function(index, item){ }}
+             <option value="{{item.id}}">{{item.name}}</option>
+        {{#  }); }}
+    </script>
+    <script type="text/javascript">
+        layui.use(["pageAccreditAdminRoleUpdate"], function () {
+            var page = layui.pageAccreditAdminRoleUpdate;
+            page.init();
+        });
+    </script>
+</body>
+
+</html>

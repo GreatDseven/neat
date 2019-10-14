@@ -1,0 +1,248 @@
+﻿<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="/content/3rd/layui/css/layui.css">
+    <link rel="stylesheet" href="/content/3rd/fontawesome/css/all.min.css">
+    <link rel="stylesheet" href="/content/neat/css/neat-common.css">
+    <style>
+
+        /*警情详细信息弹框样式*/
+
+        .tit-1 {
+            font-weight: bold;
+            margin-top: 20px;
+            padding: 10px;
+            margin-left: 30px;
+            color: #00FFFF;
+            background: url('/content/neat/images/neat-common/dialog-title.png') no-repeat;
+            letter-spacing: 2px;
+            clear: both;
+        }
+
+        .tit-2 {
+            font-weight: 600;
+            margin-top: 26px;
+            padding-left: 40px;
+            letter-spacing: 0.5px;
+        }
+
+        .con-1 {
+            font-weight: 600;
+            margin-top: 26px;
+            padding-left: 40px;
+            color: #babdc9;
+            letter-spacing: 0.5px;
+        }
+
+        .layui-form-label {
+            width: 120px;
+            color: #babdc9;
+        }
+
+        .layui-form-label-text {
+            position: relative;
+            float: left;
+            display: block;
+            padding: 9px 15px;
+            font-weight: 400;
+            line-height: 20px;
+            text-align: right;
+            padding-left: 0px;
+            color: #babdc9;
+        }
+        
+
+        .layui-textarea1 {
+            width: 600px;
+            height: 60px;
+        }
+
+        .layui-form-label {
+            width: 100px;
+            color: #babdc9;
+        }
+
+        .info-div-label {
+            clear: both;
+        }
+        /*警情详细信息弹框样式 end*/
+    </style>
+</head>
+<body>
+    <div class="layui-form" lay-filter="form" >
+        <div id="tit-1" class="tit-1"><span>基本信息</span></div>
+        <div class="info-div-label">
+            <label class="layui-form-label">设备名称：</label>
+            <label class="layui-form-label-text" id="lbldeviceName"></label>
+        </div>
+        <div class="info-div-label">
+            <label class="layui-form-label">设备编码：</label>
+            <label class="layui-form-label-text" id="lbldeviceCode"></label>
+        </div>
+        <div class="info-div-label">
+            <label class="layui-form-label">设备类型：</label>
+            <label class="layui-form-label-text" id="lbldeviceIdType"></label>
+        </div>
+        <div class="info-div-label">
+            <label class="layui-form-label">所属单位：</label>
+            <label class="layui-form-label-text" id="lblEnterpriseName"></label>
+        </div>
+        <div class="info-div-label">
+            <label class="layui-form-label">所属建筑：</label>
+            <label class="layui-form-label-text" id="lblbuildingName"></label>
+        </div>
+        <div class="info-div-label">
+            <label class="layui-form-label">所属部位：</label>
+            <label class="layui-form-label-text" id="lblkeypartName"></label>
+        </div>
+        <div class="info-div-label">
+            <label class="layui-form-label">安装位置：</label>
+            <label class="layui-form-label-text" id="lbladdress"></label>
+        </div>
+        <div id="tit-1" class="tit-1"><span>警情信息</span></div>
+        <div id="alarmInfoContainer">
+
+        </div>
+        <div id="hiddeninfolayer" style="display:none;">
+            <div id="tit-1" class="tit-1"><span>处理情况</span><span class="tit-2" id="spanHiddenDangerTime"></span></div>
+            <div class="info-div-label">
+                <label class="layui-form-label">处理人：</label>
+                <label class="layui-form-label-text" id="lblhandleUName"></label>
+            </div>
+            <div class="info-div-label">
+                <label class="layui-form-label">处理结果：</label>
+                <div class="layui-input-block" style="margin-left: 0px;">
+                    <input type="radio" name="eventradio" value="2" title="真实警情" checked="" disabled>
+                    <input type="radio" name="eventradio" value="3" title="系统测试" disabled>
+                    <input type="radio" name="eventradio" value="4" title="设备误报" disabled>
+                </div>
+            </div>
+            <div class="info-div-label">
+                <label class="layui-form-label" style="margin-top: 15px;">处理说明：</label>
+                <textarea name="handleContent" rows="4" disabled id="handleContent" placeholder="请输入内容" class="layui-textarea layui-disabled" style="float:left;width: 80%;"></textarea>
+            </div>
+            <div class="info-div-label" id="medialayer" style="padding:10px 0px 10px 0px">
+
+            </div>
+        </div>
+    </div>
+
+
+    <script type="text/html" id="imgTemplate">
+        <label class="layui-form-label">上传资料：</label>
+        <div class="layui-input-inline">
+            {{#  layui.each(d, function(index, item){ }}
+            {{#  if(item.fileDataType==1){}}
+            <img layer-pid="{{item.id}}" layer-src="{{item.fileUrl}}" style="cursor:pointer" onclick="layui.neatFileViewer.lookimg(this)" src="{{item.thumbnails}}" width="40" height="40" alt="">
+            {{#  }else if(item.fileDataType==2){ }}
+            <img layer-pid="{{item.id}}" layer-src="{{item.fileUrl}}" style="cursor:pointer" onclick="layui.neatFileViewer.mp3voice(this)" width="40" height="40" src="/content/neat/images/voice.png" alt="">
+            {{#  }else if(item.fileDataType==3){ }}
+            <div style="display: inline-block;cursor: pointer;">
+                <img layer-pid="{{item.id}}" layer-src="{{item.fileUrl}}" style="position: absolute;" width="40" height="40" onClick="layui.neatFileViewer.lookvideo(this)" src="/content/neat/images/videomp4.png" alt="">
+                <img style="cursor:pointer;background:url({{item.thumbnails}});height:40px;width:40px;display:inline-block;" />
+            </div>
+            {{#  } }); }}
+        </div>
+    </script>
+    <!--水系统报警模板-->
+    <script type="text/html" id="waterAlarmTemplate">
+        <div class="info-div-label">
+            <label class="layui-form-label">警情类型：</label>
+            <div class="layui-form-label-text">{{d.alarmCategory}}</div>
+        </div>
+        <div class="info-div-label">
+            <label class="layui-form-label">警情内容：</label>
+            <label class="layui-form-label-text" id="lblalarmContent">{{d.alarmContent}}</label>
+        </div>
+        <div class="info-div-label">
+            <label class="layui-form-label">首次报警：</label>
+            <label class="layui-form-label-text" id="lblfirstOccurTime">{{d.firstOccurTime}}</label>
+        </div>
+        <div class="info-div-label">
+            <label class="layui-form-label">末次报警：</label>
+            <label class="layui-form-label-text" id="lbllastOccurTime">{{d.lastOccurTime}}</label>
+        </div>
+        <div class="info-div-label">
+            <label class="layui-form-label">报警次数：</label>
+            <label class="layui-form-label-text" id="lbloccurCount">{{d.occurCount}}</label>
+        </div>
+        <div class="info-div-label">
+            <label class="layui-form-label">联网状态：</label>
+            <label class="layui-form-label-text" id="lblonlineStatus">{{d.onlineStatus}}</label>
+        </div>
+        <div class="info-div-label">
+            <label class="layui-form-label">当前数值：</label>
+            <label class="layui-form-label-text" id="lblcurrentValue">{{d.currentValue}}</label>
+        </div>
+        <div class="info-div-label">
+            <label class="layui-form-label">报警阈值：</label>
+            <label class="layui-form-label-text" id="lblthreshold">{{d.threshold}}</label>
+        </div>
+    </script>
+
+    <!--水系统故障模板-->
+    <script type="text/html" id="waterFaultTemplate">
+        <div class="info-div-label">
+            <label class="layui-form-label">警情类型：</label>
+            <div class="layui-form-label-text">{{d.alarmCategory}}</div>
+        </div>
+        <div class="info-div-label">
+            <label class="layui-form-label">警情内容：</label>
+            <label class="layui-form-label-text" id="lblalarmContent">{{d.alarmContent}}</label>
+        </div>
+        <div class="info-div-label">
+            <label class="layui-form-label">首次故障：</label>
+            <label class="layui-form-label-text" id="lblfirstOccurTime">{{d.firstOccurTime}}</label>
+        </div>
+        <div class="info-div-label">
+            <label class="layui-form-label">末次故障：</label>
+            <label class="layui-form-label-text" id="lbllastOccurTime">{{d.lastOccurTime}}</label>
+        </div>
+        <div class="info-div-label">
+            <label class="layui-form-label">故障次数：</label>
+            <label class="layui-form-label-text" id="lbloccurCount">{{d.occurCount}}</label>
+        </div>
+        <div class="info-div-label">
+            <label class="layui-form-label">联网状态：</label>
+            <label class="layui-form-label-text" id="lblonlineStatus">{{d.onlineStatus}}</label>
+        </div>
+    </script>
+
+    <!--其他警情信息模板-->
+    <script type="text/html" id="otherAlarmTemplate">
+        <div class="info-div-label">
+            <label class="layui-form-label">警情类型：</label>
+            <div class="layui-form-label-text">{{d.alarmCategory}}</div>
+        </div>
+        <div class="info-div-label">
+            <label class="layui-form-label">警情内容：</label>
+            <label class="layui-form-label-text" id="lblalarmContent">{{d.alarmContent}}</label>
+        </div>
+        <div class="info-div-label">
+            <label class="layui-form-label">发生时间：</label>
+            <label class="layui-form-label-text" id="lbloccurTime">{{d.firstOccurTime}}</label>
+        </div>
+        <div class="info-div-label">
+            <label class="layui-form-label">联网状态：</label>
+            <label class="layui-form-label-text" id="lblonlineStatus">{{d.onlineStatus}}</label>
+        </div>
+    </script>
+
+    <script src="/content/3rd/layui/layui.js"></script>
+    <script src="/content/neat/layui.config.js"></script>
+    <script type="text/javascript">
+
+        layui.use(["layer"], function () {
+            var layindex = layui.layer.load(1);
+            layui.use(["pagemonitorEventProcessResultWindow"], function () {
+                var page = layui.pagemonitorEventProcessResultWindow;
+                page.init();
+                layui.layer.close(layindex);
+            });
+        });
+
+    </script>
+</body>
+</html>

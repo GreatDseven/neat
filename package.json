@@ -1,0 +1,23 @@
+{
+  "name": "neat.patrol.web",
+  "version": "1.0.0",
+  "description": "",
+  "main": "",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "console-color-mr": "^2.0.1",
+    "gulp": "^4.0.2",
+    "gulp-clean": "^0.4.0",
+    "gulp-html-replace": "^1.6.2",
+    "gulp-htmlmin": "^5.0.1",
+    "gulp-jquery-mr": "^1.0.1-c",
+    "gulp-minify-css": "^1.2.4",
+    "gulp-uglify": "^3.0.2",
+    "jquery": "^3.4.1",
+    "jsdom": "^15.1.1"
+  }
+}

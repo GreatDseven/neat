@@ -1,0 +1,219 @@
+﻿<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="/content/3rd/layui/css/layui.css">
+    <link rel="stylesheet" href="/content/3rd/fontawesome/css/all.min.css">
+    <link rel="stylesheet" href="/content/neat/css/neat-common.css">
+
+    <link rel="stylesheet" href="/content/3rd/layui/css/modules/layer/default/layer.css">
+    <script src="/content/3rd/layui/layui.js"></script>
+    <script src="/content/neat/layui.config.js"></script>
+    <style>
+        .tit-1 {
+            font-weight: bold;
+            margin-top: 20px;
+            padding: 10px;
+            margin-left: 30px;
+            color: #00FFFF;
+            background: url('/content/neat/images/neat-common/dialog-title.png') no-repeat;
+            letter-spacing: 2px;
+        }
+
+        .tit-2 {
+            font-weight: 600;
+            margin-top: 26px;
+            padding-left: 40px;
+            color: #F24646;
+            letter-spacing: 0.5px;
+        }
+
+        .tit-3 {
+            font-weight: 600;
+            margin-top: 26px;
+            color: #F24646;
+            letter-spacing: 0.5px;
+            text-align: right;
+        }
+
+        .con-1 {
+            font-weight: 600;
+            margin-top: 26px;
+            padding-left: 40px;
+            color: #babdc9;
+            letter-spacing: 0.5px;
+        }
+
+        .layui-form-label {
+            width: 120px;
+            color: #babdc9;
+        }
+
+        .layui-form-label-text {
+            position: relative;
+            float: left;
+            display: block;
+            padding: 9px 15px;
+            font-weight: 400;
+            line-height: 20px;
+            text-align: right;
+            padding-left: 0px;
+            color: #babdc9;
+        }
+
+        .layui-textarea1 {
+            width: 600px;
+            height: 60px;
+        }
+
+        .layui-form-label {
+            width: 140px;
+            color: #babdc9;
+        }
+    </style>
+</head>
+<body>
+    <div class="dialog-body">
+        <div class="layui-form" lay-filter="form" style="cursor: move;">
+            <div id="tit-1" class="tit-1"><span>隐患上报</span><span class="tit-2" id="spanHiddenDangerTime"></span></div>
+            <div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">所属单位名称：</label>
+                    <label class="layui-form-label-text" id="lblEnterpriseName"></label>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">巡检点名称：</label>
+                    <label class="layui-form-label-text" id="lblPointName"></label>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">项目子类型：</label>
+                    <label class="layui-form-label-text" id="lblProjectSubtype"></label>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">隐患内容：</label>
+                    <textarea id="txtHiddenDangerContent" disabled class="layui-textarea1 layui-disabled" style="height:100px;"></textarea>
+                </div>
+                <div class="layui-form-item" id="layer-photos-upload">
+
+                </div>
+            </div>
+            <div id="tit-1" class="tit-1">
+                <span>隐患处理</span>
+                <a href="javascript:void(0)">
+                    <span style="padding-left: 520px; color: #00FFFF">历史记录</span>
+                    <span class="tit-3" id="historyCount"></span>
+                </a>
+            </div>
+            <div>
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">处理人：</label>
+                        <div class="layui-input-inline">
+                            <input type="text" id="txthandleName" readonly class="layui-input1 layui-disabled">
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label">处理结果：</label>
+                        <div class="layui-input-inline">
+                            <select name="handleResult" lay-verType="tips" lay-filter="handleResult" lay-verify="handleResult">
+                                <option value="">请选择处理结果</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-form-item toConfirmInfo">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">待确认截止时间：</label>
+                        <div class="layui-input-inline">
+                            <input type="text" name="confirmTime" readonly lay-verify="confirmTime" lay-verType="tips" autocomplete="off" class="layui-input1">
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label">待确认人：</label>
+                        <div class="layui-input-inline">
+                            <select name="confirmUser" lay-search="" lay-verType="tips" lay-verify="confirmUser" lay-filter="optConfirmUserList">
+                                <option value="">请选择待确认人</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-form-item toConfirmInfo">
+                    <label class="layui-form-label" style="color: #babdc9;">待确认内容：</label>
+                    <textarea name="toConfirmContent" lay-verify="toConfirmContent" lay-verType="tips" class="layui-textarea1"></textarea>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label" style="color: #babdc9;">处理内容：</label>
+                    <textarea name="handleContent" lay-verify="handleContent" lay-verType="tips" class="layui-textarea1"></textarea>
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-input-block" style="text-align:center;margin-left:0px;">
+                        <button class="layui-btn layui-btn" lay-submit lay-filter="filterSubmit">保存</button>
+                        <button class="layui-btn  layui-btn-grey" id="btnCancel">取消</button>
+                    </div>
+                </div>
+            </div>
+            <div style="height:50px;">
+                &nbsp;
+            </div>
+          
+        </div>
+        
+    </div>
+
+    <script type="text/javascript">
+
+
+        layui.use(["layer"], function () {
+            var layindex = layui.layer.load(1);
+            layui.use(["handleHiddenDangerDialog"], function () {
+                var page = layui.handleHiddenDangerDialog;
+                page.init();
+                layui.layer.close(layindex);
+            });
+        });
+
+
+    </script>
+
+    <script type="text/html" id="optConfirmResultTemplate">
+        {{#  layui.each(d, function(index, item){ }}
+        <option value="{{item.id}}">{{item.name}}</option>
+
+        {{#  }); }}
+    </script>
+
+    <script type="text/html" id="imgTemplate">
+        <label class="layui-form-label">上传资料：</label>
+        <div class="layui-input-inline">
+            {{#  layui.each(d.data, function(index, item){ }}
+            {{#  if(item.fileDataType==1){}}
+            <img layer-pid="{{item.id}}" layer-src="{{item.fileUrl}}" style="cursor:pointer" onclick="layui.neatFileViewer.lookimg(this)" src="{{item.thumbnails}}" width="40" height="40" alt="">
+            {{#  }else if(item.fileDataType==2){ }}
+            <img layer-pid="{{item.id}}" layer-src="{{item.fileUrl}}" style="cursor:pointer" onclick="layui.neatFileViewer.mp3voice(this)" width="40" height="40" src="/content/neat/images/voice.png" alt="">
+            {{#  }else if(item.fileDataType==3){ }}
+            <div style="display: inline-block;cursor: pointer;">
+                <img layer-pid="{{item.id}}" layer-src="{{item.fileUrl}}" style="position: absolute;" width="40" height="40"  onClick="layui.neatFileViewer.lookvideo(this)" src="/content/neat/images/videomp4.png" alt="">
+                <img style="cursor:pointer;background:url({{item.thumbnails}});height:40px;width:40px;display:inline-block;" />
+            </div>
+            {{#  } }); }}
+
+        </div>
+
+    </script>
+
+    <script type="text/html" id="optUserListTemplate">
+        <option value="">请选择待确认人</option>
+        {{#  layui.each(d.data, function(_, groupitem){ }}
+
+        <optgroup label="[{{groupitem.groupName}}]范围内人员">
+            {{#  layui.each(groupitem.children, function(index, item){ }}
+            <option value="{{item.id}}">{{item.name}}{{# if(item.jobNo){ }} (工号:{{item.jobNo}}) {{# } }}</option>
+            {{#  }); }}
+        </optgroup>
+
+        {{#  }); }}
+    </script>
+
+</body>
+</html>

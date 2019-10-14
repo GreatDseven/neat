@@ -1,0 +1,98 @@
+﻿ <!-- 巡检项目管理 -->
+
+<div class="layui-row sitemap-row-container normal-blue-text">
+    当前位置&nbsp;:&nbsp;巡检管理>巡检项目管理
+</div>
+
+<!-- 查询条件行 -->
+<div class="layui-row query-row-container">
+    <div class="layui-form layui-form-pane1" action="" lay-filter="first">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">巡检项目名称</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="projectTypeName" id="projectTypeName" lay-verify="projectType" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-inline" >
+                <label class="layui-form-label">项目类型</label>
+                <div class="layui-input-inline">
+                    <select name="projectType" lay-verify="projectType" lay-filter="projectType" id="slProjectType">
+                        <option value="">全部</option>
+                    </select>
+                </div>
+            </div>
+            <div class="layui-inline   ">
+                <label class="layui-form-label">项目子类型</label>
+                <div class="layui-input-inline">
+                    <select name="projectSubType" lay-verify="projectSubType" lay-filter="projectSubType"  id="slProjectSubType" lay-search>
+                        <option value="">全部</option>
+                       
+                    </select>
+                </div>
+            </div>
+            <div class="layui-inline">
+                <button class="layui-btn" lay-submit="" lay-filter="search" id="btnSearch">搜索</button>
+            </div>
+        </div>
+    </div>
+
+</div>
+<!-- 查询结果行 -->
+<div class="layui-row result-row-container">
+    <div class="toolbar-container">
+        <div class="layui-btn-container">
+            <button class="layui-btn layui-btn-warm" id="add">添加</button>
+            <button class="layui-btn layui-btn-danger" data-type="del" id="del">删除</button>
+            <button class="layui-btn" id="btnMapTemplate" style="display: none;">模板关联</button>
+        </div>
+    </div>
+    <div class="table-container">
+        <div lay-filter="projectManageListItem" id="projectManageList"></div>
+    </div>
+    <div class="pager-container">
+        <div id="tableProjectListPager"></div>
+    </div>
+
+</div>
+<!--数据表格操作-->
+<script type="text/html" id="operationBar">
+    {{# if(d.editable){ }}
+        <a lay-event="edit" title="编辑" style="color:#babdc9;"><i class="far fa-edit"></i></a>
+        <a lay-event="del" title="删除" style="color:#babdc9;"><i class="fas fa-trash-alt"></i></a>
+    {{# } }}
+</script>
+<script type="text/javascript">
+
+
+    layui.use(["layer"], function () {
+        var layindex = layui.layer.load(1);
+        layui.use(["pagePatrolProjectManage"], function () {
+            var page = layui.pagePatrolProjectManage;
+            page.init();
+            layui.layer.close(layindex);
+        });
+    });
+
+
+</script>
+
+
+
+<script type="text/html" id="optProjectTypeTemplate">
+    <option value="">全部</option>
+    {{#  layui.each(d.data, function(index, item){ }}
+
+    <option value="{{item.id}}">{{item.typeName}}</option>
+
+    {{#  }); }}
+</script>
+
+<script type="text/html" id="optProjectSubTypeTemplate">
+    <option value="">全部</option>
+    {{#  layui.each(d.data, function(index, item){ }}
+
+    <option value="{{item.id}}">{{item.name}}</option>
+
+    {{#  }); }}
+</script>

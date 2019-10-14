@@ -1,0 +1,108 @@
+﻿<!doctype html>
+<html lang="zh">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="/content/3rd/layui/css/layui.css">
+    <link rel="stylesheet" href="/content/3rd/fontawesome/css/all.min.css">
+    <link rel="stylesheet" href="/content/neat/css/neat-common.css">
+    <title>视频通道</title>
+
+    <style>
+        .table-cont {
+            width: 1100px;
+            overflow-y: scroll;
+        }
+
+        .btn-container {
+            padding-left: 20px !important;
+        }
+
+        .layui-form-item {
+            padding-left: 5px;
+        }
+
+            .layui-form-item .layui-input-inline {
+                width: 955px;
+            }
+    </style>
+</head>
+
+<body>
+    <div class="dialog-body">
+        <div class="layui-layer-content">
+            <!--<div class="layui-row">
+                <div class="layui-col-md12">
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label normal-label">设备名称</label>
+                            <div class="layui-input-inline">
+                                <input type="text" id="txtName" disabled class="layui-input layui-disabled">
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>-->
+
+            <div class="layui-row">
+                <div class="layui-col-md10">
+                    <div class="layui-form-item btn-container">
+                        <button class="layui-btn layui-btn-warm" id="btnAdd">添加通道</button>
+                        <button class="layui-btn layui-btn-danger" id="btnDelete">删除通道</button>
+                    </div>
+                </div>
+                <div class="layui-col-md2">
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <span class="normal-white-text">当前共</span>
+                            <label id="channelCount">0</label>
+                            <span class="normal-white-text">通道</span>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="layui-row">
+                <div class="layui-col">
+                    <div class="table-cont">
+                        <div lay-filter="resultTable" id="resultTable"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="layui-row">
+                &nbsp;
+            </div>
+        </div>
+
+
+    </div>
+
+    <!--数据表格操作-->
+    <script type="text/html" id="opColTemplate">
+
+        <a lay-event="edit" title="编辑" href="javascript:void(0)" style="color:#babdc9;"><i class="far fa-edit"></i></a>
+        <a lay-event="del" title="删除" href="javascript:void(0)" style="color:#babdc9;"><i class="fas fa-trash-alt"></i></a>
+        <a lay-event="video" title="查看视频" href="javascript:void(0)" style="color:#babdc9;"><i class="fas fa-video"></i></a>
+
+    </script>
+
+    <script src="/content/3rd/layui/layui.js"></script>
+    <script src="/content/neat/layui.config.js"></script>
+    <script type="text/javascript">
+
+        layui.use(["layer"], function () {
+            var layindex = layui.layer.load(1);
+            layui.use(["pageDirectVideoDeviceChannelList"], function () {
+                var page = layui.pageDirectVideoDeviceChannelList;
+                page.init();
+                layui.layer.close(layindex);
+            });
+        });
+
+    </script>
+</body>
+
+</html>

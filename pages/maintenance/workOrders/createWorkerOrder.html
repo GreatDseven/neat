@@ -1,0 +1,110 @@
+﻿<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="/content/3rd/layui/css/layui.css">
+    <link rel="stylesheet" href="/content/3rd/fontawesome/css/all.min.css">
+    <link rel="stylesheet" href="/content/neat/css/neat-common.css">
+
+    <link rel="stylesheet" href="/content/3rd/layui/css/modules/layer/default/layer.css">
+    <script src="/content/3rd/layui/layui.js"></script>
+    <script src="/content/neat/layui.config.js"></script>
+</head>
+<body>
+    <div  class="dialog-body">
+        <div class="layui-layer-content" id="view">
+            <div class="layui-form" action="">
+                <div class="layui-form-item">
+                    <label class="layui-form-label" style="margin-left:20px;">发起工单 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span id="spanTime" style="color:red">shijian</span></label>
+                </div>
+                <div class="layui-form-item" style="margin-left:20px;margin-right:20px;">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">维保单位</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="enterprise" required lay-verify="required|enterprise" autocomplete="off" placeholder="请输入维保单位" class="layui-input">
+                        </div>
+                    </div>
+
+                </div>
+                <div class="layui-form-item layui-form-text" style="margin-left:20px;margin-right:20px;">
+                    <label class="layui-form-label">工单描述</label>
+                    <div class="layui-input-block">
+                        <textarea name="description" required lay-verify="required|description" placeholder="请输入工单描述" class="layui-textarea"></textarea>
+                    </div>
+                </div>
+                <div class="layui-row" style="text-align: center;margin-top:20px;">
+                    <button class="layui-btn layui-btn" lay-submit lay-filter="filterSubmit" >提交</button>
+                    <button class="layui-btn layui-btn-grey" id="btnCancel">取消</button>
+                </div>
+            </div>
+        </div>
+       
+    </div>
+
+
+    <script type="text/javascript">
+        //主动加载jquery模块
+        layui.use(['jquery', 'layer', 'form', 'laytpl', 'neat', 'neatDataApi'], function () {
+            var $ = layui.$; //重点处
+            var laytpl = layui.laytpl;
+            var form = layui.form;
+            var layer = layui.layer;
+            var base = layui.neat;
+
+            $('#deleBtn').on('click', function () {
+                var index = parent.layer.getFrameIndex(window.name);
+                parent.layer.close(index);
+            });
+
+            $('#btnCancel').on('click', function () {
+                var index = parent.layer.getFrameIndex(window.name);
+                parent.layer.close(index);
+            });
+
+            var currentDateTime = new Date();
+            $('#spanTime').html(currentDateTime.getFullYear() + '-' + currentDateTime.getMonth() + '-' + currentDateTime.getDay() + '  ' + currentDateTime.getHours() + ':' + currentDateTime.getMinutes() + ':' + currentDateTime.getSeconds());
+
+            //监听提交
+            form.on('submit(filterSubmit)', function (data) {
+                var url = '/OpenApi/Maintenance/AddMtOrders';
+                var result =
+                    {
+                        token: base.getUserToken(),
+                        entperiseName: data.field.enterprise,
+                        starter: base.getCurrentUserInfo(),
+                        content: data.field.description
+                    };
+                layui.neatDataApi.sendPost(url, result, function (result) {                  
+                    layer.msg('工单编号为：' + result, {
+                        time: 20000, //20s后自动关闭
+                        btn: ['确定']
+                    }, function () {
+                        var index = parent.layer.getFrameIndex(window.name);
+                        parent.layer.close(index);
+                    });
+                });
+            });
+
+            //自定义验证规则
+            form.verify({
+                enterprise: function (value) {
+
+                    if (value.length < 3) {
+                        return '维保单位至少得2个字符啊';
+                    }
+                }
+              , description: function (value) {
+                  if (value.length < 5) {
+                      return '工单描述至少得5个字符啊';
+                  }
+              }
+              , content: function (value) {
+                  layedit.sync(editIndex);
+              }
+            });
+        });
+
+    </script>
+</body>
+</html>

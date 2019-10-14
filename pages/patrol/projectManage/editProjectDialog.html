@@ -1,0 +1,125 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="/content/3rd/layui/css/layui.css">
+    <link rel="stylesheet" href="/content/3rd/fontawesome/css/all.min.css">
+    <link rel="stylesheet" href="/content/neat/css/neat-common.css">
+
+    <link rel="stylesheet" href="/content/3rd/layui/css/modules/layer/default/layer.css">
+    <script src="/content/3rd/layui/layui.js"></script>
+    <script src="/content/neat/layui.config.js"></script>
+    <style>
+        .layui-form {
+          
+            padding-left: 10px;
+        }
+
+        .layui-layer-setwin {
+            top: 15px !important;
+        }
+
+        .layui-form-label {
+            width: 100px;
+        }
+
+
+        .layui-textarea {
+            width: 600px;
+            height: 150px;
+        }
+
+        .layui-form-item .layui-input-inline {
+            width: 230px;
+        }
+    </style>
+
+    <title>编辑项目类型</title>
+
+</head>
+<body >
+    <div class="dialog-body">
+        <div class="layui-form" lay-filter="form">
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label">项目类型</label>
+                    <div class="layui-input-inline">
+                        <select name="projectType" id="slProjectType" lay-verType="tips" lay-filter="projectType" lay-verify="projectType">
+                            <option value="">请选择项目类型</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">项目子类型</label>
+                    <div class="layui-input-inline">
+                        <select name="projectSubtype" id="slProjectSubtype" lay-verType="tips" lay-filter="projectSubtype" lay-verify="projectSubtype" lay-search>
+                            <option value="">请选择项目子类型</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label">巡检项目名称</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="projectName" lay-filter="projectName" lay-verType="tips" lay-verify="projectName" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label" id="enterpriseanddomain">所属单位名称</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="enterpriseName" disabled="disabled" lay-filter="enterpriseName" lay-verify="enterpriseName" class="layui-input layui-disabled">
+                    </div>
+                </div>
+            </div>
+            <div class="layui-form-item layui-form-text">
+                <label class="layui-form-label">项目描述</label>
+                <div class="layui-input-block">
+                    <textarea name="discription" class="layui-textarea" lay-verType="tips" lay-filter="discription" lay-verify="discription"></textarea>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-input-block" style="text-align:center;margin-left:0px;">
+                    <button class="layui-btn layui-btn" lay-submit lay-filter="filterSubmit">提交</button>
+                    <button class="layui-btn  layui-btn-grey" id="btnCancel">取消</button>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+
+    <script type="text/javascript">
+
+
+        layui.use(["layer"], function () {
+            var layindex = layui.layer.load(1);
+            layui.use(["editProjectDialog"], function () {
+                var page = layui.editProjectDialog;
+                page.init();
+                layui.layer.close(layindex);
+            });
+        });
+
+    </script>
+
+    <script type="text/html" id="optProjectTypeTemplate">
+        <option value="">请选择项目类型</option>
+        {{#  layui.each(d.data, function(index, item){ }}
+
+        <option value="{{item.id}}">{{item.typeName}}</option>
+
+        {{#  }); }}
+    </script>
+
+    <script type="text/html" id="optProjectSubTypeTemplate">
+        <option value="">请选择项目子类型</option>
+        {{#  layui.each(d.data, function(index, item){ }}
+
+        <option value="{{item.id}}">{{item.name}}</option>
+
+        {{#  }); }}
+    </script>
+</body>
+</html>

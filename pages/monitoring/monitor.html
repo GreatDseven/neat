@@ -1,0 +1,230 @@
+﻿<script>
+
+    layui.link("/content/neat/css/monitor.css");
+</script>
+<div id="mapContainer" style="width:100%;height:100%;position:relative;">
+    <!--三日内数据统计-->
+    <div class="day3-layer">
+        <div class="day3-fire"><span class="day3-data" id="day3-fire-data">0000</span></div>
+        <div class="day3-fault"><span class="day3-data" id="day3-fault-data">0000</span></div>
+        <div class="day3-alarm"><span class="day3-data" id="day3-alarm-data">0000</span></div>
+    </div>
+
+    <!--三日内数据统计 end-->
+    <!--设备事件列表-->
+    <div class="deviceDventsLayer-leftTip"></div>
+    <div class="deviceDventsLayer">
+        <div class="nav-top-number">
+            <span>今日未处理数：</span><span id="todayUntreatedNum"></span>
+        </div>
+        <div class="nav-top-time">
+            <a href="/pages/monitoring/historyEventQuery.html" target="_blank" id="lnkHistoryAlarm" ><span id="historyalarm">查看历史警情></span></a>
+        </div>
+        <div style="margin-top:60px;" id="eventtypelist" lay-filter="eventtypelist"></div>
+    </div>
+    <!--设备事件列表 end-->
+    <div class="change-button-layer">
+        <div class="layui-btn-group layui-btn-group-ext">
+            <button class="layui-btn layui-btn-use-ext" id="darkchange">暗色</button>
+            <button class="layui-btn layui-btn-normal-ext" id="normalchange">亮色</button>
+        </div>
+
+
+    </div>
+    <!--页面右侧信息层-->
+    <div class="right-layer-top" style="display:none;">
+        <div class="baseinfo-div-single">
+            <p class="baseinfo-p-single">
+                <span class="baseinfo-span-num" id="baseinfo-linknet">0</span>
+                <span class="baseinfo-span-des">联网单位</span>
+            </p>
+            <p class="baseinfo-p-single">
+                <span class="baseinfo-span-num" id="baseinfo-total-buildings">0</span>
+                <span class="baseinfo-span-des">建筑总数</span>
+            </p>
+            <p class="baseinfo-p-single">
+                <span class="baseinfo-span-num" id="baseinfo-total-parts">0</span>
+                <span class="baseinfo-span-des">部位总数</span>
+            </p>
+        </div>
+        <div class="baseinfo-div-single">
+            <p class="baseinfo-p-single">
+                <span class="baseinfo-span-num" id="baseinfo-total-devices">0</span>
+                <span class="baseinfo-span-des">设备总数</span>
+            </p>
+            <p class="baseinfo-p-single">
+                <span class="baseinfo-span-num" id="baseinfo-offline-devices">0</span>
+                <span class="baseinfo-span-des">离线设备</span>
+            </p>
+            <p class="baseinfo-p-single">
+                <span class="baseinfo-span-num" id="baseinfo-normal-devices">0</span>
+                <span class="baseinfo-span-des">正常设备</span>
+            </p>
+        </div>
+        <div class="baseinfo-div-single">
+            <p class="baseinfo-p-single">
+                <span class="baseinfo-span-num" id="baseinfo-inspection-completion">0.00%</span>
+                <span class="baseinfo-span-des">巡检完成率</span>
+            </p>
+            <p class="baseinfo-p-single">
+                <span class="baseinfo-span-num" id="baseinfo-hidden-units">0</span>
+                <span class="baseinfo-span-des">隐患单位</span>
+            </p>
+            <p class="baseinfo-p-single">
+                <span class="baseinfo-span-num" id="baseinfo-hidden-danger-point">0</span>
+                <span class="baseinfo-span-des">隐患点位</span>
+            </p>
+        </div>
+    </div>
+    <div class="baseinfo-right-tip"></div>
+    <div class="right-layer-down" style="display:none;">
+        <div class="linknet-right-progress-outdiv">
+            <span class="linknet-right-tip-span">火灾报警系统</span>
+            <div class="linknet-right-progress-div">
+                <div class="layui-progress">
+                    <div class="layui-progress-bar linknet-right-progress" id="firesys-progress" lay-percent="0%" style="width: 0%;"></div>
+                </div>
+            </div>
+            <span class="linknet-right-span-progressnum" id="firesys-progress-num">0</span>
+        </div>
+        <div class="linknet-right-progress-outdiv">
+            <span class="linknet-right-tip-span">水源监测系统</span>
+            <div class="linknet-right-progress-div">
+                <div class="layui-progress">
+                    <div class="layui-progress-bar linknet-right-progress" id="watersys-progress" lay-percent="0%" style="width: 0%;"></div>
+                </div>
+            </div>
+            <span class="linknet-right-span-progressnum" id="watersys-progress-num">0</span>
+        </div>
+        <div class="linknet-right-progress-outdiv">
+            <span class="linknet-right-tip-span">电气火灾系统</span>
+            <div class="linknet-right-progress-div">
+                <div class="layui-progress">
+                    <div class="layui-progress-bar linknet-right-progress" id="electricsys-progress" lay-percent="0%" style="width: 0%;"></div>
+                </div>
+            </div>
+            <span class="linknet-right-span-progressnum" id="electricsys-progress-num">0</span>
+        </div>
+        <div class="linknet-right-progress-outdiv">
+            <span class="linknet-right-tip-span">防火门系统</span>
+            <div class="linknet-right-progress-div">
+                <div class="layui-progress">
+                    <div class="layui-progress-bar linknet-right-progress" id="fire-proofdoorsys-progress" lay-percent="0%" style="width:0%;"></div>
+                </div>
+            </div>
+            <span class="linknet-right-span-progressnum" id="fire-proofdoorsys-progress-num">0</span>
+        </div>
+        <div class="linknet-right-progress-outdiv">
+            <span class="linknet-right-tip-span">可燃气体系统</span>
+            <div class="linknet-right-progress-div">
+                <div class="layui-progress">
+                    <div class="layui-progress-bar linknet-right-progress" id="combustible-gassys-progress" lay-percent="0%" style="width:0%;"></div>
+                </div>
+            </div>
+            <span class="linknet-right-span-progressnum" id="combustible-gassys-progress-num">0</span>
+        </div>
+        <div class="linknet-right-progress-outdiv">
+            <span class="linknet-right-tip-span">消防电源系统</span>
+            <div class="linknet-right-progress-div">
+                <div class="layui-progress">
+                    <div class="layui-progress-bar linknet-right-progress" id="fire-controlsys-progress" lay-percent="0%" style="width: 0%;"></div>
+                </div>
+            </div>
+            <span class="linknet-right-span-progressnum" id="fire-controlsys-progress-num">0</span>
+        </div>
+        <div class="linknet-right-progress-outdiv">
+            <span class="linknet-right-tip-span">智慧用电系统</span>
+            <div class="linknet-right-progress-div">
+                <div class="layui-progress">
+                    <div class="layui-progress-bar linknet-right-progress" id="electrical-controlsys-progress" lay-percent="0%" style="width: 0%;"></div>
+                </div>
+            </div>
+            <span class="linknet-right-span-progressnum" id="electrical-controlsys-progress-num">0</span>
+        </div>
+    </div>
+    <div class="linknet-right-tip"></div>
+
+    <!--页面右侧信息层 end-->
+</div>
+
+
+<script id="maplocationinfo" type="text/html">
+    <p class='entnamep' title="{{ d.name }}" id='entname'>{{ d.name }}</p>
+    <div class='infodiv-span'>
+        <span class='infospannum'>火警设备：<a href='javascript:void(0)' attrid={{ d.id }} onclick='eventbuttoncount(this,"fire")' class='div-span-a-fire'>{{ d.fireCount }}</a></span>
+        <span class='infospannum'>故障设备：<a href='javascript:void(0)' attrid={{ d.id }} onclick='eventbuttoncount(this, "fault")' class='div-span-a-fault'>{{ d.faultCount }}</a></span>
+    </div>
+    <div class='infodiv-span'>
+        <span class='infospannum'>报警设备：<a href='javascript:void(0)' attrid={{ d.id }} onclick='eventbuttoncount(this, "alarm")' class='div-span-a-alarm'>{{ d.alarmCount }}</a></span>
+        <span class='infospannum'>离线设备：<a href='javascript:void(0)' attrid={{ d.id }} onclick='eventbuttoncount(this, "offline")' class='div-span-a-offline'>{{d.offlineCount}}</a></span>
+    </div>
+    <div class='phoneaddress-div'>
+        <span class='infospannum'>电话：{{ d.fproomtel1 }}</span>
+        <span class='infospanaddr' title="{{ d.address }}">地址：{{ d.address }}</span>
+    </div>
+    <div class='button-out-div'>
+        <span class='span-button-event'>
+            <button attrid={{ d.id }} id='entdetailsbutton' onclick='entdetailsbutton(this)' class='layui-btn layui-btn-sm span-button-color'>详情</button>
+        </span>
+        <span class='span-button-event'>
+            <button attrid={{ d.id }} id='entvideobutton' onclick='entvideobutton(this)' class='layui-btn layui-btn-sm span-button-color'>视频</button>
+        </span>
+        <span class='span-button-event'>
+            <button attrid={{ d.id }} id='entplanbutton' onclick='entplanbutton(this)'  class='layui-btn layui-btn-sm span-button-color'>平面图</button>
+        </span>
+    </div>
+</script>
+
+<script id="maplocationinfoDevice" type="text/html">
+    <p class='entnamep' title="{{ d.name }}" id='entname'>{{ d.name }}</p>
+    <div class='infodiv-span'>
+        <!--<span class='infospannum' id="status" style="color:red">设备状态：{{ d.status }}</span>-->
+        <span class='infospannum'>设备状态：<a href='javascript:void(0)' attrid={{ d.id }} style="color:statusfontcolor"> {{ d.status }}</a></span>
+        <span class='infospannum'>当 前 值：<a href='javascript:void(0)' attrid={{ d.id }} style="color:valuefontcolor"> {{ d.value }}</a></span>
+    </div>
+    <div class='infodiv-span'>
+        <span class='infospannum'>信号强度：<a href='javascript:void(0)' attrid={{ d.id }} class='div-span-a-offline'>{{ d.signalStrength }}</a></span>
+        <span class='infospannum'>电池电量：<a href='javascript:void(0)' attrid={{ d.id }} class='div-span-a-offline'>{{d.batteryLevel}}</a></span>
+    </div>
+    <div class='phoneaddress-div'>
+        <span class='infospannum'>设备编码：{{ d.code }}</span>
+        <span class='infospanaddr' title="{{ d.address }}">地址：{{ d.address }}</span>
+    </div>
+    <div class='button-out-div'>
+        <!--<span class='span-button-event'>
+            <button attrid={{ d.id }} id='entdetailsbutton' onclick='entdetailsbutton(this)' class='layui-btn layui-btn-sm span-button-color'>详情</button>
+        </span>-->
+        <span class='span-button-event'>
+            <button attrid={{ d.id }} id='entvideobutton' onclick='entvideobutton(this)' class='layui-btn layui-btn-sm span-button-color'>视频</button>
+        </span>
+        <!--<span class='span-button-event'>
+            <button attrid={{ d.id }} id='entplanbutton' onclick='entplanbutton(this)' class='layui-btn layui-btn-sm span-button-color'>平面图</button>
+        </span>-->
+    </div>
+</script>
+<!--数据表格操作-->
+<script type="text/html" id="opColTemplate">
+
+    <!--处理-->
+    {{# if(!d.isHandled){ }}
+    <a lay-event="event-process" title="处理" href="javascript:void(0)" style="color:#babdc9;"><i class="fas fa-mouse-pointer"></i></a>
+    {{#} else { }}
+    <a lay-event="" title="无需处理" href="javascript:void(0)" style="color:rgba(241, 238, 238, 0.5);"><i class="fas fa-mouse-pointer"></i></a>
+    {{#}  }}
+
+    <!-- 查看 -->
+    <a lay-event="event-detail" title="查看详情" href="javascript:void(0)" style="color:#babdc9;"><i class="fa fa-eye"></i></a>
+    <!-- 平面图 -->
+    <a lay-event="planar-graph" title="平面图" href="javascript:void(0)" style="color:#babdc9;"><i class="fa fa-money-check"></i></a>
+    <!-- 地图定位 -->
+    <a lay-event="gis-locate" title="地图定位" href="javascript:void(0)" style="color:#babdc9;"><i class="fa fa-map-marker-alt"></i></a>
+    <!-- 摄像头 -->
+    <a lay-event="camera" title="摄像头" href="javascript:void(0)" style="color:#babdc9;"><i class="fa fa-video"></i></a>
+
+</script>
+<script type="text/javascript">
+    layui.use(["pageMonitor"], function () {
+        var page = layui.pageMonitor;
+        page.init();
+    });
+</script>

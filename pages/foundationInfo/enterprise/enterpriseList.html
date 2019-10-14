@@ -1,0 +1,74 @@
+﻿<!-- 单位管理 -->
+<div class="layui-row sitemap-row-container normal-blue-text">
+    当前位置&nbsp;:&nbsp;基础信息>单位管理
+</div>
+
+
+<!-- 查询条件行 -->
+<div class="layui-row query-row-container">
+    <div class="layui-form layui-form-pane1" lay-filter="query">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">单位名称</label>
+                <div class="layui-input-inline">
+                    <input type="text" id="txtkeyWord" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">单位类别</label>
+                <div class="layui-input-inline layui-form" lay-filter="optEntTypeForm">
+                    <select id="optEntType" lay-filter="optEntType">
+                        <option value="">全部</option>
+
+                    </select>
+                </div>
+            </div>
+            <div class="layui-inline">
+                <button class="layui-btn" id="btnQuery" lay-filter="query">查询</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- 查询结果行 -->
+<div class="layui-row result-row-container">
+    <div class="toolbar-container">
+        <div class="layui-btn-container">
+            <button class="layui-btn layui-btn-warm" id="btnAdd">添加单位</button>
+            <button class="layui-btn layui-btn-danger" data-type="getSelectedDelete" id="btnDelete">删除单位</button>
+        </div>
+    </div>
+
+    <div class="table-container">
+        <div id="resultTable" lay-filter="resultTable"></div>
+    </div>
+    <div class="pager-container">
+        <div id="resultTablePager"></div>
+    </div>
+</div>
+
+
+<!--数据表格操作-->
+<script type="text/html" id="opColTemplate">
+    <a lay-event="edit" title="编辑" href="javascript:void(0)" style="color:#babdc9;"><i class="far fa-edit"></i></a>
+    <a lay-event="del" title="删除" href="javascript:void(0)" style="color:#babdc9;"><i class="fas fa-trash-alt"></i></a>
+</script>
+
+
+<script type="text/html" id="optEntTypeTemplate">
+    <option value="">全部</option>
+    {{#  layui.each(d.data, function(index, item){ }}
+
+    <option value="{{item.value}}">{{item.name}}</option>
+
+    {{#  }); }}
+</script>
+<script type="text/javascript">
+    layui.use(["pageEnterpriseList"], function () {
+        var subPage = layui.pageEnterpriseList;
+
+        subPage.init();
+    });
+</script>

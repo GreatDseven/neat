@@ -1,0 +1,365 @@
+﻿<!doctype html>
+<html lang="zh">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="/content/3rd/layui/css/layui.css">
+    <link rel="stylesheet" href="/content/3rd/fontawesome/css/all.min.css">
+    <link rel="stylesheet" href="/content/neat/css/neat-common.css">
+    <title>新建NEAT水信号</title>
+
+    <style>
+        .layui-form-item .layui-input-inline {
+            width: 250px;
+        }
+
+        .layui-form-select dl {
+            max-height: 200px;
+        }
+        .tit-1 {
+            font-weight: bold;
+            margin-top: 20px;
+            padding: 10px;
+            margin-left: 30px;
+            color: #00FFFF;
+            background: url('/content/neat/images/neat-common/dialog-title.png') no-repeat;
+            letter-spacing: 2px;
+        }
+
+        /*模拟量左侧样式*/
+        .short {
+            width: 100px !important;
+        }
+        .short2 {
+            width: 180px !important;
+        }
+        .short2-first {
+            width: 100px !important;
+        }
+        .short2-second {
+            width: 80px !important;
+            color: #00A0E9;
+        }
+
+        /*模拟量 右侧样式*/
+        .short4 {
+            width: 400px !important;
+        }
+        .short4-first {
+            width: 80px !important;
+        }
+        .short4-second {
+            width: 80px !important;
+        }
+        .short4-third {
+            width: 80px !important;
+            color: #00A0E9;
+        }
+        .short4-forth {
+            width: 140px !important;
+            color: #00A0E9;
+        }
+
+        /*数字量 样式*/
+        .yx {
+            width: 600px !important;
+        }
+
+        .yx-first {
+            width: 100px !important;
+        }
+
+        .yx-second {
+            width: 300px !important;
+        }
+
+        .yx-third {
+            width: 160px !important;
+        }
+
+        .layui-form-radio * {
+            display: inline-block;
+            vertical-align: middle;
+            font-size: 14px;
+            color: #00A0E9;
+        }
+        .layui-form-checkbox[lay-skin="primary"] span {
+            padding-left: 0;
+            padding-right: 15px;
+            line-height: 18px;
+            background: none;
+            color: #02E6FF;
+        }
+        
+    </style>
+</head>
+
+<body>
+    <div>
+        <div class="layui-layer-content layui-form" lay-filter="wholeForm">
+
+            <div class="layui-row">
+                <div class="layui-col-sm6">
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label normal-label">网关编码</label>
+                            <div class="layui-input-inline">
+                                <input type="text" id="txtGatewayCode" disabled class="layui-input layui-disabled">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-sm6">
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label normal-label">网关名称</label>
+                            <div class="layui-input-inline">
+                                <input type="text" id="txtGatewayName" disabled class="layui-input layui-disabled">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="layui-row">
+                <div class="layui-col-sm6">
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label normal-label">信号编码</label>
+                            <div class="layui-input-inline">
+                                <div class="layui-input-inline">
+                                    <input type="text" id="txtSignalCode" autocomplete="off" name="txtSignalCode" placeholder="00.01.01.00" class="layui-input"  lay-verify="txtSignalCode" lay-verType="tips">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-sm6">
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label normal-label">信号名称</label>
+                            <div class="layui-input-inline ">
+                                <input type="text" id="txtSignalName" autocomplete="off" name="txtSignalName" class="layui-input" lay-verify="txtSignalName" lay-verType="tips">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="layui-row">
+                <div class="layui-col-sm6">
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label normal-label">信号类型</label>
+                            <div class="layui-input-inline">
+                                <input type="radio" name="signalValueType" lay-filter="signalValueType" value="YX" title="数字量">
+                                <input type="radio" name="signalValueType" lay-filter="signalValueType" value="YC" title="模拟量" checked>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-sm6">
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label normal-label">安装位置</label>
+                            <div class="layui-input-inline">
+                                <input type="text" id="txtAddr" autocomplete="off" name="txtAddr" class="layui-input" lay-verify="txtAddr" lay-verType="tips">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="layui-row">
+                <div id="tit-1" class="tit-1"><span>信号配置</span></div>
+            </div>
+
+            <!--开关量-->
+            <div id="yxconfig" class="layui-row" style="display:none">
+                <div class="layui-row">
+                    <div class="layui-form-item">
+                        <div class="layui-inline ">
+                            <div class="layui-input-inline yx">
+                                <label class="layui-form-label yx-first">真值(1)含义</label>
+                                <input type="text" id="txtTrueLabel" autocomplete="off" name="txtTrueLabel" class="layui-input yx-second" lay-verify="txtTrueLabel" value="开" lay-verType="tips">
+                                <input type="checkbox" lay-filter="trueAlarmFlag" name="trueAlarmFlag" title="产生报警" class="yx-third layui-input" lay-skin="primary">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-row">
+                    <div class="layui-form-item">
+                        <div class="layui-inline ">
+                            <div class="layui-input-inline yx">
+                                <label class="layui-form-label yx-first">假值(0)含义</label>
+                                <input type="text" id="txtFalseLabel" autocomplete="off" name="txtFalseLabel" class="layui-input yx-second" lay-verify="txtFalseLabel" value="关" lay-verType="tips">
+                                <input type="checkbox" lay-filter="falseAlarmFlag" name="falseAlarmFlag" title="产生报警" class="yx-third" lay-skin="primary">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-row">
+                    &nbsp;
+                </div>
+                <div class="layui-row">
+                    &nbsp;
+                </div>
+                <div class="layui-row">
+                    &nbsp;
+                </div>
+                <div class="layui-row">
+                    &nbsp;
+                </div>
+            </div>
+            <!--模拟量-->
+            <div id="ycconfig" class="layui-row">
+                <div class="layui-col-sm5">
+                    <div class="layui-row">
+                        <div class="layui-form-item">
+                            <div class="layui-inline">
+                                <label class="layui-form-label normal-label ">设备类型</label>
+                                <div class="layui-input-inline layui-form short" lay-filter="optDeviceTypeForm">
+                                    <select id="optDeviceType" lay-filter="optDeviceType" name="optDeviceType" lay-verify="optDeviceType" lay-verType="tips"></select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-row">
+                        <div class="layui-form-item">
+                            <div class="layui-inline">
+                                <label class="layui-form-label normal-label">单位</label>
+                                <div class="layui-input-inline layui-form short" lay-filter="optUnitForm">
+                                    <select id="optUnit" lay-filter="optUnit" name="optUnit" lay-verify="optUnit" lay-verType="tips"></select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-row">
+                        <div class="layui-form-item">
+                            <div class="layui-inline">
+                                <label class="layui-form-label normal-label">阈值上限</label>
+                                <div class="layui-input-inline short2">
+                                    <input type="text" id="txtMaxValue" autocomplete="off" name="txtMaxValue" class="layui-input short2-first" lay-verify="txtMaxValue" lay-verType="tips" />
+                                    <label class="short2-second" name="unitLabel"></label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-row">
+
+                        <div class="layui-form-item">
+                            <div class="layui-inline">
+                                <label class="layui-form-label normal-label">阈值下限</label>
+                                <div class="layui-input-inline short2">
+                                    <input type="text" id="txtMinValue" autocomplete="off" name="txtMinValue" class="layui-input short2-first" lay-verify="txtMinValue" lay-verType="tips" />
+                                    <label class="short2-second" name="unitLabel"></label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-sm7">
+                    <div class="layui-row">
+                        <div class="layui-form-item">
+                            <div class="layui-inline">
+                                <div class="layui-input-inline short4">
+                                    <input type="checkbox" lay-filter="hl2AlarmFlag" name="hl2AlarmFlag" id="hl2AlarmFlag" lay-filter="hl2AlarmFlag" title="超过" lay-skin="primary">
+                                    <input type="text" id="txtHL2AlarmValue" autocomplete="off" name="txtHL2AlarmValue" disabled class="layui-input short4-second layui-disabled" lay-verify="txtHL2AlarmValue" lay-verType="tips" />
+                                    <label class="short4-third" name="unitLabel"></label>
+                                    <label class="short4-forth">产生<span style="color:#02E6FF">【上上限】</span>报警</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-row">
+                        <div class="layui-form-item">
+                            <div class="layui-inline">
+
+
+                                <div class="layui-input-inline short4">
+                                    <input type="checkbox" lay-filter="hl1AlarmFlag" name="hl1AlarmFlag" id="hl2AlarmFlag" lay-filter="hl1AlarmFlag" title="超过" lay-skin="primary">
+                                    <input type="text" id="txtHL1AlarmValue" autocomplete="off" name="txtHL1AlarmValue" disabled class="layui-input short4-second layui-disabled" lay-verify="txtHL1AlarmValue" lay-verType="tips" />
+                                    <label class="short4-third" name="unitLabel"></label>
+                                    <label class="short4-forth">产生<span style="color:#02E6FF">【上限】</span>报警</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-row">
+                        <div class="layui-form-item">
+                            <div class="layui-inline">
+
+                                <div class="layui-input-inline short4">
+                                    <input type="checkbox" lay-filter="ll1AlarmFlag" name="ll1AlarmFlag" id="ll1AlarmFlag"  lay-filter="ll1AlarmFlag" title="低于" lay-skin="primary">
+                                    <input type="text" id="txtLL1AlarmValue" autocomplete="off" name="txtLL1AlarmValue" disabled class="layui-input short4-second layui-disabled" lay-verify="txtLL1AlarmValue" lay-verType="tips" />
+                                    <label class="short4-third" name="unitLabel"></label>
+                                    <label class="short4-forth">产生<span style="color:#02E6FF">【下限】</span>报警</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-row">
+                        <div class="layui-form-item">
+                            <div class="layui-inline">
+
+                                <div class="layui-input-inline short4">
+                                    <input type="checkbox"  lay-filter="ll2AlarmFlag" name="ll2AlarmFlag" id="ll2AlarmFlag"  lay-filter="ll2AlarmFlag" title="低于" lay-skin="primary">
+                                    <input type="text" id="txtLL2AlarmValue" autocomplete="off" name="txtLL2AlarmValue" disabled class="layui-input short4-second layui-disabled" lay-verify="txtLL2AlarmValue" lay-verType="tips" />
+                                    <label class="short4-third" name="unitLabel"></label>
+                                    <label class="short4-forth">产生<span style="color:#02E6FF">【下下限】</span>报警</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="layui-row" style="text-align: center;margin-top:20px;">
+                <button class="layui-btn layui-btn" lay-submit lay-filter="btnSave" id="btnSave">保存</button>
+                <button class="layui-btn layui-btn-grey" id="btnCancel">取消</button>
+            </div>
+        </div>
+
+
+        
+    </div>
+
+    <!--设备类型-->
+    <script type="text/html" id="optDeviceTypeTemplate">
+       
+        {{#  layui.each(d.data, function(index, item){ }}
+
+        <option value="{{item.id}}">{{item.name}}</option>
+
+        {{#  }); }}
+    </script>
+
+    <!--单位-->
+    <script type="text/html" id="optUnitTemplate">
+        {{#  layui.each(d.data, function(index, item){ }}
+
+        <option value="{{item.id}}">{{item.name}}</option>
+
+        {{#  }); }}
+    </script>
+    
+
+    <script src="/content/3rd/layui/layui.js"></script>
+    <script src="/content/neat/layui.config.js"></script>
+    <script type="text/javascript">
+
+
+        layui.use(["layer"], function () {
+            var layindex = layui.layer.load(1);
+            layui.use(["pageNEATWaterSignalCreate"], function () {
+                var page = layui.pageNEATWaterSignalCreate;
+                page.init();
+                layui.layer.close(layindex);
+            });
+        });
+
+    </script>
+</body>
+
+</html>

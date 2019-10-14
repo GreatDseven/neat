@@ -1,0 +1,306 @@
+﻿/**********大屏展示*********/
+* {
+    font-family: normalFont;
+    font-size: 10pt;
+}
+
+body {
+    background-color: #111B3A;
+}
+
+.big-container {
+    width: 1920px;
+    height: 1045px;
+    margin: auto;
+    /*background-color:red;*/
+}
+
+.big-screen-head {
+    height: 135px;
+    width: 100%;
+    /*background-color:blue;*/
+}
+
+.big-screen-body {
+    height: 910px;
+    width: 100%;
+}
+
+.head-time-layer {
+    width: 539px;
+    height: 45px;
+    float: left;
+    margin: 30px 10px 10px 0px;
+    background: url(/content/neat/images/board/logo-left.png) center right no-repeat;
+}
+
+.head-time-content {
+    width: 270px;
+    color: #06c3e0;
+    line-height: 45px;
+    text-align: center;
+    vertical-align: middle;
+    font-size: 12pt;
+    letter-spacing: 5px;
+    font-weight: bold;
+    margin-left: 200px;
+}
+
+.head-logo-layer {
+    width: 539px;
+    height: 45px;
+    float: left;
+    background: url(/content/neat/images/board/logo.png) center right no-repeat;
+    background-size: contain;
+    width: 780px;
+    height: 135px;
+}
+
+.head-com-layer {
+    width: 550px;
+    height: 45px;
+    float: left;
+    margin: 30px 0px 10px 10px;
+    background: url(/content/neat/images/board/logo-right.png) center right no-repeat;
+}
+
+.head-com-content {
+    line-height: 42px;
+    font-size: 16pt;
+    letter-spacing: 2px;
+    color: #06c3e0;
+    font-weight: bold;
+    text-decoration: none;
+    margin-left: 90px;
+}
+
+.body-left-bigout-layer {
+    width: 533px;
+    height: 910px;
+    float: left;
+    margin-right: 30px;
+}
+
+.body-middle-bigout-layer {
+    width: 755px;
+    height: 910px;
+    float: left;
+    margin-right: 30px;
+}
+
+.body-right-bigout-layer {
+    width: 533px;
+    height: 910px;
+    float: left;
+}
+
+.body-left-inlayer1 {
+    margin-top: -30px;
+    width: 533px;
+    height: 219px;
+    background: url(/content/neat/images/board/not-handled-event1.png) center right no-repeat;
+}
+
+.body-left-inlayer1-span {
+    width: 140px;
+    height: 25px;
+    line-height: 40px;
+    margin-left: 30px;
+    color: #15A9F6;
+    letter-spacing: 2px;
+    font-weight: bold;
+    font-family: titleFont;
+    font-size: 13pt;
+}
+
+.body-left-inlayer1-centdiv {
+    width: 500px;
+    height: 130px;
+    margin: 19px 0px 0px 17px;
+}
+
+.body-left-inlayer1-incentds {
+    float: left;
+    width: 110px;
+    height: 130px;
+    margin-right: 13px;
+    margin-top: 7px;
+    text-align: center;
+}
+
+.body-left-inlayer1-incentdiv {
+    width: 110px;
+    height: 92px;
+    background: url(/content/neat/images/board/ling.png) center right no-repeat;
+}
+
+.body-left-inlayer1-innumdiv {
+    width: 46px;
+    height: 30px;
+    margin-left: 32px;
+    padding-top: 32px;
+}
+
+.body-left-inlayer1-incentspan {
+    width: 110px;
+    height: 50px;
+    color: #15A9F6;
+    line-height: 38px;
+}
+
+.body-left-inlayer2 {
+    margin-top: 25px;
+    width: 533px;
+    height: 172px;
+    background: url(/content/neat/images/board/not-handled-event2.png) center right no-repeat;
+}
+
+.body-left-inlayer2-centdiv {
+    width: 500px;
+    height: 130px;
+    padding: 20px 0 0 30px;
+}
+
+.body-left-inlayer2-innumdiv {
+    width: 46px;
+    height: 30px;
+    margin-left: 22px;
+    padding-top: 30px;
+}
+
+.body-left-inlayer2-incentds {
+    float: left;
+    width: 88px;
+    height: 120px;
+    margin-right: 30px;
+    margin-top: 7px;
+    text-align: center;
+}
+
+.body-left-inlayer2-incentdiv {
+    width: 88px;
+    height: 88px;
+    background: url(/content/neat/images/board/yuan.png) center right no-repeat;
+}
+
+.body-left-inlayer3 {
+    margin-top: 25px;
+    width: 533px;
+    height: 201px;
+    background: url(/content/neat/images/board/inspect-stat.png) center right no-repeat;
+}
+
+.body-left-inlayer3-span {
+    width: 130px;
+    height: 25px;
+    line-height: 50px;
+    margin-left: 20px;
+    color: #15A9F6;
+    letter-spacing: 2px;
+    font-weight: bold;
+    font-family: titleFont;
+    font-size: 13pt;
+}
+
+.body-left-inlayer5-chart {
+    width: 745px;
+    height: 180px;
+}
+
+.body-left-inlayer3-centdiv {
+    width: 500px;
+    height: 130px;
+    padding: 0px 0 0 25px;
+}
+
+.body-left-inlayer3-incentds {
+    width: 98px;
+    height: 110px;
+    margin-right: 20px;
+}
+
+.body-left-inlayer3-chartdiv {
+    float: left;
+    width: 120px;
+    height: 120px;
+    margin: -10px 0 0 0;
+    text-align: center;
+}
+
+.body-left-inlayer3-chartdivspan {
+    font-size: 11pt;
+    color: #02f2f4;
+    font-weight: bold;
+}
+
+.body-left-inlayer4 {
+    margin-top: 25px;
+    width: 533px;
+    height: 272px;
+    background: url(/content/neat/images/board/recent-year-event-stat.png) center right no-repeat;
+}
+
+.body-left-inlayer4-chart {
+    width: 520px;
+    height: 180px;
+}
+
+
+
+.body-middle-inlayer1 {
+    width: 755px;
+    height: 610px;
+    overflow: hidden;
+    background: url(/content/neat/images/board/map.png) center right no-repeat;
+}
+
+.body-middle-inlayer1-mapin {
+    margin: 20px 20px 20px 20px;
+    width: 715px;
+    height: 570px;
+}
+
+.body-middle-inlayer2 {
+    margin-top: 25px;
+    width: 755px;
+    height: 272px;
+    background: url(/content/neat/images/board/a-year-event-stat.png) center right no-repeat;
+}
+
+.body-right-inlayer1 {
+    width: 533px;
+    height: 325px;
+    background: url(/content/neat/images/board/online-host-stat.png) center right no-repeat;
+}
+
+.body-right-inlayer2 {
+    margin-top: 25px;
+    width: 533px;
+    height: 258px;
+    position: relative;
+    background: url(/content/neat/images/board/ent-stat.png) center right no-repeat;
+}
+
+.body-right-inlayer3 {
+    margin-top: 25px;
+    width: 533px;
+    height: 272px;
+    background: url(/content/neat/images/board/realtime-event.png) center right no-repeat;
+}
+
+.body-right-inlayer6-chart {
+    width: 533px;
+    height: 272px;
+}
+
+.body-right-inlayer7-chart {
+    width: 500px;
+    height: 190px;
+    display: inline;
+}
+
+.info-bottom {
+    top: 18px !important;
+}
+
+/**********END**大屏展示**END*********/

@@ -1,0 +1,123 @@
+﻿<!doctype html>
+<html lang="zh">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="/content/3rd/layui/css/layui.css">
+    <link rel="stylesheet" href="/content/3rd/fontawesome/css/all.min.css">
+    <link rel="stylesheet" href="/content/neat/css/neat-common.css">
+    <title>关联巡检项目模板</title>
+
+    <style>
+        .table-cont{
+            width:1350px;
+           
+            overflow-y:scroll;
+        }
+        .layui-table-page>div {
+            height: 26px;
+            text-align: right; 
+            padding-right: 20px; 
+        }
+    </style>
+</head>
+
+<body>
+    <div class="dialog-body">
+        <div class="layui-layer-content">
+            <div class="layui-row">
+                <div class="layui-col">
+                    <div class="layui-form layui-form-pane1" action="" lay-filter="first">
+                        <div class="layui-form-item">
+                            <div class="layui-inline">
+                                <label class="layui-form-label">巡检项目名称</label>
+                                <div class="layui-input-inline">
+                                    <input type="text" name="projectName" id="projectName"  autocomplete="off" class="layui-input">
+                                </div>
+                            </div>
+                            <div class="layui-inline">
+                                <label class="layui-form-label">项目类型</label>
+                                <div class="layui-input-inline">
+                                    <select name="projectType" id="projectType" lay-filter="projectType">
+                                        <option value="">全部</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="layui-inline">
+                                <label class="layui-form-label">项目子类型</label>
+                                <div class="layui-input-inline">
+                                    <select name="projectSubType" id="projectSubType" lay-filter="projectSubType">
+                                        <option value="">全部</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="layui-inline">
+                                <label class="layui-form-label">关联状态</label>
+                                <div class="layui-input-inline">
+                                    <select name="optStatus" id="optStatus" lay-filter="optStatus" >
+                                        <option value="0" selected>全部</option>
+                                        <option value="1">未关联</option>
+                                        <option value="2">已关联</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="layui-inline">
+                                <button class="layui-btn"  id="btnSearch">搜索</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-row">
+                <div class="layui-col">
+                    <div class="table-cont">
+                        <div lay-filter="resultTable" id="resultTable"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="layui-row" style="text-align: center;margin-top:20px;">
+                <button class="layui-btn layui-btn" id="btnSave" lay-submit lay-filter="btnSave">保存</button>
+                <button class="layui-btn layui-btn-grey" id="btnCancel">关闭</button>
+            </div>
+        </div>
+
+        
+    </div>
+    <script type="text/html" id="optProjectTypeTemplate">
+        <option value="">全部</option>
+        {{#  layui.each(d.data, function(index, item){ }}
+
+        <option value="{{item.id}}">{{item.typeName}}</option>
+
+        {{#  }); }}
+    </script>
+    <script type="text/html" id="optProjectSubTypeTemplate">
+        <option value="">全部</option>
+        {{#  layui.each(d.data, function(index, item){ }}
+
+        <option value="{{item.id}}">{{item.name}}</option>
+
+        {{#  }); }}
+    </script>
+
+
+
+    <script src="/content/3rd/layui/layui.js"></script>
+    <script src="/content/neat/layui.config.js"></script>
+    <script type="text/javascript">
+
+
+        layui.use(["layer"], function () {
+            var layindex = layui.layer.load(1);
+            layui.use(["mapProjectTemplateDialog"], function () {
+                var page = layui.mapProjectTemplateDialog;
+                page.init();
+                layui.layer.close(layindex);
+            });
+        });
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,142 @@
+﻿@charset utf-8;
+
+
+
+.my-modal {
+    will-change: visibility, opacity;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+    z-index: 1000;
+    visibility: visible;
+    opacity: 1;
+    
+}
+
+
+
+.my-modal-align-top {
+    -webkit-box-align: start;
+    -ms-flex-align: start;
+    align-items: flex-start;
+}
+.my-table-body {
+    color: rgba(255,255,255,0.7);
+    text-align: center;
+    margin: 0px;
+    height: 100%;
+    width: 100%;
+    font-size: 15px;
+    line-height: 44px;
+}
+
+.my-modal-content {
+    will-change: transform, opacity;
+    position: relative;
+    padding: 1.4rem;
+    background-clip: padding-box;
+    -webkit-transition: all 0.25s cubic-bezier(0.23, 1, 0.32, 1);
+    transition: all 0.25s cubic-bezier(0.23, 1, 0.32, 1);
+}
+.my-modal-content-enterpriseDetail{
+  width: 675px;
+  height: 633px;
+  background: url(/content/neat/images/dialog/dialog-bg-enterpriseDetail.png) no-repeat;
+}
+.my-modal-content-enterpriseDetail .my-table-body {
+    height:325px !important;
+}
+
+.my-modal-content-eventList {
+    width: 880px;
+    height: 694px;
+    background: url(/content/neat/images/dialog/dialog-bg-eventlist.png) no-repeat;
+}
+.my-modal-content-eventList-title{
+    line-height:40px;
+    margin-top:-10px;
+    margin-bottom:20px;
+    margin-left:20px;
+
+}
+.my-modal-content-eventList .my-table-body {
+    height:535px !important;
+}
+.my-modal-content-ditu{
+  width: 1204px;
+  height: 756px;
+  background: url(/content/neat/images/dialog/dialog-bg-ditu.png) no-repeat;
+}
+.my-modal-content-ditu-iframe{
+    width: 945px;
+    height: 655px;
+    margin-top: 40px;
+    margin-left: 20px;
+}
+.my-modal-content-ditu-container{
+    width: 1125px;
+    height: 655px;
+    margin-top: 40px;
+    margin-left: 20px;
+}
+
+.my-modal-close {
+    z-index: 1100;
+    cursor: pointer;
+    position: absolute;
+    top: 25px;
+    right: -2px;
+    margin: 0.2rem;
+    padding: 0.2rem;
+    border-radius: 50%;
+    -webkit-transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+    transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.my-modal-close svg {
+    width: 16px;
+    fill: #fff;
+    pointer-events: none;
+    vertical-align: top;
+}
+
+
+.tit-1 {
+    font-size: 14px;
+    font-weight: bold;
+    margin-top: 40px;
+    padding: 10px;
+    color: #00FFFF;
+    background: url(/content/neat/images/tit1.png) no-repeat;
+    letter-spacing: 2px;
+}
+
+.tit-2 {
+    font-size: 14px;
+    font-weight: bold;
+    margin-top: 26px;
+    padding: 10px;
+    color: #00FFFF;
+    background: url(/content/neat/images/tit1.png) no-repeat;
+    letter-spacing: 2px;
+}
+
+.cont-1 {
+    font-size: 14px;
+    margin: 10px;
+    color: rgba(255, 255, 255, 0.7);
+    letter-spacing: 1px;
+}

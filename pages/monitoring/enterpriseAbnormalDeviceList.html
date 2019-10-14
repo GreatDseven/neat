@@ -1,0 +1,75 @@
+﻿<!doctype html>
+<html lang="zh">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="/content/3rd/layui/css/layui.css">
+    <link rel="stylesheet" href="/content/3rd/fontawesome/css/all.min.css">
+    <link rel="stylesheet" href="/content/neat/css/neat-common.css">
+    <title>企业非正常设备列表</title>
+
+    <style>
+        .table-cont {
+            width: 1030px;
+            overflow-y: scroll;
+        }
+
+        .btn-container {
+            padding-left: 20px;
+        }
+        .layui-form-item{
+            padding-left:5px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="dialog-body">
+        <div class="layui-layer-content">
+
+            <div class="layui-row">
+                <div class="layui-col">
+                    <div class="table-cont">
+                        <div lay-filter="resultTable" id="resultTable"></div>
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="layui-row">
+                &nbsp;
+            </div>
+        </div>
+
+
+    </div>
+
+    <script src="/content/3rd/layui/layui.js"></script>
+    <script src="/content/neat/layui.config.js"></script>
+
+    <!--数据表格操作-->
+    <!--<script type="text/html" id="opColTemplate">
+
+        <a lay-event="detail" title="查看详情" href="javascript:void(0)" style="color:#babdc9;"><i class="fa fa-eye"></i></a>
+        <a lay-event="realtime-data" title="实时数据" href="javascript:void(0)" style="color:#babdc9;"><i class="fa fa-chart-bar"></i></a>
+        {{# if(d.deviceCategory == '2' || d.deviceCategory == '3'){ }}
+        <a lay-event="history-data" title="历史数据" href="javascript:void(0)" style="color:#babdc9;"><i class="fa fa-clock"></i></a>
+        {{#} else { }}
+        <a lay-event="" title="该设备不支持查询历史数据" href="javascript:void(0)" style="color:rgba(241, 238, 238, 0.5);"><i class="fa fa-clock"></i></a>
+        {{#}  }}
+        <a lay-event="location" title="地图定位" href="javascript:void(0)" style="color:#babdc9;"><i class="fa fa-map-marker-alt"></i></a>
+        <a lay-event="events" title="报警信息" href="javascript:void(0)" style="color:#babdc9;"><i class="fa fa-bell"></i></a>
+
+    </script>-->
+
+
+
+    <script type="text/javascript">
+        layui.use(["pageEnterpriseAbnormalDeviceList"], function () {
+            var page = layui.pageEnterpriseAbnormalDeviceList;
+            page.init();
+        });
+    </script>
+</body>
+
+</html>

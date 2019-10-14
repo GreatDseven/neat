@@ -1,0 +1,115 @@
+﻿<!-- 巡检点管理 -->
+<div class="layui-row sitemap-row-container normal-blue-text">
+    当前位置&nbsp;:&nbsp;巡检管理>巡检点管理
+</div>
+
+
+<!-- 查询条件行 -->
+<div class="layui-row query-row-container">
+    <div class="layui-form layui-form-pane1"  lay-filter="query">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">名称</label>
+                <div class="layui-input-inline">
+                    <input type="text" id="txtPointName" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">项目类型</label>
+                <div class="layui-input-inline layui-form" lay-filter="optPrjTypeForm">
+                    <select id="optPrjType" lay-filter="optPrjType">
+                        <option value="">请选择项目类型</option>
+                       
+                    </select>
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">子类型</label>
+                <div class="layui-input-inline layui-form" lay-filter="optSubTypeForm" >
+                    <select id="optSubType"  lay-filter="optSubType" lay-search>
+                      
+                    </select>
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">绑定状态</label>
+                <div class="layui-input-inline  layui-form" lay-filter="optBindTypeForm">
+                    <select id="optBindType"  lay-filter="optBindType">
+                    </select>
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">关联状态</label>
+                <div class="layui-input-inline layui-form" lay-filter="optUseTypeForm">
+                    <select id="optUseType"   lay-filter="optUseType">
+                       
+                    </select>
+                </div>
+            </div>
+            <div class="layui-inline">
+                <button class="layui-btn" id="btnQuery" lay-filter="query">查询</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- 查询结果行 -->
+<div class="layui-row result-row-container">
+    <div class="toolbar-container">
+        <div class="layui-btn-container">
+            <button class="layui-btn layui-btn-warm" id="btnAdd">添加</button>
+            <button class="layui-btn layui-btn-danger" data-type="getSelectedDelete" id="btnDelete">删除</button>
+        </div>
+    </div>
+
+    <div class="table-container" >
+        <div id="resultTable" lay-filter="resultTable"></div>
+    </div>
+    <div class="pager-container">
+        <div id="resultTablePager"></div>
+    </div>
+</div>
+
+<!--生成option的通用模板-->
+<script type="text/html" id="optCommonTemplate">
+ 
+    {{#  layui.each(d.data, function(index, item){ }}
+
+    <option value="{{item.id}}">{{item.name}}</option>
+
+    {{#  }); }}
+</script>
+
+<script type="text/html" id="optPrjTypeTemplate">
+    <option value="">请选择项目类型</option>
+    {{#  layui.each(d.data, function(index, item){ }}
+
+    <option value="{{item.id}}">{{item.typeName}}</option>
+
+    {{#  }); }}
+</script>
+
+<script type="text/html" id="optPrjSubTypeTemplate">
+    <option value="">请选择项目子类型</option>
+    {{#  layui.each(d.data, function(index, item){ }}
+
+    <option value="{{item.id}}">{{item.typeName}}</option>
+
+    {{#  }); }}
+</script>
+
+<!--数据表格操作-->
+<script type="text/html" id="opColTemplate">
+    <a lay-event="edit" title="编辑" href="javascript:void(0)" style="color:#babdc9;"><i class="far fa-edit"></i></a>
+    <a lay-event="del" title="删除" href="javascript:void(0)" style="color:#babdc9;"><i class="fas fa-trash-alt"></i></a>
+</script>
+
+<script type="text/javascript">
+    layui.use("pagePatrolPointManageList", function () {
+        var subPage = layui.pagePatrolPointManageList;
+        
+        subPage.init();
+    });
+</script>

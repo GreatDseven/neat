@@ -1,0 +1,106 @@
+﻿<!doctype html>
+<html lang="zh">
+<head>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title></title>
+
+
+    <script src="/content/3rd/layui/layui.js"></script>
+    <script src="/content/neat/layui.config.js"></script>
+    <script>
+        var cssArray = [
+            "/content/3rd/layui/css/layui.css",
+            "/content/3rd/fontawesome/css/all.min.css",
+            "/content/neat/css/neat-common.css",
+            "/content/neat/css/notify.css"
+        ];
+
+        layui.each(cssArray, function (_, cssurl) {
+            layui.link(cssurl);
+
+        });
+
+    </script>
+
+</head>
+
+<body>
+    <div class="neat-container">
+        <!-- 第一行 -->
+        <div class="layui-row  top-row">
+            <div class="layui-col logo"></div>
+            <div class="layui-col menu-container">
+
+            </div>
+
+            <div class="layui-col user-info normal-blue-text">
+
+                <ul class="layui-nav .layui-bg-transparent" id="userInfoCtl" style="display:none">
+                    <li class="layui-nav-item">
+                        <a href="javascript:;">欢迎您,<span id="userInfo"></span></a>
+                        <dl class="layui-nav-child">
+                            <dd><a href="javascript:;" id="logout">注销</a></dd>
+
+                        </dl>
+                    </li>
+                </ul>
+
+            </div>
+        </div>
+
+
+    </div>
+
+    <script type="text/template" id="treeModeTemplate">
+        <!-- 第二行 -->
+        <div class="layui-row template middle-row-tree ">
+            <div class="layui-col left-container">
+                <div class="layui-row tree-query-container">
+                    <input type="text" id="txtSearchTree" class="search-input" aria-label="..." placeholder="在此输入搜索内容" />
+                    <input class="search-btn" type="button" id="btnSearchTree" value="搜索" />
+                </div>
+                <div class="layui-row tree-container">
+                    <div class="" id="treeview">
+                    </div>
+                </div>
+            </div>
+            <div class="layui-col right-container layui-form" lay-filter="subpageContainer" id="subpageContainer">
+            </div>
+        </div>
+        <!--第三行-->
+        <div class="layui-row  template bottom-row">
+            <!-- 当前时间 -->
+            <div class="layui-col-lg3 current-time-container normal-blue-text">
+                当前时间 : <span id="currentTime"></span>
+            </div>
+            <!-- 版权信息 -->
+            <div class="layui-col-lg3 layui-col-lg-offset6 copyright-container normal-blue-text">
+                版权所有 : 秦皇岛尼特智能科技有限公司
+            </div>
+        </div>
+    </script>
+
+    <script type="text/template" id="mapModeTemplate">
+        <!-- 第二行 -->
+        <div class="layui-row template middle-row-map">
+            <div id="subpageContainer" style="width:100%;height:100%;background: rgb(0, 50, 87);" class="layui-form" lay-filter="subpageContainer">
+            </div>
+        </div>
+    </script>
+
+    <script type="text/javascript">
+        layui.use(["pageBoard", 'form'], function () {
+            layui.pageBoard.init();
+            layui.form.render();
+        });
+    </script>
+
+    <!-- build:versionTag -->
+    <script type="text/javascript"></script>
+    <!-- endbuild -->
+   
+</body>
+
+</html>

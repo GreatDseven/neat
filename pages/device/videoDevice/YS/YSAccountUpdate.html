@@ -1,0 +1,105 @@
+﻿<!doctype html>
+<html lang="zh">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="/content/3rd/layui/css/layui.css">
+    <link rel="stylesheet" href="/content/3rd/fontawesome/css/all.min.css">
+    <link rel="stylesheet" href="/content/neat/css/neat-common.css">
+    <title>修改萤石云账号</title>
+    <style>
+        .layui-form-item .layui-input-inline {
+            width: 500px;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <div class="layui-layer-content layui-form" lay-filter="wholeForm">
+
+            <div class="layui-row">
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label normal-label">账号名称</label>
+                        <div class="layui-input-inline">
+                            <input type="text" id="txtName" name="txtName" autocomplete="off" lay-verify="txtName" lay-verType="tips" placeholder="请输入名称" class="layui-input">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class="layui-row">
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label normal-label">AppKey</label>
+                        <div class="layui-input-inline">
+                            <input type="text" id="txtAppKey" name="txtAppKey" autocomplete="off" lay-verify="txtAppKey" lay-verType="tips" placeholder="请输入AppKey" class="layui-input">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="layui-row">
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label normal-label">AppSecret</label>
+                        <div class="layui-input-inline">
+                            <input type="text" id="txtAppSecret" name="txtAppSecret" autocomplete="off" lay-verify="txtAppSecret" lay-verType="tips" placeholder="请输入AppSecret" class="layui-input">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="layui-row">
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label normal-label">所属机构</label>
+                        <div class="layui-input-inline">
+                            <input type="text" id="txtOrgName" autocomplete="off" disabled class="layui-input layui-disabled">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="layui-row">
+                &nbsp;
+            </div>
+
+            <div class="layui-row" style="text-align: center;margin-top:20px;">
+                <button class="layui-btn layui-btn" lay-submit lay-filter="btnSave" id="btnSave">保存</button>
+                <button class="layui-btn layui-btn-grey" id="btnCancel">取消</button>
+            </div>
+        </div>
+
+
+
+    </div>
+
+
+
+
+
+    <script src="/content/3rd/layui/layui.js"></script>
+    <script src="/content/neat/layui.config.js"></script>
+    <script type="text/javascript">
+
+
+        layui.use(["layer"], function () {
+            var layindex = layui.layer.load(1);
+            layui.use(["pageYSAccountUpdate"], function () {
+                var page = layui.pageYSAccountUpdate;
+                page.init();
+                layui.layer.close(layindex);
+            });
+        });
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,99 @@
+﻿<!-- 隐患处理 -->
+<!-- 当前位置行 -->
+<div class="layui-row sitemap-row-container normal-blue-text">
+    当前位置&nbsp;:&nbsp;巡检管理>隐患处理
+</div>
+
+<!-- 查询条件行 -->
+<div class="layui-row query-row-container">
+    <div class="layui-form layui-form-pane1" action="" lay-filter="form">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">巡检点名称</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="txtPatrolPoint" id="patrolPointName" lay-verify="patrolPointName" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">所属单位名称</label>
+                <div class="layui-input-inline">
+                    <select name="txtEnterpriseName" lay-verify="enterpriseName" lay-filter="enterpriseName" id="slEnterpriseName">
+                        <option value="">全部</option>
+                    </select>
+                </div>
+            </div>
+            <div class="layui-inline   ">
+                <label class="layui-form-label">当前状态</label>
+                <div class="layui-input-inline">
+                    <select name="patrolStatus" lay-verify="patrolStatus" lay-filter="patrolStatus" id="slPatrolStatus">
+                        <option value="">全部</option>
+                    </select>
+                </div>
+            </div>
+            <div class="layui-inline">
+                <button class="layui-btn" lay-submit="" lay-filter="search" id="btnSearch">搜索</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 查询结果行 -->
+<div class="layui-row result-row-container">
+    <div class="table-container">
+        <div lay-filter="hiddenDangerList" id="hiddenDangerList"></div>
+    </div>
+    <div class="pager-container">
+        <div id="tablehiddenDangerListPager"></div>
+    </div>
+</div>
+
+
+
+<script type="text/html" id="operationBar">
+    {{# if(d.status=='1'){ }}
+    <a lay-event="see" title="查看" style="color:#babdc9;"><i class="fas fa-eye"></i></a>
+    <a lay-event="handle" title="去处理" style="color:#babdc9;"><i class="fas fa-mouse-pointer"></i></a>
+    {{# } else if (d.status=='2') { }}
+    <a lay-event="see" title="查看" style="color:#babdc9;"><i class="fas fa-eye"></i></a>
+    
+    {{# } else if (d.status=='3') {}}
+    <a lay-event="see"  title="查看" style="color:#babdc9;"><i class="fas fa-eye"></i></a>
+    {{# } }}
+</script>
+<script type="text/html" id="statusnBar">
+    {{# if(d.status=='1'){}}
+    <span style="color:#babdc9;">待处理</span>
+    {{# } else if (d.status=='2') { }}
+    <span style="color:#babdc9;">待确认</span>
+    {{# } else if (d.status=='3') { }}
+    <span style="color:#babdc9;">已完成</span>
+    {{# } }}
+</script>
+
+<script type="text/html" id="optEnterpriseTemplate">
+    <option value="">全部</option>
+    {{#  layui.each(d, function(index, item){ }}
+
+    <option value="{{item.id}}">{{item.name}}</option>
+
+    {{#  }); }}
+</script>
+
+
+<script type="text/html" id="optPatrolStatusTemplate">
+    <option value="">全部</option>
+    {{#  layui.each(d.data, function(index, item){ }}
+
+    <option value="{{item.id}}">{{item.name}}</option>
+
+    {{#  }); }}
+</script>
+
+
+
+<script type="text/javascript">
+    layui.use("pagePatrolHiddenDangerManage", function () {
+        var subPage = layui.pagePatrolHiddenDangerManage;
+
+        subPage.init();
+    });
+</script>

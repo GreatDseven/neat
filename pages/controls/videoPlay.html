@@ -1,0 +1,315 @@
+﻿<!doctype html>
+<html lang="zh">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="renderer" content="webkit">
+    <title>实时监控查看</title>
+    <link rel="stylesheet" href="/content/3rd/layui/css/layui.css">
+    <link rel="stylesheet" href="/content/3rd/fontawesome/css/all.min.css">
+
+    <style type="text/css">
+        .menu_list {
+            height: 415px;
+            width: 250px;
+            margin: 0 auto;
+            float: left;
+            margin-top: 10px;
+        }
+
+        .menu_head {
+            height: 47px;
+            line-height: 47px;
+            padding-left: 20px;
+            font-size: 14px;
+            position: relative;
+            margin: 0px;
+            font-weight: bold;
+            background: #1f2d55;
+        }
+
+        .menu_list .current {
+            color: #f7f8f8;
+            background-color: #134c7e;
+        }
+
+        .menu_body {
+            line-height: 38px;
+            border-left: 1px solid #1f2d55;
+            background: #1f2d55;
+            border-right: 1px solid #1f2d55;
+            height: 380px;
+            overflow-y: auto;
+            overflow-x: hidden;
+        }
+
+            .menu_body a {
+                font-size: 12px;
+                display: block;
+                height: 38px;
+                line-height: 38px;
+                padding-left: 25px;
+                color: #b5b9c7;
+                background: #1f2d55;
+                text-decoration: none;
+            }
+
+                .menu_body a:hover {
+                    text-decoration: none;
+                    background-color: #134c7e;
+                }
+
+        .left_layer_listCon {
+            width: 260px;
+            height: 685px;
+            float: left;
+        }
+
+        .video_out_div {
+            margin: 10px;
+        }
+
+        .video_in_div {
+            float: right;
+            width: 1100px;
+            height: 718px;
+            /*background: url('../../content/neat/images/videomonitor/BG-122.png') top no-repeat;*/
+        }
+
+        .control_body {
+            height: 280px;
+            width: 250px;
+            margin: 0 auto;
+            float: left;
+            background: #1f2d55;
+        }
+
+        .control_in_body {
+            height: 215px;
+            width: 220px;
+            margin: 0 auto;
+            margin: 15px;
+        }
+
+        .control_in120x120_body {
+            height: 120px;
+            width: 120px;
+            margin: 0px 0px 0px 4px;
+            float: left;
+        }
+
+        .control_in80x120_body {
+            height: 120px;
+            width: 80px;
+            margin: 0px 4px 0px 0px;
+            float: right;
+        }
+
+        .control_in212x30_body {
+            height: 30px;
+            width: 212px;
+            margin: 10px 4px 0px 4px;
+            float: right;
+            text-align: center;
+        }
+
+        .control_in212x35_body {
+            height: 30px;
+            width: 212px;
+            margin: 15px 4px 0px 4px;
+            float: right;
+        }
+
+        .control_in_body button {
+            height: 35px;
+            width: 35px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .button1 {
+            background: url('../../content/neat/images/videomonitor/lefttop.png') top no-repeat;
+        }
+
+        .button2 {
+            background: url('../../content/neat/images/videomonitor/top.png') top no-repeat;
+        }
+
+        .button3 {
+            background: url('../../content/neat/images/videomonitor/righttop.png') top no-repeat;
+        }
+
+        .button4 {
+            background: url('../../content/neat/images/videomonitor/left.png') top no-repeat;
+        }
+
+        .button5 {
+            background: url('../../content/neat/images/videomonitor/zhong.png') top no-repeat;
+        }
+
+        .button6 {
+            background: url('../../content/neat/images/videomonitor/right.png') top no-repeat;
+        }
+
+        .button7 {
+            background: url('../../content/neat/images/videomonitor/leftdown.png') top no-repeat;
+        }
+
+        .button8 {
+            background: url('../../content/neat/images/videomonitor/down.png') top no-repeat;
+        }
+
+        .button9 {
+            background: url('../../content/neat/images/videomonitor/rightdown.png') top no-repeat;
+        }
+
+        .button10 {
+            background: url('../../content/neat/images/videomonitor/small.png') top no-repeat;
+        }
+
+        .button11 {
+            background: url('../../content/neat/images/videomonitor/fangbig.png') top no-repeat;
+        }
+
+        .button12 {
+            background: url('../../content/neat/images/videomonitor/jiaojujia.png') top no-repeat;
+        }
+
+        .button13 {
+            background: url('../../content/neat/images/videomonitor/jiaojujian.png') top no-repeat;
+        }
+
+        .button14 {
+            background: url('../../content/neat/images/videomonitor/photo.png') top no-repeat;
+        }
+
+        .button15 {
+            background: url('../../content/neat/images/videomonitor/luxiang.png') top no-repeat;
+        }
+
+        .button16 {
+            background: url('../../content/neat/images/videomonitor/signalping.png') top no-repeat;
+            margin-right: 1.5px;
+        }
+
+        .button17 {
+            background: url('../../content/neat/images/videomonitor/4ping.png') top no-repeat;
+            margin-right: 1.5px;
+        }
+
+        .button18 {
+            background: url('../../content/neat/images/videomonitor/16ping.png') top no-repeat;
+            margin-right: 1.5px;
+        }
+
+        .button19 {
+            background: url('../../content/neat/images/videomonitor/quanping.png') top no-repeat;
+            margin-right: 1.5px;
+        }
+
+        .button20 {
+            background: url('../../content/neat/images/videomonitor/rec.png') top no-repeat;
+            margin-right: 1.5px;
+        }
+
+        .slide_span {
+            float: left;
+            margin-top: 5px;
+            font-size: 14px;
+            color: #00A0E9;
+        }
+
+        .slide_div {
+            width: 150px;
+            padding: 13px;
+            display: inline-block;
+            float: left;
+        }
+
+        .button5_selected {
+            background: url('../../content/neat/images/videomonitor/zhongselected.png') top no-repeat !important;
+        }
+
+        .button15_selected {
+            background: url('../../content/neat/images/videomonitor/recing.png') top no-repeat !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="video_out_div">
+        <div class="left_layer_listCon">
+            <div class="control_body">
+                <div class="control_in_body">
+                    <div class="control_in120x120_body">
+                        <button class="button1"></button>
+                        <button class="button2"></button>
+                        <button class="button3"></button>
+
+                        <button class="button4"></button>
+                        <button class="button5"></button>
+                        <button class="button6"></button>
+
+                        <button class="button7"></button>
+                        <button class="button8"></button>
+                        <button class="button9"></button>
+                    </div>
+                    <div class="control_in80x120_body">
+                        <button class="button10"></button>
+                        <button class="button11"></button>
+                        <button class="button12"></button>
+                        <button class="button13"></button>
+                        <button class="button14"></button>
+                        <button class="button15"></button>
+                    </div>
+                    <div class="control_in212x30_body">
+                        <span class="slide_span">慢</span><div id="slideSpeed" class="slide_div"></div><span class="slide_span">快</span>
+                    </div>
+                    <div class="control_in212x35_body">
+                        <!--<button class="button16"></button>
+                        <button class="button17"></button>
+                        <button class="button18"></button>
+                        <button class="button19"></button>
+                        <button class="button20"></button>-->
+                        <div class="layui-input-inline" style="width:210px;">
+                            <input type="text" class="layui-input" readonly="readonly" id="recinputdate" placeholder="选择时间范围">
+                        </div>
+                        <div style="width: 210px; margin: 0;">
+                            <button id="recbutton" type="button" class="layui-btn layui-btn-fluid" style="width:210px;margin-top:10px;background:#2EA7E0;">开始回放录像</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="menu_list">
+                <div id="firstpane"></div>
+            </div>
+
+        </div>
+
+
+        <div class="video_in_div">
+            <div id="playWind" width="1110" height="708" src=""></div>
+        </div>
+    </div>
+    <script id="videoListTemplate" type="text/html">
+
+        <h3 class="menu_head">{{ d.enterpriseName }}</h3>
+        <div class="menu_body">
+            {{#  layui.each(d.channelList, function(index, e){ }}
+            <a href="javascript:void(0)" title="{{ e.channelName }}" onclick="playVideo(this,'{{ e.token }}','{{ e.playURL }}','{{ e.channelId }}')" id="{{ e.channelId }}">
+                {{ e.channelName.substring(0,20)+"..." }}
+            </a>
+            {{#  }); }}
+        </div>
+    </script>
+    <script src="/content/3rd/layui/layui.js"></script>
+    <script src="/content/neat/layui.config.js"></script>
+    <script src="/content/3rd/ezuikit.js"></script>
+    <script>
+        layui.use(["pagevideoPlay"], function () {
+            var page = layui.pagevideoPlay;
+            page.init();
+        });
+    </script>
+</body>
+
+</html>

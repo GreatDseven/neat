@@ -1,0 +1,106 @@
+﻿<!doctype html>
+<html lang="zh">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="/content/3rd/layui/css/layui.css">
+    <link rel="stylesheet" href="/content/3rd/fontawesome/css/all.min.css">
+    <link rel="stylesheet" href="/content/neat/css/neat-common.css">
+    <title>通道列表</title>
+
+    <style>
+        .table-cont {
+            width: 1100px;
+            overflow-y: scroll;
+        }
+
+        .layui-form-item {
+            padding-left: 5px;
+        }
+        .layui-form-item .layui-input-inline {
+            width: 300px;
+        }
+       
+    </style>
+</head>
+
+<body>
+    <div class="dialog-body">
+        <div class="layui-layer-content">
+            <div class="layui-row">
+                <div class="layui-col-sm5">
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label normal-label">系列号</label>
+                            <div class="layui-input-inline">
+                                <input type="text" id="txtCode" disabled class="layui-input layui-disabled">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-sm5">
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label normal-label">设备名称</label>
+                            <div class="layui-input-inline">
+                                <input type="text" id="txtName" disabled class="layui-input layui-disabled">
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="layui-col-sm2">
+
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <span class="normal-white-text">当前共</span>
+                            <label id="channelCount">0</label>
+                            <span class="normal-white-text">通道</span>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="layui-row">
+                <div class="layui-col">
+                    <div class="table-cont">
+                        <div lay-filter="resultTable" id="resultTable"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="layui-row">
+                &nbsp;
+            </div>
+        </div>
+
+
+    </div>
+
+    <!--数据表格操作-->
+    <script type="text/html" id="opColTemplate">
+
+        <a lay-event="edit" title="编辑" href="javascript:void(0)" style="color:#babdc9;"><i class="far fa-edit"></i></a>
+        <a lay-event="video" title="查看视频" href="javascript:void(0)" style="color:#babdc9;"><i class="fas fa-video"></i></a>
+
+    </script>
+
+    <script src="/content/3rd/layui/layui.js"></script>
+    <script src="/content/neat/layui.config.js"></script>
+    <script type="text/javascript">
+
+        layui.use(["layer"], function () {
+            var layindex = layui.layer.load(1);
+            layui.use(["pageYSDeviceChannelList"], function () {
+                var page = layui.pageYSDeviceChannelList;
+                page.init();
+                layui.layer.close(layindex);
+            });
+        });
+
+    </script>
+</body>
+
+</html>

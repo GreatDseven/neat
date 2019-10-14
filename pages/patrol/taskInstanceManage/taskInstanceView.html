@@ -1,0 +1,54 @@
+﻿<!doctype html>
+<html lang="zh">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="/content/3rd/layui/css/layui.css">
+    <link rel="stylesheet" href="/content/3rd/fontawesome/css/all.min.css">
+    <link rel="stylesheet" href="/content/neat/css/neat-common.css">
+    <title>任务查看</title>
+
+    <style>
+       .dialog-table-container{
+           width:850px;
+           height:500px;
+           overflow-y:auto;
+           overflow-x:hidden;
+       }
+    </style>
+</head>
+
+<body >
+    <div class="dialog-body">
+        <div class="layui-layer-content">
+            <div class="dialog-table-container">
+                <div id="resultTable" lay-filter="resultTable"></div>
+            </div>
+        </div>
+        
+    </div>
+
+
+    <!--数据表格操作-->
+    <script type="text/html" id="opColTemplate">
+        <button lay-event="detail" style="color:#babdc9;" class="layui-btn">查看</button>
+    </script>
+
+    <script src="/content/3rd/layui/layui.js"></script>
+    <script src="/content/neat/layui.config.js"></script>
+    <script type="text/javascript">
+
+
+        layui.use(["layer"], function () {
+            var layindex = layui.layer.load(1);
+            layui.use(["pagePatrolTaskInstanceView"], function () {
+                var page = layui.pagePatrolTaskInstanceView;
+                page.init();
+                layui.layer.close(layindex);
+            });
+        });
+
+    </script>
+</body>
+
+</html>

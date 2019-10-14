@@ -1,0 +1,107 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="/content/3rd/layui/css/layui.css">
+    <link rel="stylesheet" href="/content/3rd/fontawesome/css/all.min.css">
+    <link rel="stylesheet" href="/content/neat/css/neat-common.css">
+
+    <link rel="stylesheet" href="/content/3rd/layui/css/modules/layer/default/layer.css">
+    <script src="/content/3rd/layui/layui.js"></script>
+    <script src="/content/neat/layui.config.js"></script>
+    <style>
+        .layui-form {
+          
+            padding-left: 10px;
+            width: 400px;
+        }
+
+        .layui-layer-setwin {
+            top: -9px !important;
+        }
+
+        .layui-form-label {
+            width: 100px;
+        }
+
+        .layui-form-item .layui-input-inline-dialog {
+            display: block;
+            float: none;
+            left: -3px;
+            width: 200px;
+            margin: 0 0 10px 112px;
+        }
+    </style>
+
+    <title>编辑项目子类型</title>
+
+</head>
+<body >
+    <div class="dialog-body" >
+        <div class="layui-form" lay-filter="form">
+            <div class="layui-form-item">
+                <label class="layui-form-label">项目子类型</label>
+                <div class="layui-input-inline">
+                    <input type="text" id="txtProjectSubTypeName" name="txtProjectSubTypeName" lay-verType="tips" lay-filter="projectSubTypeName" lay-verify="projectSubTypeName" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">项目类型</label>
+                <div class="layui-input-inline">
+                    <select name="slProjectType" id="slProjectType" lay-verType="tips" lay-filter="projectType" lay-verify="projectType">
+                        <option value="">请选择项目类型</option>
+                    </select>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">所属机构</label>
+                <div class="layui-input-inline">
+                   
+                    <input name="txtEnterpriseName" disabled class="layui-input layui-disabled"/>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-input-block" style="text-align:center;margin-left:0px;">
+                    <button class="layui-btn layui-btn-warm" lay-submit lay-filter="filterSubmit">保存</button>
+                    <button class="layui-btn layui-btn-grey" id="btnCancel">取消</button>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+
+    <script type="text/html" id="optEnterpriseTemplate">
+        <option value="">请选择所属单位名称</option>
+        {{#  layui.each(d, function(index, item){ }}
+
+        <option value="{{item.id}}">{{item.name}}</option>
+
+        {{#  }); }}
+    </script>
+
+    <script type="text/html" id="optProjectTypeTemplate">
+        <option value="">请选择项目类型</option>
+        {{#  layui.each(d.data, function(index, item){ }}
+
+        <option value="{{item.id}}">{{item.typeName}}</option>
+
+        {{#  }); }}
+    </script>
+
+    <script type="text/javascript">
+
+
+        layui.use(["layer"], function () {
+            var layindex = layui.layer.load(1);
+            layui.use(["editProjectSubtypeDialog"], function () {
+                var page = layui.editProjectSubtypeDialog;
+                page.init();
+                layui.layer.close(layindex);
+            });
+        });
+
+    </script>
+</body>
+</html>

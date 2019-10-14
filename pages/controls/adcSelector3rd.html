@@ -1,0 +1,108 @@
+﻿<!doctype html>
+<html lang="zh">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="/content/3rd/layui/css/layui.css">
+    <link rel="stylesheet" href="/content/3rd/fontawesome/css/all.min.css">
+    <link rel="stylesheet" href="/content/neat/css/neat-common.css">
+    <title>新建中心</title>
+
+    <style>
+    </style>
+
+</head>
+
+<body>
+    <div class="dialog-body">
+        <div class="layui-form" lay-filter="wholeForm">
+            <div class="layui-row">
+
+                <div class="layui-form-item layui-form" lay-filter="opt1Form">
+
+                    <select id="opt1" lay-filter="opt1">
+                        <option value="">请选择省份</option>
+                    </select>
+
+                </div>
+            </div>
+            <div class="layui-row">
+                <div class="layui-form-item layui-form" lay-filter="opt2Form">
+                    <select id="opt2" lay-filter="opt2">
+                        <option value="">请选择市</option>
+                    </select>
+
+                </div>
+            </div>
+            <div class="layui-row">
+                <div class="layui-form-item layui-form" lay-filter="opt3Form">
+                    <select id="opt3" lay-filter="opt3">
+                        <option value="">请选择区/县</option>
+                    </select>
+
+                </div>
+            </div>
+
+        </div>
+
+
+
+
+        <script type="text/html" id="opt1Template">
+            <option value="">请选择省份</option>
+            {{#  layui.each(d.data, function(index, item){ }}
+
+            {{# if (item.code == d.selectedValue){}}
+            <option value="{{item.code}}" selected>{{item.name}}</option>
+            {{# } else {}}
+            <option value="{{item.code}}">{{item.name}}</option>
+            {{# } }}
+
+            {{#  }); }}
+        </script>
+        <script type="text/html" id="opt2Template">
+            <option value="">请选择市</option>
+            {{#  layui.each(d.data, function(index, item){ }}
+
+            {{# if (item.code == d.selectedValue){}}
+            <option value="{{item.code}}" selected>{{item.name}}</option>
+            {{# } else {}}
+            <option value="{{item.code}}">{{item.name}}</option>
+            {{# } }}
+
+            {{#  }); }}
+        </script>
+        <script type="text/html" id="opt3Template">
+            <option value="">请选择区/县</option>
+            {{#  layui.each(d.data, function(index, item){ }}
+
+            {{# if (item.code == d.selectedValue){}}
+            <option value="{{item.code}}" selected data-fullname="{{item.fullName}}">{{item.name}}</option>
+            {{# } else {}}
+            <option value="{{item.code}}" data-fullname="{{item.fullName}}">{{item.name}}</option>
+            {{# } }}
+
+            {{#  }); }}
+        </script>
+    </div>
+    <script src="/content/3rd/layui/layui.js"></script>
+    <script src="/content/neat/layui.config.js"></script>
+
+
+    <script type="text/javascript">
+
+
+        layui.use(["layer"], function () {
+            var layindex = layui.layer.load(1);
+            layui.use(["pageAdcSelector3rd"], function () {
+                var page = layui.pageAdcSelector3rd;
+                page.init();
+                layui.layer.close(layindex);
+            });
+        });
+
+
+    </script>
+</body>
+
+</html>

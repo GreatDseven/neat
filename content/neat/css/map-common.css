@@ -1,0 +1,197 @@
+﻿body {
+    background-color: #111B3A;
+}
+
+/**和地图有关的**/
+.infowindow {
+    background-color: #0f1836;
+    opacity: 0.8;
+    padding: 10px 10px 10px 10px;
+}
+
+/*地图中信息窗体 标题*/
+.infowindow-title-text {
+    font-weight: bold;
+    padding: 5px;
+    font-size: 16px;
+    display: inline-block;
+}
+
+.clickable {
+    cursor: pointer;
+}
+
+.infowindow-foot-label,
+.infowindow-body-label {
+    font-weight: bold;
+    padding: 5px;
+    font-size: 14px;
+    display: inline-block;
+}
+
+.infowindow-body-text,
+.infowindow-foot-text {
+    padding: 5px;
+    font-size: 14px;
+    display: inline-block;
+    font-weight: bold;
+}
+
+
+
+.infowindow-blue {
+    color: #0387c9;
+}
+
+.infowindow-gray {
+    color: #cfd1d7;
+}
+
+/*地图中信息窗体 不换行,超长后隐藏*/
+.infowindow-nowrap {
+    max-width: calc(100% - 10px);
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap;
+}
+
+/*地图中信息窗体 外面的内容框*/
+.mymap-info-content {
+    background-color: #0f1836;
+    opacity: 0.9;
+    border: 1px solid #2EA7E0;
+    padding: 10px 18px 10px 10px;
+    line-height: 1.2;
+    overflow: hidden;
+}
+
+
+/*地图中信息窗体 外面的边框*/
+.mymap-info-outer,
+.mymap-menu-outer {
+    box-shadow: 0 3px 14px rgba(0, 0, 100, 0.6);
+    background: none repeat scroll 0 0 #0f1836;
+    border-radius: 2px;
+    padding: 1px;
+    text-align: left;
+    border: #2EA7E0 solid 1px;
+}
+
+/*地图中信息窗体 close按钮*/
+.mymap-info-close {
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    color: #0e649c;
+    text-decoration: none;
+    font: bold 16px/14px Tahoma, Verdana, sans-serif;
+    width: 14px;
+    height: 14px;
+    cursor: pointer;
+}
+
+/*地图中信息窗体 下面的 指向 marker的小图片*/
+.mymap-info-sharp {
+    height: 23px;
+    margin: 0 auto;
+    overflow: hidden;
+    position: relative;
+    top: -1px;
+    width: 30px;
+}
+
+/*火警的文字颜色*/
+.event-fire {
+    color: #E74E4E;
+}
+
+/*报警的文字颜色*/
+.event-alarm {
+    color: #814DF4;
+}
+
+/*故障的文字颜色*/
+.event-fault {
+    color: #F4BA5D;
+}
+/*正常的文字颜色*/
+.event-normal {
+    color: #02E6FF;
+}
+
+
+
+
+
+/*地图标记 火警 的颜色*/
+.marker-fire div {
+    background: #E74E4E;
+}
+
+/*地图标记 报警 的颜色*/
+.marker-alarm div {
+    background: #814DF4;
+}
+
+/*地图标记 故障 的颜色*/
+.marker-fault div {
+    background: #F4BA5D;
+}
+/*地图标记 正常 的颜色*/
+.marker-normal div {
+    background: #02E6FF;
+}
+
+/*选中的标记大小*/
+.marker-bigger div {
+    width: 36px !important;
+    height: 36px !important;
+    margin: 0px !important;
+}
+
+.neatmarker {
+    width: 36px;
+    height: 36px;
+}
+
+
+    /*地图标记 动画*/
+    .neatmarker div {
+        position: absolute;
+        width: 22px;
+        height: 22px;
+        margin-left: 5.5px;
+        margin-top: 5.5px;
+        border-radius: 100%;
+        -webkit-animation: neatmarker 3s linear infinite;
+        animation: neatmarker 3s linear infinite;
+    }
+
+        .neatmarker div:last-child {
+            animation-delay: -1.8s;
+            -webkit-animation-delay: -1.8s;
+        }
+
+@keyframes neatmarker {
+    0% {
+        transform: scale(0, 0);
+        opacity: 0.8;
+    }
+
+    100% {
+        transform: scale(1, 1);
+        opacity: 0;
+    }
+}
+
+@-webkit-keyframes neatmarker {
+    0% {
+        -webkit-transform: scale(0, 0);
+        opacity: 0.8;
+    }
+
+    100% {
+        -webkit-transform: scale(1, 1);
+        opacity: 0;
+    }
+}

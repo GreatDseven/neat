@@ -1,0 +1,137 @@
+﻿<!doctype html>
+<html lang="zh">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="/content/3rd/layui/css/layui.css">
+    <link rel="stylesheet" href="/content/3rd/fontawesome/css/all.min.css">
+    <link rel="stylesheet" href="/content/neat/css/neat-common.css">
+    <title>编辑中心</title>
+
+</head>
+
+<body>
+    <div class="dialog-body">
+        <div class="layui-layer-content layui-form" lay-filter="wholeForm">
+
+            <div class="layui-row">
+                <div class="layui-col-sm6">
+                    <div class="layui-form-item">
+
+                        <div class="layui-inline">
+                            <label class="layui-form-label normal-label">中心名称</label>
+                            <div class="layui-input-inline">
+                                <input type="text" id="txtDomainName" name="txtDomainName" lay-verify="domainName" autocomplete="off" lay-verType="tips" placeholder="请输入中心名称" class="layui-input">
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="layui-col-sm6">
+                    <div class="layui-form-item">
+
+                        <div class="layui-inline">
+                            <label class="layui-form-label normal-label">中心地址</label>
+                            <div class="layui-input-inline">
+                                <input type="text" id="txtAddress" name="txtAddress" lay-verify="address" autocomplete="off" lay-verType="tips" placeholder="请输入中心地址" class="layui-input">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="layui-row">
+                <div class="layui-col-sm6">
+                    <div class="layui-form-item">
+
+                        <div class="layui-inline">
+                            <label class="layui-form-label normal-label">负责人</label>
+                            <div class="layui-input-inline">
+                                <input type="text" id="txtInChargePerson" name="txtInChargePerson" lay-verify="inChargePerson" autocomplete="off" lay-verType="tips" placeholder="请输入负责人" class="layui-input">
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="layui-col-sm6">
+                    <div class="layui-form-item">
+
+                        <div class="layui-inline">
+                            <label class="layui-form-label normal-label">联系电话</label>
+                            <div class="layui-input-inline">
+                                <input type="text" id="txtMobilePhone" name="txtMobilePhone" lay-verify="mobilePhone" autocomplete="off" lay-verType="tips" placeholder="例如:139xxxxxxxx" class="layui-input">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="layui-row">
+                <div class="layui-col-sm6">
+                    <div class="layui-form-item">
+
+                        <div class="layui-inline">
+                            <label class="layui-form-label normal-label">固定电话</label>
+                            <div class="layui-input-inline">
+                                <input type="text" id="txtTelephone" name="txtTelephone" lay-verify="telephone" autocomplete="off" lay-verType="tips" placeholder="请输入固定电话" class="layui-input">
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="layui-col-sm6">
+                    <div class="layui-form-item">
+
+                        <div class="layui-inline">
+                            <label class="layui-form-label normal-label">上级中心</label>
+                            <div class="layui-input-inline">
+                                <input type="text" id="txtParentDomainName" readonly autocomplete="off" lay-verType="tips" class="layui-input">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="layui-row">
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label normal-label">Logo</label>
+                        <div class="layui-input-inline">
+                            <button class="layui-btn layui-btn-warm" style="display:none" id="btnUpload">上传</button>
+                            <button class="layui-btn layui-btn-warm" style="display:none" id="btnReupload">重新上传</button>
+                            <button class="layui-btn layui-btn-danger" style="display:none" id="btnDeleteLogo">删除</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="layui-row" style="text-align: center;margin-top:20px;">
+                <button class="layui-btn layui-btn" lay-submit lay-filter="btnSave" id="btnSave">保存</button>
+                <button class="layui-btn layui-btn-grey" id="btnCancel">取消</button>
+            </div>
+        </div>
+        
+
+    </div>
+    <script src="/content/3rd/layui/layui.js"></script>
+    <script src="/content/neat/layui.config.js"></script>
+
+   
+    <script type="text/javascript">
+
+
+        layui.use(["layer"], function () {
+            var layindex = layui.layer.load(1);
+            layui.use(["pageDomainUpdate"], function () {
+                var page = layui.pageDomainUpdate;
+                page.init();
+                layui.layer.close(layindex);
+            });
+        });
+
+
+    </script>
+</body>
+
+</html>

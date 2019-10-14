@@ -1,0 +1,92 @@
+﻿<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>隐患处理历史记录</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="/content/3rd/layui/css/layui.css">
+    <link rel="stylesheet" href="/content/3rd/fontawesome/css/all.min.css">
+    <link rel="stylesheet" href="/content/neat/css/neat-common.css">
+
+    <link rel="stylesheet" href="/content/3rd/layui/css/modules/layer/default/layer.css">
+    <script src="/content/3rd/layui/layui.js"></script>
+    <script src="/content/neat/layui.config.js"></script>
+    <style>
+        .hisTab{
+            border-color:#0b5083;
+            border-width:1px;
+            border-style:solid;
+            border-collapse:collapse;
+            width:760px;
+            margin:20px;
+        }
+        .hisTab  tr > td{
+            border-color:#0b5083;
+            border-width:1px;
+            border-style:solid;
+        }
+         .hisTab  tr > td{
+             font-size:14px;
+            padding: 10px;
+            color: #babdc9;
+            letter-spacing: 2px;
+            background-color:#112951;
+        
+        } 
+        .hisTab  tr > td > span{
+            font-size:14px;
+            font-weight: bold;
+            padding: 10px;
+            color: #00FFFF;
+            letter-spacing: 2px;
+        
+        }
+    </style>
+</head>
+<body>
+    <div class="dialog-body">
+        <div id="tabCont" style="cursor: move; text-align:center;">
+           
+        </div>
+        
+    </div>
+
+    <script type="text/javascript">
+
+
+        layui.use(["layer"], function () {
+            var layindex = layui.layer.load(1);
+            layui.use(["troubleProcessHistoryDialog"], function () {
+                var page = layui.troubleProcessHistoryDialog;
+                page.init();
+                layui.layer.close(layindex);
+            });
+        });
+
+
+
+    </script>
+
+    <script type="text/html" id="historyItemTmpl">
+
+        {{#  layui.each(d.data, function(index, item){ }}
+        <table class="hisTab">
+            <tr>
+                <td><span>处理时间:</span>{{item.handleTime}}</td>
+                <td><span>处理人:</span>{{item.handleUName}}</td>
+                <td><span>处理内容:</span>{{item.handleContent}}</td>
+            </tr>
+            <tr>
+                <td><span>确认时间:</span>{{item.confirmTime}}</td>
+                <td><span>确认人:</span>{{item.confirmUName}}</td>
+                <td><span>确认内容:</span>{{item.confirmContent}}</td>
+            </tr>
+        </table>
+
+        {{#  }); }}
+
+    </script>
+
+
+
+</body>
+</html>

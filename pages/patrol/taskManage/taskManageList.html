@@ -1,0 +1,127 @@
+﻿<!-- 巡检任务管理 -->
+
+<div class="layui-row sitemap-row-container normal-blue-text">
+    当前位置&nbsp;:&nbsp;巡检管理>巡检任务管理
+</div>
+
+<!-- 查询条件行 -->
+<div class="layui-row query-row-container">
+    <div class="layui-form layui-form-pane1" lay-filter="query">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">任务名称</label>
+                <div class="layui-input-inline">
+                    <input type="text" id="txtTaskName" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">巡检频率</label>
+                <div class="layui-input-inline layui-form" lay-filter="optFrequenceForm">
+                    <select id="optFrequence" lay-filter="optFrequence">
+                        <option value="">全部</option>
+                    </select>
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">巡检人类型</label>
+                <div class="layui-input-inline layui-form" lay-filter="optExecutorTypeForm" >
+                    <select id="optExecutorType" lay-filter="optExecutorType">
+                        <option value="">全部</option>
+                        
+                    </select>
+                </div>
+            </div>
+            <div class="layui-inline">
+                <div class="layui-input-inline layui-form" lay-filter="optExecutorListForm">
+                    <select id="optExecutorList" lay-search="" lay-filter="optExecutorList">
+                        <option value="">角色名/人员名</option>
+                    </select>
+                </div>
+            </div>
+            <div class="layui-inline">
+                    <button class="layui-btn" id="btnQuery" lay-filter="query">查询</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 查询结果行 -->
+<div class="layui-row result-row-container">
+    <div class="toolbar-container">
+        <div class="layui-btn-container">
+            <button class="layui-btn layui-btn-warm" id="btnAdd">添加</button>
+            <button class="layui-btn layui-btn-danger" id="btnDelete">删除</button>
+        </div>
+    </div>
+
+    <div class="table-container">
+        <div id="tableTaskList" lay-filter="tableTaskList"></div>
+    </div>
+    <div class="pager-container">
+        <div id="tableTaskListPager"></div>
+    </div>
+</div>
+
+<!--数据表格操作-->
+<script type="text/html" id="opColTemplate">
+    <a lay-event="clone" title="克隆" href="javascript:void(0)" style="color:#babdc9;"><i class="far fa-clone"></i></a>
+    <a lay-event="del" title="删除" href="javascript:void(0)" style="color:#babdc9;"><i class="fas fa-trash-alt"></i></a>
+</script>
+
+<script type="text/html" id="optFrequenceTemplate">
+    <option value="">全部</option>
+    {{#  layui.each(d.data, function(index, item){ }}
+
+    <option value="{{item.id}}">{{item.rateName}}</option>
+
+    {{#  }); }}
+</script>
+
+<script type="text/html" id="optUserListTemplate">
+    <option value="">全部</option>
+    {{#  layui.each(d.data, function(_, groupitem){ }}
+        
+        <optgroup label="[{{groupitem.groupName}}]范围内人员">
+            {{#  layui.each(groupitem.children, function(index, item){ }}
+            <option value="{{item.id}}">{{item.name}}{{# if(item.jobNo){ }} (工号:{{item.jobNo}}) {{# } }}</option>
+            {{#  }); }}
+        </optgroup>
+
+    {{#  }); }}
+</script>
+
+<script type="text/html" id="optRoleListTemplate">
+    <option value="">全部</option>
+    {{#  layui.each(d.data, function(_, groupitem){ }}
+     
+        <optgroup label="[{{groupitem.groupName}}]范围内角色">
+            {{#  layui.each(groupitem.children, function(index, item){ }}
+            <option value="{{item.id}}">{{item.name}}</option>
+            {{#  }); }}
+        </optgroup>
+
+    {{#  }); }}
+</script>
+
+<script type="text/html" id="optExecutorTypeTemplate">
+    <option value="">全部</option>
+    {{#  layui.each(d.data, function(index, item){ }}
+
+    <option value="{{item.id}}">{{item.name}}</option>
+
+    {{#  }); }}
+</script>
+
+<script type="text/html" id="optExecutorListTemplate">
+    <option value="">角色名/人员名</option>
+</script>
+
+
+<script type="text/javascript">
+    layui.use(["pagePatrolTaskManageList"], function () {
+
+        var subPage = layui.pagePatrolTaskManageList;
+
+        subPage.init();
+
+    });
+</script>

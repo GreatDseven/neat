@@ -1,0 +1,59 @@
+﻿<!-- 巡检点管理 -->
+<div class="layui-row sitemap-row-container normal-blue-text">
+    当前位置&nbsp;:&nbsp;用户权限
+</div>
+
+<div class="layui-row aca-container">
+    <!--角色管理-->
+    <div class="layui-col aca-role-mgr-container">
+        <div class="aca-toolbar-container">
+            <div class="layui-btn-container">
+                <button class="layui-btn layui-btn-warm" id="btnAddRole">添加</button>
+                <button class="layui-btn layui-btn-danger"  id="btnDeleteRole">删除</button>
+            </div>
+        </div>
+        <div class="table-container">
+            <div id="roleResultTable" lay-filter="roleResultTable"></div>
+        </div>
+        <div class="pager-container">
+            <div id="roleResultTablePager"></div>
+        </div>
+    </div>
+    <!--人员管理-->
+    <div class="layui-col aca-user-mgr-container">
+        <div class="aca-toolbar-container">
+            <div class="layui-btn-container">
+                <button class="layui-btn layui-btn-warm" id="btnAddUser">添加</button>
+                <button class="layui-btn layui-btn-danger"  id="btnDeleteUser">删除</button>
+            </div>
+        </div>
+        <div class="table-container">
+            <div id="userResultTable" lay-filter="userResultTable"></div>
+        </div>
+        <div class="pager-container">
+            <div id="userResultTablePager"></div>
+        </div>
+    </div>
+</div>
+
+<script type="text/html" id="opColRoleTemplate">
+    <a lay-event="edit" title="编辑" href="javascript:void(0)" style="color:#babdc9;"><i class="far fa-edit"></i></a>
+    <a lay-event="del" title="删除" href="javascript:void(0)" style="color:#babdc9;"><i class="fas fa-trash-alt"></i></a>
+    <a lay-event="selectUser" title="选择用户" href="javascript:void(0)" style="color:#babdc9;"><i class="fas fa-user"></i></a>
+</script>
+
+<script type="text/html" id="opColUserTemplate">
+    <a lay-event="edit" title="编辑" href="javascript:void(0)" style="color:#babdc9;"><i class="far fa-edit"></i></a>
+    <a lay-event="del" title="删除" href="javascript:void(0)" style="color:#babdc9;"><i class="fas fa-trash-alt"></i></a>
+    <!--<a lay-event="selectRole" title="用户的角色" href="javascript:void(0)" style="color:#babdc9;"><i class="fab fa-r-project"></i></a>-->
+    <a lay-event="selectRole" title="用户所属角色" href="javascript:void(0)" style="color:#babdc9;"><i class="fas fa-lock"></i></a>
+  
+</script>
+
+<script type="text/javascript">
+    layui.use(["pageAccreditAdminList"], function () {
+        var subPage = layui.pageAccreditAdminList;
+
+        subPage.init();
+    });
+</script>

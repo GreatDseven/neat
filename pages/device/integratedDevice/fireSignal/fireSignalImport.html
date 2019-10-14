@@ -1,0 +1,78 @@
+﻿<html lang="zh">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="/content/3rd/layui/css/layui.css">
+    <link rel="stylesheet" href="/content/3rd/fontawesome/css/all.min.css">
+    <link rel="stylesheet" href="/content/neat/css/neat-common.css">
+    <title>添加平面图</title>
+
+    <style>
+        .layui-form-item .layui-input-inline {
+            width: 500px !important;
+        }
+
+        .layui-form-item .layui-input-inline-button {
+            width: 80px !important;
+        }
+
+        .layui-form-item .layui-input-inline-short {
+            width: 400px !important;
+        }
+
+        .layui-form-select dl {
+            max-height: 200px;
+        }
+
+        .normal-label-self {
+            width: 100px;
+        }
+
+        .layui-form-item-margin {
+            margin-left: 27px;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <div class="layui-layer-content layui-form" lay-filter="form">
+            <div class="layui-row">
+                <div class="layui-form-item layui-form-item-margin">
+                    <div class="layui-inline">
+                        <label class="layui-form-label normal-label normal-label-self">选择Excel文件</label>
+                        <div class="layui-input-inline  layui-input-inline-short">
+                            <input type="text" id="txtFile" name="txtFile" autocomplete="off" lay-verify="txtFile" readonly lay-verType="tips" placeholder="请选择文件" class="layui-input">
+                        </div>
+                        <div class="layui-input-inline layui-input-inline-button">
+                            <button class="layui-btn layui-btn" lay-filter="btnBrowse" style="margin-left:25px;" id="btnBrowse">选择</button>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="layui-row" style="text-align: center;margin-top:20px;">
+                <button class="layui-btn layui-btn" lay-submit lay-filter="btnUpload" id="btnUpload">上传</button>
+            </div>
+            <div class="layui-row">
+                &nbsp;
+            </div>
+        </div>
+
+    </div>
+
+    <script src="/content/3rd/layui/layui.js"></script>
+    <script src="/content/neat/layui.config.js"></script>
+    <script type="text/javascript">
+        layui.use(["layer"], function () {
+            layui.use(["pageIntegratedFireSignalImport"], function () {
+                var page = layui.pageIntegratedFireSignalImport;
+                page.init();
+            });
+        });
+
+    </script>
+</body>
+
+</html>

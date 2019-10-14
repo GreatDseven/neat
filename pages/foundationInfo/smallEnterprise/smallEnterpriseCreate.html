@@ -1,0 +1,309 @@
+﻿<!doctype html>
+<html lang="zh">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="/content/3rd/layui/css/layui.css">
+    <link rel="stylesheet" href="/content/3rd/fontawesome/css/all.min.css">
+    <link rel="stylesheet" href="/content/neat/css/neat-common.css">
+    <title>添加小单位</title>
+
+    <style>
+        .layui-form-item .layui-input-inline {
+            float: left;
+            width: 250px;
+            margin-right: 10px;
+        }
+
+        .layui-upload-list {
+            width: 650px;
+        }
+
+        .layui-input-inline-addbutton {
+            float: left;
+            margin-right: 10px;
+        }
+
+        .layui-input-inline-delbutton {
+            float: left;
+            margin-right: 10px;
+        }
+
+        .layui-form-item .layui-input-wide-inline {
+            width: 650px;
+        }
+
+        .layui-form-item .layui-input-wide2-inline {
+            width: 530px;
+        }
+
+        .layui-form-item .layui-input-wide3-inline {
+            width: 80px;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="dialog-body">
+        <div class="layui-layer-content layui-form" lay-filter="wholeForm">
+
+            <div class="layui-row">
+
+                <div class="layui-col-sm6">
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label normal-label">单位名称</label>
+                            <div class="layui-input-inline">
+                                <input type="text" id="entName" name="entName" lay-verify="entName" autocomplete="off" lay-verType="tips" placeholder="请输入单位名称" class="layui-input">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-sm6">
+                    <div class="layui-form-item">
+
+                        <div class="layui-inline">
+                            <label class="layui-form-label normal-label">所属中心</label>
+                            <div class="layui-input-inline">
+                                <input type="text" id="parentDomain" disabled autocomplete="off" lay-verType="tips" class="layui-input layui-disabled" />
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="layui-row">
+                <div class="layui-col-sm6">
+                    <div class="layui-form-item">
+
+                        <div class="layui-inline">
+                            <label class="layui-form-label normal-label">单位类别</label>
+                            <div class="layui-input-inline layui-form" lay-filter="optEntTypeForm">
+                                <select id="optEntType" name="optEntType" lay-verify="optEntType" lay-verType="tips" lay-filter="optEntType">
+                                    <option value="">请选择单位类别</option>
+                                </select>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-sm6">
+                    <div class="layui-form-item">
+
+                        <div class="layui-inline">
+                            <label class="layui-form-label normal-label">行政区划</label>
+                            <div class="layui-input-inline">
+                                <input type="text" id="txtAdcPath" name="txtAdcPath" lay-verify="txtAdcPath" lay-verType="tips" autocomplete="off" readonly style="width:180px;" class="layui-input" />
+                                <button class="layui-btn" id="btnSelectAdc">...</button>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="layui-row">
+                <div class="layui-col-sm6">
+                    <div class="layui-form-item">
+
+                        <div class="layui-inline">
+                            <label class="layui-form-label normal-label">单位地址</label>
+                            <div class="layui-input-inline">
+                                <input type="text" id="address" name="address" lay-verify="address" autocomplete="off" lay-verType="tips" placeholder="请输入单位地址" class="layui-input">
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="layui-col-sm6">
+                    <div class="layui-form-item">
+
+                        <div class="layui-inline">
+                            <label class="layui-form-label normal-label">入网时间</label>
+                            <div class="layui-input-inline">
+                                <input type="text" class="layui-input" readonly id="joinDate" name="joinDate" lay-verify="joinDate" lay-verType="tips" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-row">
+                <div class="layui-col-sm6">
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label normal-label">联网状态</label>
+                            <div class="layui-input-inline layui-form" lay-filter="optJoinStatusForm">
+                                <select id="optJoinStatus" name="optJoinStatus" lay-verify="optJoinStatus" lay-verType="tips" lay-filter="optJoinStatus">
+                                    <option value="">请选择联网状态</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-sm6">
+                    <div class="layui-form-item">
+
+                        <div class="layui-inline">
+                            <label class="layui-form-label normal-label">监管等级</label>
+                            <div class="layui-input-inline layui-form" lay-filter="optSuperviseLevelForm">
+                                <select id="optSuperviseLevel" name="optSuperviseLevel" lay-verify="optSuperviseLevel" lay-verType="tips" lay-filter="optSuperviseLevel">
+                                    <option value="">请选择监管等级</option>
+                                </select>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="layui-row">
+                <div class="layui-col-sm6">
+                    <div class="layui-form-item">
+
+                        <div class="layui-inline">
+                            <label class="layui-form-label normal-label">单位负责人</label>
+                            <div class="layui-input-inline">
+                                <input type="text" id="inChargePerson" name="inChargePerson" lay-verify="inChargePerson" placeholder="请输入单位负责人" autocomplete="off" lay-verType="tips" class="layui-input" />
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="layui-col-sm6">
+                    <div class="layui-form-item">
+
+                        <div class="layui-inline">
+                            <label class="layui-form-label normal-label">联系电话</label>
+                            <div class="layui-input-inline">
+                                <input type="text" id="mobilePhone" name="mobilePhone" lay-verify="mobilePhone" placeholder="请输入联系电话" autocomplete="off" lay-verType="tips" class="layui-input" />
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="layui-row">
+                <div class="layui-col-sm6">
+                    <div class="layui-form-item">
+
+                        <div class="layui-inline">
+                            <label class="layui-form-label normal-label">固定电话</label>
+                            <div class="layui-input-inline">
+                                <input type="text" id="telephone" name="telephone" lay-verify="telephone" placeholder="请输入固定电话" autocomplete="off" lay-verType="tips" class="layui-input" />
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="layui-col-sm6">
+                    <div class="layui-form-item">
+
+                        <div class="layui-inline">
+                            <label class="layui-form-label normal-label">消防室电话</label>
+                            <div class="layui-input-inline">
+                                <input type="text" id="fpRoomTel" name="fpRoomTel" lay-verify="fpRoomTel" placeholder="请输入消防室电话" autocomplete="off" lay-verType="tips" class="layui-input" />
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-row">
+                <div class="layui-col-sm12">
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label normal-label">地图标注</label>
+                            <div class="layui-input-inline layui-input-wide2-inline">
+
+                                <input type="text" id="txtGisAddress" readonly autocomplete="off" class="layui-input layui-disabled">
+                            </div>
+                            <div class="layui-input-inline layui-input-wide3-inline">
+                                <button class="layui-btn layui-btn-normal" style="margin-left:25px;" id="btnGisBrowse">标注</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="layui-row">
+                <div class="layui-col-sm12">
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label normal-label">相关文件</label>
+                            <div class="layui-input-inline-addbutton">
+                                <div class="layui-upload-list">
+                                    <table class="layui-table">
+                                        <thead>
+                                            <tr>
+                                                <th>文件名</th>
+                                                <th>状态</th>
+                                                <th>操作</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="fileList"></tbody>
+                                    </table>
+                                </div>
+                                <button class="layui-btn layui-btn-warm" lay-filter="btnAddFile" id="btnSave">选择文件</button>
+                                <button type="button" style="visibility:hidden" id="btnStartUpload">开始上传</button>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="layui-row" style="text-align: center;margin-top:20px;">
+                <button class="layui-btn" lay-submit lay-filter="btnSave" id="btnSave">保存</button>
+                <button class="layui-btn layui-btn-grey" id="btnCancel">取消</button>
+            </div>
+        </div>
+
+
+    </div>
+    <script src="/content/3rd/layui/layui.js"></script>
+    <script src="/content/neat/layui.config.js"></script>
+
+    <script type="text/html" id="optEntTypeTemplate">
+        <option value="">请选择单位类别</option>
+        {{#  layui.each(d.data, function(index, item){ }}
+
+        <option value="{{item.value}}">{{item.name}}</option>
+
+        {{#  }); }}
+    </script>
+    <script type="text/html" id="optJoinStatusTemplate">
+        <option value="">请选择联网状态</option>
+        {{#  layui.each(d.data, function(index, item){ }}
+
+        <option value="{{item.value}}">{{item.name}}</option>
+
+        {{#  }); }}
+    </script>
+    <script type="text/html" id="optSuperviseLevelTemplate">
+        <option value="">请选择监管等级</option>
+        {{#  layui.each(d.data, function(index, item){ }}
+
+        <option value="{{item.value}}">{{item.name}}</option>
+
+        {{#  }); }}
+    </script>
+
+    <script type="text/javascript">
+
+
+        layui.use(["layer"], function () {
+            var layindex = layui.layer.load(1);
+            layui.use(["pageEnterpriseCreate"], function () {
+                var page = layui.pageEnterpriseCreate;
+                page.init();
+                layui.layer.close(layindex);
+            });
+        });
+
+    </script>
+</body>
+
+</html>

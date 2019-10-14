@@ -1,0 +1,77 @@
+﻿<!-- 工单管理 -->
+
+<div class="layui-row sitemap-row-container normal-blue-text">
+    当前位置&nbsp;:&nbsp;维保管理>工单管理
+</div>
+
+<!-- 查询条件行 -->
+<div class="layui-row query-row-container">
+    <div class="layui-form layui-form-pane1" lay-filter="query">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">工单编号</label>
+                <div class="layui-input-inline">
+                    <input type="text" id="txtOrderNo" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            
+            <div class="layui-inline">
+                <label class="layui-form-label">工单发起人</label>
+                <div class="layui-input-inline">
+                    <input type="text" id="txtSubmitUser" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+           
+            <div class="layui-inline">
+                <label class="layui-form-label">工单状态</label>
+                <div class="layui-input-inline layui-form" lay-filter="optOrderStatusForm">
+                    <select id="optOrderStatus" lay-filter="optOrderStatus">
+                        <option value="">全部</option>
+                        <option value="true">是</option>
+                        <option value="false">否</option>
+                    </select>
+                </div>
+            </div>
+            <div class="layui-inline">
+                <button class="layui-btn" id="btnQuery" lay-filter="query">查询</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 查询结果行 -->
+<div class="layui-row result-row-container">
+    <div class="toolbar-container">
+        <div class="layui-btn-container">
+            <button class="layui-btn layui-btn-danger" id="add">发起工单</button>
+           
+        </div>
+    </div>
+    <div class="table-container">
+        <div id="resultTable" lay-filter="resultTable"></div>
+    </div>
+    <div class="pager-container">
+        <div id="resultTablePager"></div>
+    </div>
+</div>
+
+
+
+<!--生成option的通用模板-->
+<script type="text/html" id="optCommonTemplate">
+
+    {{#  layui.each(d.data, function(index, item){ }}
+
+    <option value="{{item.id}}">{{item.name}}</option>
+
+    {{#  }); }}
+</script>
+
+<script type="text/javascript">
+    layui.use(["pageMaintenanceWorkOrderList"], function () {
+
+        var subPage = layui.pageMaintenanceWorkOrderList;
+
+        subPage.init();
+
+    });
+</script>

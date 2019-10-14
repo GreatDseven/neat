@@ -1,0 +1,283 @@
+﻿<!doctype html>
+<html lang="zh">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="/content/3rd/layui/css/layui.css">
+    <link rel="stylesheet" href="/content/3rd/fontawesome/css/all.min.css">
+    <link rel="stylesheet" href="/content/neat/css/neat-common.css">
+    <title>编辑建筑</title>
+
+    <style>
+        .layui-form-item .layui-input-inline {
+            float: left;
+            width: 250px;
+            margin-right: 10px;
+        }
+
+        .layui-input-inline-address {
+            float: left;
+            width: 650px;
+            margin-right: 10px;
+        }
+
+
+        /*建筑面积 单位  平方米*/
+        .layui-input-inline-dw-pfm
+        {
+            float: left;
+            width: 50px;
+            margin-right: 10px;
+            margin-top: 6px;
+            margin-left: -60px;
+            color:#00A0E9;
+        }
+
+         /*建筑高度 单位  米*/
+        .layui-input-inline-dw-m
+        {
+            float: left;
+            width: 10px;
+            margin-right: 10px;
+            margin-top: 6px;
+            margin-left: -30px;
+            color: #00A0E9;
+        }
+
+
+       .layui-upload-list{
+           width:650px;
+       }
+
+        .layui-input-inline-addbutton {
+            float: left;
+           
+            margin-right: 10px;
+        }
+
+        .layui-input-inline-delbutton {
+            float: left;
+           
+            margin-right: 10px;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="dialog-body">
+        <div class="layui-layer-content layui-form" lay-filter="wholeForm">
+
+            <div class="layui-row">
+                <div class="layui-col-sm6">
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label normal-label">建筑名称</label>
+                            <div class="layui-input-inline">
+                                <input type="text" id="buildingName" name="buildingName" lay-verify="buildingName" autocomplete="off" lay-verType="tips" placeholder="请输入建筑名称" class="layui-input">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-sm6">
+                    <div class="layui-form-item">
+
+                        <div class="layui-inline">
+                            <label class="layui-form-label normal-label">所属机构</label>
+                            <div class="layui-input-inline">
+                                <input type="text" id="orgName" name="orgName" disabled autocomplete="off" lay-verType="tips" class="layui-input layui-disabled">
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="layui-row">
+                <div class="layui-col-sm6">
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label normal-label">建筑类别</label>
+                            <div class="layui-input-inline layui-form" lay-filter="optBuildingTypeForm">
+                                <select id="optBuildingType" name="optBuildingType" lay-verify="optBuildingType" lay-verType="tips" lay-filter="optBuildingType">
+                                    <option value="">请选择建筑类别</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-sm6">
+                    <div class="layui-form-item">
+
+                        <div class="layui-inline">
+                            <label class="layui-form-label normal-label">结构类型</label>
+                            <div class="layui-input-inline layui-form" lay-filter="optArchTypeForm">
+                                <select id="optArchType" name="optArchType" lay-verify="optArchType" lay-verType="tips" lay-filter="optArchType">
+                                    <option value="">请选择结构类型</option>
+                                </select>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="layui-row">
+                <div class="layui-col-sm6">
+                    <div class="layui-form-item">
+
+                        <div class="layui-inline">
+                            <label class="layui-form-label normal-label">建筑面积</label>
+                            <div class="layui-input-inline">
+                                <input type="text" id="area" maxlength="12" name="area" lay-verify="area" placeholder="请输入建筑面积" autocomplete="off" lay-verType="tips" class="layui-input" />
+                            </div>
+                            <div class="layui-input-inline-dw-pfm layui-inline">
+                                <label>平方米</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-sm6">
+                    <div class="layui-form-item">
+
+                        <div class="layui-inline">
+                            <label class="layui-form-label normal-label">建筑高度</label>
+                            <div class="layui-input-inline">
+                                <input type="text" id="height" maxlength="12" name="height" lay-verify="height" placeholder="请输入建筑高度" autocomplete="off" lay-verType="tips" class="layui-input" />
+                            </div>
+                            <div class="layui-input-inline-dw-m layui-inline">
+                                <label>米</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="layui-row">
+                <div class="layui-col-sm6">
+                    <div class="layui-form-item">
+
+                        <div class="layui-inline">
+                            <label class="layui-form-label normal-label">地上层数</label>
+                            <div class="layui-input-inline">
+                                <input type="text" id="onFloorCount" name="onFloorCount" lay-verify="onFloorCount" placeholder="请输入地上层数" autocomplete="off" lay-verType="tips" class="layui-input" />
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="layui-col-sm6">
+                    <div class="layui-form-item">
+
+                        <div class="layui-inline">
+                            <label class="layui-form-label normal-label">地下层数</label>
+                            <div class="layui-input-inline">
+                                <input type="text" id="underFloorCount" name="underFloorCount" lay-verify="underFloorCount" placeholder="请输入地下层数" autocomplete="off" lay-verType="tips" class="layui-input" />
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="layui-row">
+                <div class="layui-col-sm12">
+                    <div class="layui-form-item">
+
+                        <div class="layui-inline">
+                            <label class="layui-form-label normal-label">建筑地址</label>
+                            <div class="layui-input-inline-address">
+                                <input type="text" id="address" name="address" lay-verify="address" autocomplete="off" lay-verType="tips" placeholder="请输入建筑地址" class="layui-input">
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="layui-row">
+                <div class="layui-col-sm12">
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label normal-label">相关建筑图</label>
+                            <div class="layui-input-inline-addbutton">
+                                <div class="layui-upload-list">
+                                    <table class="layui-table">
+                                        <thead>
+                                            <tr>
+                                                <th style="width:330px;">文件名</th>
+                                                <th style="width:160px;">状态</th>
+                                                <th style="width:160px;">操作</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="fileList"></tbody>
+                                    </table>
+                                </div>
+                                <button class="layui-btn layui-btn-warm" lay-filter="btnAddFile" id="btnSave">选择文件</button>
+                                <button type="button" style="visibility:hidden" id="btnStartUpload">开始上传</button>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-row" style="text-align: center;margin-top:20px;">
+                <button class="layui-btn" lay-submit lay-filter="btnSave" id="btnSave">保存</button>
+                <button class="layui-btn layui-btn-grey" id="btnCancel">取消</button>
+            </div>
+            <div class="layui-row" style="text-align: center;margin-top:20px;">
+                &nbsp;
+            </div>
+        </div>
+        
+
+    </div>
+    <script src="/content/3rd/layui/layui.js"></script>
+    <script src="/content/neat/layui.config.js"></script>
+
+    <script type="text/html" id="optBuildingTypeTemplate">
+        <option value="">请选择建筑类别</option>
+        {{#  layui.each(d.data, function(index, item){ }}
+
+        {{# if (item.value == d.selectedValue){}}
+        <option value="{{item.value}}" selected>{{item.name}}</option>
+        {{# } else {}}
+        <option value="{{item.value}}">{{item.name}}</option>
+        {{# } }}
+
+        {{#  }); }}
+    </script>
+    <script type="text/html" id="optArchTypeTemplate">
+        <option value="">请选择结构类型</option>
+        {{#  layui.each(d.data, function(index, item){ }}
+
+        {{# if (item.value == d.selectedValue){}}
+        <option value="{{item.value}}" selected>{{item.name}}</option>
+        {{# } else {}}
+        <option value="{{item.value}}">{{item.name}}</option>
+        {{# } }}
+
+        {{#  }); }}
+    </script>
+
+
+    <script type="text/javascript">
+
+        layui.use(["layer"], function () {
+            var layindex = layui.layer.load(1);
+            layui.use(["pageBuildingUpdate"], function () {
+                var page = layui.pageBuildingUpdate;
+                page.init();
+                layui.layer.close(layindex);
+            });
+        });
+
+
+    </script>
+</body>
+
+</html>

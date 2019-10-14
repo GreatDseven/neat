@@ -1,0 +1,93 @@
+﻿<div class="layui-row sitemap-row-container normal-blue-text">
+    当前位置&nbsp;:&nbsp;设备管理>视频联动
+</div>
+
+<style>
+    .layui-input-inline-checkbox {
+        float: left;
+        max-width: 160px !important;
+        min-width: 100px;
+        margin-right: 10px;
+    }
+
+    .layui-form-checkbox span {
+        color: #0486c7 !important;
+    }
+</style>
+
+<!-- 查询条件行 -->
+<div class="layui-row query-row-container">
+    <div class="layui-form layui-form-pane1" lay-filter="query">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">关键字</label>
+                <div class="layui-input-inline">
+                    <input type="text" id="txtKeyword" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label" id="lblDeviceCategory">联动设备</label>
+
+                <div class="layui-inline">
+                    &nbsp;
+                </div>
+
+                <div class="layui-inline">
+                    <button class="layui-btn" id="btnQuery" lay-filter="query">查询</button>
+                </div>
+                <div class="layui-inline">
+                    <button class="layui-btn layui-btn-normal" id="btnRefresh" lay-filter="query">刷新</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 查询结果行 -->
+<div class="layui-row result-row-container">
+    <div class="toolbar-container">
+        <div class="layui-btn-container">
+            <button class="layui-btn layui-btn-warm" id="btnAdd">添加联动</button>
+            <button class="layui-btn layui-btn-danger" id="btnDelete">删除联动</button>
+        </div>
+    </div>
+    <div class="table-container">
+        <div id="resultTable" lay-filter="resultTable"></div>
+    </div>
+    <div class="pager-container">
+        <div id="resultTablePager"></div>
+    </div>
+</div>
+
+<!--数据表格操作-->
+<script type="text/html" id="opColTemplate">
+    <a lay-event="video" title="查看视频" href="javascript:void(0)" style="color:#babdc9;"><i class="fa fa-video"></i></a>
+    <a lay-event="del" title="删除" href="javascript:void(0)" style="color:#babdc9;"><i class="fas fa-trash-alt"></i></a>
+
+</script>
+
+<script type="text/html" id="deviceCategoryTemplate">
+    {{#  layui.each(d.data, function(index, item){ }}
+    <div class="layui-input-inline-checkbox">
+        <input type="checkbox" name="devType" dev-type-value="{{item.id}}" checked lay-filter="devType" lay-skin="primary" title="{{item.name}}">
+    </div>
+
+    {{#  }); }}
+
+
+</script>
+
+<script type="text/javascript">
+    layui.use(["pageVideoLinkageList"], function () {
+
+        var subPage = layui.pageVideoLinkageList;
+
+        subPage.init();
+
+    });
+</script>
+
+
+
+
+
+

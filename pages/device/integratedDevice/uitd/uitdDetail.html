@@ -1,0 +1,259 @@
+﻿<!doctype html>
+<html lang="zh">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="/content/3rd/layui/css/layui.css">
+    <link rel="stylesheet" href="/content/3rd/fontawesome/css/all.min.css">
+    <link rel="stylesheet" href="/content/neat/css/neat-common.css">
+    <title>新建用户信息传输装置</title>
+
+    <style>
+        .layui-form-item .layui-input-inline {
+            width: 250px !important;
+        }
+
+        .layui-form-select dl {
+            max-height: 200px;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <div class="layui-layer-content layui-form" lay-filter="form">
+            <div class="layui-row">
+                <div class="layui-col-sm6">
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label normal-label">设备编码</label>
+                            <div class="layui-input-inline">
+                                <input type="text" id="txtCode" disabled class="layui-input layui-disabled">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-sm6">
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label normal-label">设备名称</label>
+                            <div class="layui-input-inline">
+                                <input type="text" id="txtName" disabled class="layui-input layui-disabled">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="layui-row">
+                <div class="layui-col-sm6">
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label normal-label">传输协议</label>
+                            <div class="layui-input-inline layui-form" lay-filter="transmissionProtocolForm">
+                                <select id="optTransmissionProtocol" disabled class="layui-input layui-disabled">
+                                    <option value="">请选择传输协议</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-sm6">
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label normal-label">报文协议</label>
+                            <div class="layui-input-inline layui-form" lay-filter="optMessageProtocolForm">
+                                <select id="optMessageProtocol" disabled class="layui-input layui-disabled">
+                                    <option value="">请选择报文协议</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="layui-row">
+                <div class="layui-col-sm6">
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label normal-label">设备类型</label>
+                            <div class="layui-input-inline layui-form" lay-filter="optDeviceTypeForm">
+                                <select id="optDeviceType" disabled class="layui-input layui-disabled">
+                                    <option value="">请选择设备类型</option>
+
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-sm6">
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label normal-label">生产厂商</label>
+                            <div class="layui-input-inline layui-form" lay-filter="optManufacturerForm">
+                                <select id="optManufacturer" disabled class="layui-input layui-disabled">
+                                    <option value="">请选择生产厂商</option>
+
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="layui-row">
+                <div class="layui-col-sm6">
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label normal-label">所属单位</label>
+                            <div class="layui-input-inline">
+                                <input type="text" id="txtEnterpriseName" disabled class="layui-input layui-disabled">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-sm6">
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label normal-label">所属建筑</label>
+                            <div class="layui-input-inline layui-form" lay-filter="optBuildingForm">
+                                <select id="optBuilding" lay-filter="optBuilding" disabled>
+                                    <option value="">请选择所属建筑</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="layui-row">
+                <div class="layui-col-sm6">
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label normal-label">所属部位</label>
+                            <div class="layui-input-inline layui-form" lay-filter="optKeyPartListForm">
+                                <select id="optKeyPartList" lay-filter="optKeyPartList" disabled>
+                                    <option value="">请选择所属部位</option>
+
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-sm6">
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label normal-label">安装位置</label>
+                            <div class="layui-input-inline layui-form">
+                                <input type="text" id="txtAddr" disabled class="layui-input layui-disabled">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--<div class="layui-row" style="text-align: center;margin-top:20px;">
+                <button class="layui-btn layui-btn-grey" id="btnCancel">取消</button>
+            </div>-->
+            <div class="layui-row">
+                &nbsp;
+            </div>
+        </div>
+    </div>
+
+    <script type="text/html" id="optBuildingTemplate">
+        <option value="">请选择所属建筑</option>
+        {{#  layui.each(d.data, function(index, item){ }}
+
+        {{# if (item.id == d.selectedValue){}}
+        <option value="{{item.id}}" selected>{{item.name}}</option>
+        {{# } else {}}
+        <option value="{{item.id}}">{{item.name}}</option>
+        {{# } }}
+
+        {{#  }); }}
+    </script>
+    <script type="text/html" id="optKeyPartListTemplate">
+        <option value="">请选择所属部位</option>
+        {{#  layui.each(d.data, function(index, item){ }}
+
+        {{# if (item.id == d.selectedValue){}}
+        <option value="{{item.id}}" selected>{{item.name}}</option>
+        {{# } else {}}
+        <option value="{{item.id}}">{{item.name}}</option>
+        {{# } }}
+
+        {{#  }); }}
+    </script>
+
+
+
+    <script type="text/html" id="optTransmissionProtocolTemplate">
+        <option value="">请选择传输协议</option>
+        {{#  layui.each(d.data, function(index, item){ }}
+
+        {{# if (item.id == d.selectedValue){}}
+        <option value="{{item.id}}" selected>{{item.name}}</option>
+        {{# } else {}}
+        <option value="{{item.id}}">{{item.name}}</option>
+        {{# } }}
+
+        {{#  }); }}
+    </script>
+
+    <script type="text/html" id="optMessageProtocolTemplate">
+        <option value="">请选择报文协议</option>
+        {{#  layui.each(d.data, function(index, item){ }}
+
+        {{# if (item.id == d.selectedValue){}}
+        <option value="{{item.id}}" selected>{{item.name}}</option>
+        {{# } else {}}
+        <option value="{{item.id}}">{{item.name}}</option>
+        {{# } }}
+
+        {{#  }); }}
+    </script>
+
+    <script type="text/html" id="optTransmissionDeviceTypeTemplate">
+        <option value="">请选择传输设备类型</option>
+        {{#  layui.each(d.data, function(index, item){ }}
+
+        {{# if (item.id == d.selectedValue){}}
+        <option value="{{item.id}}" selected>{{item.name}}</option>
+        {{# } else {}}
+        <option value="{{item.id}}">{{item.name}}</option>
+        {{# } }}
+
+        {{#  }); }}
+    </script>
+
+    <script type="text/html" id="optDeviceManufacturerTemplate">
+        <option value="">请选择传输设备类型</option>
+        {{#  layui.each(d.data, function(index, item){ }}
+
+        {{# if (item.id == d.selectedValue){}}
+        <option value="{{item.id}}" selected>{{item.name}}</option>
+        {{# } else {}}
+        <option value="{{item.id}}">{{item.name}}</option>
+        {{# } }}
+
+        {{#  }); }}
+    </script>
+
+    <script src="/content/3rd/layui/layui.js"></script>
+    <script src="/content/neat/layui.config.js"></script>
+    <script type="text/javascript">
+
+
+        layui.use(["layer"], function () {
+            var layindex = layui.layer.load(1);
+            layui.use(["pageIntegratedDetailUITD"], function () {
+                var page = layui.pageIntegratedDetailUITD;
+                page.init();
+                layui.layer.close(layindex);
+            });
+        });
+    </script>
+</body>
+
+</html>

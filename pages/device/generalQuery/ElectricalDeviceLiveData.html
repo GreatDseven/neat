@@ -1,0 +1,139 @@
+﻿<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="/content/3rd/layui/css/layui.css">
+    <link rel="stylesheet" href="/content/3rd/fontawesome/css/all.min.css">
+    <link rel="stylesheet" href="/content/neat/css/neat-common.css">
+    <style>
+        .ed-block-div {
+            float: left;
+            width: 290px;
+            height: 320px;
+            background-color: #202d57;
+            margin-right: 15px;
+        }
+
+            .ed-block-div:nth-child(3n+0) {
+                float: left;
+                width: 290px;
+                height: 320px;
+                background-color: #202d57;
+                margin-right: 0px;
+            }
+
+        .ed-p-td {
+            color: #02e6ff;
+            font-size: 14px;
+            font-weight: bold;
+            margin: 10px 0px 0px 10px;
+        }
+
+        .ed-out-div {
+            padding: 20px;
+            text-align:center;
+            vertical-align:middle;
+        }
+    </style>
+</head>
+<body>
+    <div class="ed-out-div" id="outdivLiveDataTemplate">
+
+    </div>
+    <script type="text/html" id="divLiveDataTemplate">
+        {{#  layui.each(d.data, function(index, item){ }}
+        <div class="ed-block-div">
+            <p class="ed-p-td">通道{{item.code}}</p>
+            <div id="ed{{item.code}}GaugeContainer">
+            </div>
+        </div>
+        {{#  }); }}
+    </script>
+    <script src="/content/3rd/layui/layui.js"></script>
+    <script src="/content/neat/layui.config.js"></script>
+    <script src="/content/neat/modules/3rdmod/d3.v3.min.js"></script>
+    <script src="/content/neat/modules/3rdmod/Gauge.js"></script>
+    <script type="text/javascript">
+        layui.use(["jquery", "electricalDeviceDataApi", "laytpl", "neatNavigator", "neat", "autoRefresh"], function () {
+            var $ = layui.$;
+            var neat = layui.neat;
+            var refresh = layui.autoRefresh;
+            var laytpl = layui.laytpl;
+            var gateWayId = "";
+            var neatNavigator = layui.neatNavigator;
+            var dataApi = layui.electricalDeviceDataApi;
+            var token = neat.getUserToken();
+            var width = 300;
+            var initflag = 0;
+            function createGauges() {
+                dataApi.queryEFDeviceRealTimeData(token, layui.neatNavigator.getUrlParam("id"), function (resultData) {
+                    var d = {};
+                    d.data = resultData;
+                    if (d.data.length == 0) {
+                        $("#outdivLiveDataTemplate").html("<h3>该网关没有设备通道</h3>");
+                        return;
+                    }
+                    var getTpl = $("#divLiveDataTemplate").html();
+                    $("#outdivLiveDataTemplate").html(laytpl(getTpl).render(d));
+                    var dataval = d.data;
+                    initGauge(dataval);
+                    initflag = 1;
+                });
+            }
+            function initGauge(dataval) {
+                if (dataval.length > 0) {
+                    for (var i = 0; i < dataval.length; i++) {
+                        switch (dataval[i].valueType) {
+                            case 3:
+                                createGauge('ed' + dataval[i].code, '温度', dataval[i].minValue, dataval[i].maxValue, 'C°', width, dataval[i].lowerLimitValue, dataval[i].upperLimitValue, dataval[i].value);
+                                break;
+                            case 9:
+                                createGauge('ed' + dataval[i].code, '电流', dataval[i].minValue, dataval[i].maxValue, 'A', width, dataval[i].lowerLimitValue, dataval[i].upperLimitValue, dataval[i].value);
+                                break;
+                            case 128:
+                                createGauge('ed' + dataval[i].code, '漏电流', dataval[i].minValue, dataval[i].maxValue, 'mA', width, dataval[i].lowerLimitValue, dataval[i].upperLimitValue, dataval[i].value);
+                                break;
+                            default:
+                        }
+                    }
+
+                }
+            }
+
+            function updateGauges() {
+                if (initflag == 1) {
+                    dataApi.queryEFDeviceRealTimeData(token, layui.neatNavigator.getUrlParam("id"), function (resultData) {
+                        var d = {};
+                        d.data = resultData;
+                        var dataval = d.data;
+                        if (dataval.length > 0) {
+                            for (var i = 0; i < dataval.length; i++) {
+                                V_GAUGES['ed' + dataval[i].code].redraw(dataval[i].value);
+                            }
+
+                        }
+
+                    })
+                }
+
+            }
+             function initRefresh () {
+                var that = this;
+                refresh.autoRefresh(function () {
+                    updateGauges();
+                }, 5000);
+
+            };
+
+
+            function initialize() {
+                createGauges();
+                initRefresh();
+            }
+            initialize();
+        });
+
+    </script>
+</body>
+</html>
